@@ -207,10 +207,6 @@ typedef uint32 codepoint_t;
 #define PI_NTSVCS		13
 #define PI_MAX_PIPES		14
 
-/* 64 bit time (100usec) since ????? - cifs6.txt, section 3.5, page 30 */
-typedef uint64_t NTTIME;
-
-
 /* Allowable account control bits */
 #define ACB_DISABLED			0x00000001  /* 1 = User account disabled */
 #define ACB_HOMDIRREQ			0x00000002  /* 1 = Home directory required */
@@ -516,13 +512,6 @@ typedef struct files_struct {
 
 #include "ntquotas.h"
 #include "sysquotas.h"
-
-/* used to hold an arbitrary blob of data */
-typedef struct data_blob {
-	uint8 *data;
-	size_t length;
-	void (*free)(struct data_blob *data_blob);
-} DATA_BLOB;
 
 extern const DATA_BLOB data_blob_null;
 
@@ -1516,13 +1505,6 @@ char *strdup(char *s);
 #define CAP_LARGE_WRITEX     0x8000
 #define CAP_UNIX             0x800000 /* Capabilities for UNIX extensions. Created by HP. */
 #define CAP_EXTENDED_SECURITY 0x80000000
-
-/* protocol types. It assumes that higher protocols include lower protocols
-   as subsets */
-enum protocol_types {PROTOCOL_NONE,PROTOCOL_CORE,PROTOCOL_COREPLUS,PROTOCOL_LANMAN1,PROTOCOL_LANMAN2,PROTOCOL_NT1};
-
-/* security levels */
-enum security_types {SEC_SHARE,SEC_USER,SEC_SERVER,SEC_DOMAIN,SEC_ADS};
 
 /* server roles */
 enum server_types {

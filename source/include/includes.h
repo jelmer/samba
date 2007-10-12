@@ -71,22 +71,6 @@
 #undef HAVE_TERMIOS_H
 #endif
 
-#ifndef _PUBLIC_
-#ifdef HAVE_VISIBILITY_ATTR
-#  define _PUBLIC_ __attribute__((visibility("default")))
-#else
-#  define _PUBLIC_
-#endif
-#endif
-
-#if defined(__GNUC__) && !defined(__cplusplus)
-/** gcc attribute used on function parameters so that it does not emit
- * warnings about them being unused. **/
-#  define UNUSED(param) param __attribute__ ((unused))
-#else
-#  define UNUSED(param) param
-/** Feel free to add definitions for other compilers here. */
-#endif
 
 #ifdef RELIANTUNIX
 /*
@@ -623,6 +607,7 @@ typedef int BOOL;
 #define NGROUPS_MAX 32 /* Guess... */
 #endif
 
+#include "lib/util/util.h"
 /* Our own pstrings and fstrings */
 #include "pstring.h"
 
@@ -631,7 +616,6 @@ typedef int BOOL;
 #include "intl.h"
 #include "dlinklist.h"
 #include "tdb.h"
-#include "util_tdb.h"
 
 #include "lib/talloc/talloc.h"
 /* And a little extension. Abort on type mismatch */

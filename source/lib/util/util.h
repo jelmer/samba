@@ -21,8 +21,6 @@
 #ifndef _SAMBA_UTIL_H_
 #define _SAMBA_UTIL_H_
 
-#include "charset/charset.h"
-
 /**
  * @file
  * @brief Helpful macros
@@ -37,7 +35,6 @@ extern const char *panic_action;
 #include "util/time.h"
 #include "util/data_blob.h"
 #include "util/xfile.h"
-#include "util/debug.h"
 #include "util/mutex.h"
 #include "util/byteorder.h"
 

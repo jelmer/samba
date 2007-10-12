@@ -214,7 +214,7 @@ TDBBASE_OBJ = lib/tdb/common/tdb.o lib/tdb/common/dump.o lib/tdb/common/error.o 
 	lib/tdb/common/open.o lib/tdb/common/transaction.o \
 	lib/tdb/common/traverse.o
 
-TDB_OBJ = $(TDBBASE_OBJ) lib/util_tdb.o\
+TDB_OBJ = $(TDBBASE_OBJ) \
 	lib/dbwrap.o lib/dbwrap_tdb.o lib/dbwrap_ctdb.o
 
 SMBLDAP_OBJ = @SMBLDAP@ @SMBLDAPUTIL@
@@ -272,18 +272,19 @@ LIB_WITHOUT_PROTO_OBJ = $(LIBREPLACE_OBJ) $(SOCKET_WRAPPER_OBJ) $(TALLOC_OBJ) \
 	lib/messages_ctdbd.o lib/packet.o lib/ctdbd_conn.o lib/talloc_stack.o
 
 LIB_WITH_PROTO_OBJ = $(VERSION_OBJ) lib/charcnv.o lib/debug.o lib/fault.o \
+					 $(LIB_UTIL_OBJ) \
 	  lib/interface.o lib/md4.o \
 	  lib/interfaces.o lib/pidfile.o \
-	  lib/signal.o lib/system.o lib/sendfile.o lib/time.o \
-	  lib/ufc.o lib/genrand.o lib/username.o \
+	  lib/signal.o lib/system.o lib/sendfile.o \
+	  lib/ufc.o lib/username.o \
 	  lib/util_pw.o lib/access.o lib/smbrun.o \
 	  lib/bitmap.o lib/crc32.o lib/dprintf.o \
-	  lib/xfile.o lib/wins_srv.o $(UTIL_REG_OBJ) \
-	  lib/util_str.o lib/clobber.o lib/util_sid.o lib/util_uuid.o \
-	  lib/util_unistr.o lib/util_file.o lib/data_blob.o \
-	  lib/util.o lib/util_sock.o lib/sock_exec.o lib/util_sec.o \
+	  lib/wins_srv.o $(UTIL_REG_OBJ) \
+	  lib/clobber.o lib/util_sid.o lib/util_uuid.o \
+	  lib/util_unistr.o \
+	  lib/util_sock.o lib/sock_exec.o lib/util_sec.o \
 	  lib/substitute.o lib/fsusage.o \
-	  lib/ms_fnmatch.o lib/select.o lib/errmap_unix.o \
+	  lib/select.o lib/errmap_unix.o \
 	  lib/tallocmsg.o lib/dmallocmsg.o libsmb/smb_signing.o \
 	  lib/md5.o lib/hmacmd5.o lib/arc4.o lib/iconv.o \
 	  nsswitch/wb_client.o $(WBCOMMON_OBJ) \
@@ -490,6 +491,16 @@ VFS_FILEID_OBJ = modules/vfs_fileid.o
 PLAINTEXT_AUTH_OBJ = auth/pampass.o auth/pass_check.o
 
 SLCACHE_OBJ = libsmb/samlogon_cache.o
+
+LIB_UTIL_OBJ = lib/util/become_daemon.o lib/util/capability.o \
+			   lib/util/data_blob.o lib/util/dprintf.o \
+			   lib/util/fsusage.o lib/util/genrand.o \
+			   lib/util/idtree.o lib/util/ms_fnmatch.o lib/util/mutex.o \
+			   lib/util/signal.o lib/util/system.o lib/util/time.o \
+			   lib/util/unix_privs.o lib/util/util.o lib/util/util_file.o \
+			   lib/util/util_getent.o lib/util/util_pw.o lib/util/util_str.o \
+			   lib/util/util_strlist.o lib/util/util_tdb.o \
+			   lib/util/wrap_xattr.o lib/util/xfile.o
 
 DCUTIL_OBJ  = libsmb/namequery_dc.o libsmb/trustdom_cache.o libsmb/trusts_util.o libsmb/dsgetdcname.o
 
