@@ -129,21 +129,6 @@ struct GUID GUID_zero(void)
 	return guid;
 }
 
-/**
- * see if a range of memory is all zero. A NULL pointer is considered
- * to be all zero 
- */
-BOOL all_zero(const uint8_t *ptr, size_t size)
-{
-	int i;
-	if (!ptr) return True;
-	for (i=0;i<size;i++) {
-		if (ptr[i]) return False;
-	}
-	return True;
-}
-
-
 BOOL GUID_all_zero(const struct GUID *u)
 {
 	if (u->time_low != 0 ||

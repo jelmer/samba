@@ -48,58 +48,6 @@ bool is_ipaddress_v4(const char *str)
 	return pure_address;
 }
 
-/****************************************************************************
- Interpret an internet address or name into an IP address in 4 byte form.
-****************************************************************************/
-
-uint32 interpret_addr(const char *str)
-{
-	struct hostent *hp;
-	uint32 res;
-
-	if (strcmp(str,"0.0.0.0") == 0)
-		return(0);
-	if (strcmp(str,"255.255.255.255") == 0)
-		return(0xFFFFFFFF);
-
-	/* if it's in the form of an IP address then
-	 * get the lib to interpret it */
-	if (is_ipaddress_v4(str)) {
-		res = inet_addr(str);
-	} else {
-		/* otherwise assume it's a network name of some sort and use
-			sys_gethostbyname */
-		if ((hp = sys_gethostbyname(str)) == 0) {
-			DEBUG(3,("sys_gethostbyname: Unknown host. %s\n",str));
-			return 0;
-		}
-
-		if(hp->h_addr == NULL) {
-			DEBUG(3,("sys_gethostbyname: host address is "
-				"invalid for host %s\n",str));
-			return 0;
-		}
-		putip((char *)&res,(char *)hp->h_addr);
-	}
-
-	if (res == (uint32)-1)
-		return(0);
-
-	return(res);
-}
-
-/*******************************************************************
- A convenient addition to interpret_addr().
-******************************************************************/
-
-struct in_addr *interpret_addr2(const char *str)
-{
-	static struct in_addr ret;
-	uint32 a = interpret_addr(str);
-	ret.s_addr = a;
-	return(&ret);
-}
-
 /*******************************************************************
  Map a text hostname or IP address (IPv4 or IPv6) into a
  struct sockaddr_storage.
