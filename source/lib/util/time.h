@@ -19,8 +19,6 @@
 #ifndef _SAMBA_TIME_H_
 #define _SAMBA_TIME_H_
 
-#include <talloc.h>
-
 #ifndef _PUBLIC_
 #define _PUBLIC_
 #endif
