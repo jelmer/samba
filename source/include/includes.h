@@ -592,11 +592,6 @@ struct timespec {
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #endif
 
-#ifndef _UPPER_BOOL
-typedef int BOOL;
-#define _UPPER_BOOL
-#endif
-
 #ifdef HAVE_BROKEN_GETGROUPS
 #define GID_T int
 #else
@@ -1112,21 +1107,21 @@ void krb5_free_unparsed_name(krb5_context ctx, char *val);
 #endif
 
 /* Samba wrapper function for krb5 functionality. */
-void setup_kaddr( krb5_address *pkaddr, struct sockaddr *paddr);
+void setup_kaddr_v4( krb5_address *pkaddr, struct sockaddr *paddr);
 int create_kerberos_key_from_string(krb5_context context, krb5_principal host_princ, krb5_data *password, krb5_keyblock *key, krb5_enctype enctype);
 int create_kerberos_key_from_string_direct(krb5_context context, krb5_principal host_princ, krb5_data *password, krb5_keyblock *key, krb5_enctype enctype);
-BOOL get_auth_data_from_tkt(TALLOC_CTX *mem_ctx, DATA_BLOB *auth_data, krb5_ticket *tkt);
+bool get_auth_data_from_tkt(TALLOC_CTX *mem_ctx, DATA_BLOB *auth_data, krb5_ticket *tkt);
 krb5_const_principal get_principal_from_tkt(krb5_ticket *tkt);
 krb5_error_code smb_krb5_locate_kdc(krb5_context ctx, const krb5_data *realm, struct sockaddr **addr_pp, int *naddrs, int get_masters);
 #if defined(HAVE_KRB5_LOCATE_KDC)
 krb5_error_code krb5_locate_kdc(krb5_context ctx, const krb5_data *realm, struct sockaddr **addr_pp, int *naddrs, int get_masters);
 #endif
 krb5_error_code get_kerberos_allowed_etypes(krb5_context context, krb5_enctype **enctypes);
-BOOL get_krb5_smb_session_key(krb5_context context, krb5_auth_context auth_context, DATA_BLOB *session_key, BOOL remote);
+bool get_krb5_smb_session_key(krb5_context context, krb5_auth_context auth_context, DATA_BLOB *session_key, bool remote);
 krb5_error_code smb_krb5_kt_free_entry(krb5_context context, krb5_keytab_entry *kt_entry);
 krb5_principal kerberos_fetch_salt_princ_for_host_princ(krb5_context context, krb5_principal host_princ, int enctype);
 void kerberos_set_creds_enctype(krb5_creds *pcreds, int enctype);
-BOOL kerberos_compatible_enctypes(krb5_context context, krb5_enctype enctype1, krb5_enctype enctype2);
+bool kerberos_compatible_enctypes(krb5_context context, krb5_enctype enctype1, krb5_enctype enctype2);
 void kerberos_free_data_contents(krb5_context context, krb5_data *pdata);
 NTSTATUS decode_pac_data(TALLOC_CTX *mem_ctx,
 			 DATA_BLOB *pac_data_blob,
@@ -1161,7 +1156,7 @@ krb5_error_code krb5_rd_req_return_keyblock_from_keytab(krb5_context context,
 krb5_error_code smb_krb5_parse_name_norealm(krb5_context context, 
 					    const char *name, 
 					    krb5_principal *principal);
-BOOL smb_krb5_principal_compare_any_realm(krb5_context context, 
+bool smb_krb5_principal_compare_any_realm(krb5_context context, 
 					  krb5_const_principal princ1, 
 					  krb5_const_principal princ2);
 int cli_krb5_get_ticket(const char *principal, time_t time_offset, 
@@ -1191,7 +1186,7 @@ krb5_error_code smb_krb5_enctype_to_string(krb5_context context,
 					    char **etype_s);
 krb5_error_code smb_krb5_open_keytab(krb5_context context, 
  				      const char *keytab_name, 
-				      BOOL write_access, 
+				      bool write_access, 
 				      krb5_keytab *keytab);
 #endif /* HAVE_KRB5 */
 

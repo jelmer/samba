@@ -145,7 +145,7 @@ enum winbindd_result winbindd_dual_list_trusted_domains(struct winbindd_domain *
 	int extra_data_len = 0;
 	char *extra_data;
 	NTSTATUS result;
-	BOOL have_own_domain = False;
+	bool have_own_domain = False;
 
 	DEBUG(3, ("[%5lu]: list trusted domains\n",
 		  (unsigned long)state->pid));
@@ -289,70 +289,6 @@ enum winbindd_result winbindd_dual_getdcname(struct winbindd_domain *domain,
 	return WINBINDD_OK;
 }
 
-static struct winbindd_child static_locator_child;
-
-void init_locator_child(void)
-{
-	setup_domain_child(NULL, &static_locator_child, "locator");
-}
-
-struct winbindd_child *locator_child(void)
-{
-	return &static_locator_child;
-}
-
-void winbindd_dsgetdcname(struct winbindd_cli_state *state)
-{
-	state->request.domain_name
-		[sizeof(state->request.domain_name)-1] = '\0';
-
-	DEBUG(3, ("[%5lu]: DsGetDcName for %s\n", (unsigned long)state->pid,
-		  state->request.domain_name));
-
-	sendto_child(state, locator_child());
-}
-
-enum winbindd_result winbindd_dual_dsgetdcname(struct winbindd_domain *domain,
-					       struct winbindd_cli_state *state)
-{
-	NTSTATUS result;
-	struct DS_DOMAIN_CONTROLLER_INFO *info = NULL;
-	const char *dc = NULL;
-
-	state->request.domain_name
-		[sizeof(state->request.domain_name)-1] = '\0';
-
-	DEBUG(3, ("[%5lu]: DsGetDcName for %s\n", (unsigned long)state->pid,
-		  state->request.domain_name));
-
-	result = DsGetDcName(state->mem_ctx, NULL, state->request.domain_name,
-			     NULL, NULL, state->request.flags, &info);
-
-	if (!NT_STATUS_IS_OK(result)) {
-		return WINBINDD_ERROR;
-	}
-
-	if (info->domain_controller_address) {
-		dc = info->domain_controller_address;
-		if ((dc[0] == '\\') && (dc[1] == '\\')) {
-			dc += 2;
-		}
-	}
-
-	if ((!dc || !is_ipaddress_v4(dc)) && info->domain_controller_name) {
-		dc = info->domain_controller_name;
-	}
-
-	if (!dc || !*dc) {
-		return WINBINDD_ERROR;
-	}
-
-	fstrcpy(state->response.data.dc_name, dc);
-
-	return WINBINDD_OK;
-}
-
-
 struct sequence_state {
 	TALLOC_CTX *mem_ctx;
 	struct winbindd_cli_state *cli_state;
@@ -362,7 +298,7 @@ struct sequence_state {
 	char *extra_data;
 };
 
-static void sequence_recv(void *private_data, BOOL success);
+static void sequence_recv(void *private_data, bool success);
 
 void winbindd_show_sequence(struct winbindd_cli_state *state)
 {
@@ -422,7 +358,7 @@ void winbindd_show_sequence(struct winbindd_cli_state *state)
 			     sequence_recv, seq);
 }
 
-static void sequence_recv(void *private_data, BOOL success)
+static void sequence_recv(void *private_data, bool success)
 {
 	struct sequence_state *state =
 		(struct sequence_state *)private_data;
@@ -489,7 +425,7 @@ struct domain_info_state {
 	struct winbindd_cli_state *cli_state;
 };
 
-static void domain_info_init_recv(void *private_data, BOOL success);
+static void domain_info_init_recv(void *private_data, bool success);
 
 void winbindd_domain_info(struct winbindd_cli_state *state)
 {
@@ -542,7 +478,7 @@ void winbindd_domain_info(struct winbindd_cli_state *state)
 	request_ok(state);
 }
 
-static void domain_info_init_recv(void *private_data, BOOL success)
+static void domain_info_init_recv(void *private_data, bool success)
 {
 	struct domain_info_state *istate =
 		(struct domain_info_state *)private_data;

@@ -269,7 +269,7 @@ const struct sockaddr_storage *iface_ip(const struct sockaddr_storage *ip)
   return True if a IP is directly reachable on one of our interfaces
 */
 
-bool iface_local(struct sockaddr_storage *ip)
+bool iface_local(const struct sockaddr_storage *ip)
 {
 	return iface_find(ip, True) ? true : false;
 }
@@ -285,12 +285,11 @@ static void add_interface(const struct iface_struct *ifs)
 
 	if (iface_find(&ifs->ip, False)) {
 		DEBUG(3,("add_interface: not adding duplicate interface %s\n",
-			print_sockaddr(addr, sizeof(addr),
-				&ifs->ip, sizeof(struct sockaddr_storage)) ));
+			print_sockaddr(addr, sizeof(addr), &ifs->ip) ));
 		return;
 	}
 
-	if (!(ifs->flags & IFF_BROADCAST)) {
+	if (!(ifs->flags & (IFF_BROADCAST|IFF_LOOPBACK))) {
 		DEBUG(3,("not adding non-broadcast interface %s\n",
 					ifs->name ));
 		return;
@@ -317,29 +316,26 @@ static void add_interface(const struct iface_struct *ifs)
 
 	DEBUG(2,("added interface %s ip=%s ",
 		iface->name,
-		print_sockaddr(addr, sizeof(addr),
-			&iface->ip, sizeof(struct sockaddr_storage)) ));
+		print_sockaddr(addr, sizeof(addr), &iface->ip) ));
 	DEBUG(2,("bcast=%s ",
 		print_sockaddr(addr, sizeof(addr),
-			&iface->bcast,
-			sizeof(struct sockaddr_storage)) ));
+			&iface->bcast) ));
 	DEBUG(2,("netmask=%s\n",
 		print_sockaddr(addr, sizeof(addr),
-			&iface->netmask,
-			sizeof(struct sockaddr_storage)) ));
+			&iface->netmask) ));
 }
 
 /****************************************************************************
  Create a struct sockaddr_storage with the netmask bits set to 1.
 ****************************************************************************/
 
-static bool make_netmask(struct sockaddr_storage *pss_out,
+bool make_netmask(struct sockaddr_storage *pss_out,
 			const struct sockaddr_storage *pss_in,
 			unsigned long masklen)
 {
 	*pss_out = *pss_in;
 	/* Now apply masklen bits of mask. */
-#if defined(AF_INET6)
+#if defined(HAVE_IPV6)
 	if (pss_in->ss_family == AF_INET6) {
 		char *p = (char *)&((struct sockaddr_in6 *)pss_out)->sin6_addr;
 		unsigned int i;
@@ -386,7 +382,7 @@ static void make_bcast_or_net(struct sockaddr_storage *pss_out,
 	*pss_out = *pss_in;
 
 	/* Set all zero netmask bits to 1. */
-#if defined(AF_INET6)
+#if defined(HAVE_IPV6)
 	if (pss_in->ss_family == AF_INET6) {
 		p = (char *)&((struct sockaddr_in6 *)pss_out)->sin6_addr;
 		pmask = (char *)&((struct sockaddr_in6 *)nmask)->sin6_addr;
@@ -461,7 +457,7 @@ static void interpret_interface(char *token)
 	/* maybe it is a DNS name */
 	p = strchr_m(token,'/');
 	if (p == NULL) {
-		if (!interpret_string_addr(&ss, token)) {
+		if (!interpret_string_addr(&ss, token, 0)) {
 			DEBUG(2, ("interpret_interface: Can't find address "
 				  "for %s\n", token));
 			return;
@@ -481,7 +477,7 @@ static void interpret_interface(char *token)
 
 	/* parse it into an IP address/netmasklength pair */
 	*p = 0;
-	goodaddr = interpret_string_addr(&ss, token);
+	goodaddr = interpret_string_addr(&ss, token, 0);
 	*p++ = '/';
 
 	if (!goodaddr) {
@@ -492,7 +488,7 @@ static void interpret_interface(char *token)
 	}
 
 	if (strlen(p) > 2) {
-		goodaddr = interpret_string_addr(&ss_mask, p);
+		goodaddr = interpret_string_addr(&ss_mask, p, 0);
 		if (!goodaddr) {
 			DEBUG(2,("interpret_interface: "
 				"can't determine netmask from %s\n",

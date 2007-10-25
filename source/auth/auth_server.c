@@ -33,10 +33,10 @@ static struct cli_state *server_cryptkey(TALLOC_CTX *mem_ctx)
 {
 	struct cli_state *cli = NULL;
 	fstring desthost;
-	struct in_addr dest_ip;
+	struct sockaddr_storage dest_ss;
 	const char *p;
 	char *pserver;
-	BOOL connected_ok = False;
+	bool connected_ok = False;
 
 	if (!(cli = cli_initialise()))
 		return NULL;
@@ -54,12 +54,12 @@ static struct cli_state *server_cryptkey(TALLOC_CTX *mem_ctx)
 				   desthost, sizeof(desthost));
 		strupper_m(desthost);
 
-		if(!resolve_name( desthost, &dest_ip, 0x20)) {
+		if(!resolve_name( desthost, &dest_ss, 0x20)) {
 			DEBUG(1,("server_cryptkey: Can't resolve address for %s\n",desthost));
 			continue;
 		}
 
-		if (ismyip_v4(dest_ip)) {
+		if (ismyaddr(&dest_ss)) {
 			DEBUG(1,("Password server loop - disabling password server %s\n",desthost));
 			continue;
 		}
@@ -73,7 +73,7 @@ static struct cli_state *server_cryptkey(TALLOC_CTX *mem_ctx)
 			return NULL;
 		}
 
-		status = cli_connect(cli, desthost, &dest_ip);
+		status = cli_connect(cli, desthost, &dest_ss);
 		if (NT_STATUS_IS_OK(status)) {
 			DEBUG(3,("connected to password server %s\n",desthost));
 			connected_ok = True;
@@ -91,7 +91,7 @@ static struct cli_state *server_cryptkey(TALLOC_CTX *mem_ctx)
 	}
 	
 	if (!attempt_netbios_session_request(&cli, global_myname(), 
-					     desthost, &dest_ip)) {
+					     desthost, &dest_ss)) {
 		release_server_mutex();
 		DEBUG(1,("password server fails session request\n"));
 		cli_shutdown(cli);
@@ -148,7 +148,7 @@ struct server_security_state {
  Send a 'keepalive' packet down the cli pipe.
 ****************************************************************************/
 
-static BOOL send_server_keepalive(const struct timeval *now,
+static bool send_server_keepalive(const struct timeval *now,
 				  void *private_data)
 {
 	struct server_security_state *state = talloc_get_type_abort(
@@ -265,10 +265,10 @@ static NTSTATUS check_smbserver_security(const struct auth_context *auth_context
 	struct cli_state *cli;
 	static unsigned char badpass[24];
 	static fstring baduser; 
-	static BOOL tested_password_server = False;
-	static BOOL bad_password_server = False;
+	static bool tested_password_server = False;
+	static bool bad_password_server = False;
 	NTSTATUS nt_status = NT_STATUS_NOT_IMPLEMENTED;
-	BOOL locally_made_cli = False;
+	bool locally_made_cli = False;
 
 	cli = (struct cli_state *)my_private_data;
 	

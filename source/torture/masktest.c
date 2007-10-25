@@ -23,8 +23,8 @@ static fstring password;
 static fstring username;
 static int got_pass;
 static int max_protocol = PROTOCOL_NT1;
-static BOOL showall = False;
-static BOOL old_list = False;
+static bool showall = False;
+static bool old_list = False;
 static const char *maskchars = "<>\"?*abc.";
 static const char *filechars = "abcdefghijklm.";
 static int verbose;
@@ -34,7 +34,7 @@ static int ignore_dot_errors = 0;
 
 extern char *optarg;
 extern int optind;
-extern BOOL AllowDebugChange;
+extern bool AllowDebugChange;
 
 /* a test fn for LANMAN mask support */
 static int ms_fnmatch_lanman_core(const char *pattern, const char *string)
@@ -128,7 +128,7 @@ static int ms_fnmatch_lanman(const char *pattern, const char *string)
 	return ms_fnmatch_lanman_core(pattern, string);
 }
 
-static BOOL reg_match_one(struct cli_state *cli, const char *pattern, const char *file)
+static bool reg_match_one(struct cli_state *cli, const char *pattern, const char *file)
 {
 	/* oh what a weird world this is */
 	if (old_list && strcmp(pattern, "*.*") == 0) return True;
@@ -168,7 +168,7 @@ static struct cli_state *connect_one(char *share)
 	struct nmb_name called, calling;
 	char *server_n;
 	char *server;
-	struct in_addr ip;
+	struct sockaddr_storage ss;
 	NTSTATUS status;
 
 	server = share+2;
@@ -178,14 +178,14 @@ static struct cli_state *connect_one(char *share)
 	share++;
 
 	server_n = server;
-	
-        zero_ip_v4(&ip);
+
+	zero_addr(&ss, AF_INET);
 
 	make_nmb_name(&calling, "masktest", 0x0);
 	make_nmb_name(&called , server, 0x20);
 
  again:
-        zero_ip_v4(&ip);
+        zero_addr(&ss, AF_INET);
 
 	/* have to open a new connection */
 	if (!(c=cli_initialise())) {
@@ -193,7 +193,7 @@ static struct cli_state *connect_one(char *share)
 		return NULL;
 	}
 
-	status = cli_connect(c, server_n, &ip);
+	status = cli_connect(c, server_n, &ss);
 	if (!NT_STATUS_IS_OK(status)) {
 		DEBUG(0,("Connection to %s failed. Error %s\n", server_n, nt_errstr(status) ));
 		return NULL;

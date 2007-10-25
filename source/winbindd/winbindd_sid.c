@@ -27,7 +27,7 @@
 
 /* Convert a string  */
 
-static void lookupsid_recv(void *private_data, BOOL success,
+static void lookupsid_recv(void *private_data, bool success,
 			   const char *dom_name, const char *name,
 			   enum lsa_SidType type);
 
@@ -50,7 +50,7 @@ void winbindd_lookupsid(struct winbindd_cli_state *state)
 	winbindd_lookupsid_async(state->mem_ctx, &sid, lookupsid_recv, state);
 }
 
-static void lookupsid_recv(void *private_data, BOOL success,
+static void lookupsid_recv(void *private_data, bool success,
 			   const char *dom_name, const char *name,
 			   enum lsa_SidType type)
 {
@@ -73,7 +73,7 @@ static void lookupsid_recv(void *private_data, BOOL success,
  * Look up the SID for a qualified name.  
  **/
 
-static void lookupname_recv(void *private_data, BOOL success,
+static void lookupname_recv(void *private_data, bool success,
 			    const DOM_SID *sid, enum lsa_SidType type);
 
 void winbindd_lookupname(struct winbindd_cli_state *state)
@@ -106,7 +106,7 @@ void winbindd_lookupname(struct winbindd_cli_state *state)
 				  state);
 }
 
-static void lookupname_recv(void *private_data, BOOL success,
+static void lookupname_recv(void *private_data, bool success,
 			    const DOM_SID *sid, enum lsa_SidType type)
 {
 	struct winbindd_cli_state *state =
@@ -152,22 +152,10 @@ void winbindd_lookuprids(struct winbindd_cli_state *state)
 	sendto_domain(state, domain);
 }
 
-static struct winbindd_child static_idmap_child;
-
-void init_idmap_child(void)
-{
-	setup_domain_child(NULL, &static_idmap_child, "idmap");
-}
-
-struct winbindd_child *idmap_child(void)
-{
-	return &static_idmap_child;
-}
-
 /* Convert a sid to a uid.  We assume we only have one rid attached to the
    sid. */
 
-static void sid2uid_recv(void *private_data, BOOL success, uid_t uid)
+static void sid2uid_recv(void *private_data, bool success, uid_t uid)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);
@@ -183,7 +171,7 @@ static void sid2uid_recv(void *private_data, BOOL success, uid_t uid)
 	request_ok(state);
 }
 
-static void sid2uid_lookupsid_recv( void *private_data, BOOL success, 
+static void sid2uid_lookupsid_recv( void *private_data, bool success, 
 				    const char *domain_name, 
 				    const char *name, 
 				    enum lsa_SidType type)
@@ -244,7 +232,7 @@ void winbindd_sid_to_uid(struct winbindd_cli_state *state)
 /* Convert a sid to a gid.  We assume we only have one rid attached to the
    sid.*/
 
-static void sid2gid_recv(void *private_data, BOOL success, gid_t gid)
+static void sid2gid_recv(void *private_data, bool success, gid_t gid)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);
@@ -260,7 +248,7 @@ static void sid2gid_recv(void *private_data, BOOL success, gid_t gid)
 	request_ok(state);
 }
 
-static void sid2gid_lookupsid_recv( void *private_data, BOOL success, 
+static void sid2gid_lookupsid_recv( void *private_data, bool success, 
 				    const char *domain_name, 
 				    const char *name, 
 				    enum lsa_SidType type)
@@ -321,7 +309,7 @@ void winbindd_sid_to_gid(struct winbindd_cli_state *state)
 	winbindd_lookupsid_async( state->mem_ctx, &sid, sid2gid_lookupsid_recv, state );	
 }
 
-static void sids2xids_recv(void *private_data, BOOL success, void *data, int len)
+static void sids2xids_recv(void *private_data, bool success, void *data, int len)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);
@@ -347,7 +335,7 @@ void winbindd_sids_to_unixids(struct winbindd_cli_state *state)
 			sids2xids_recv, state);
 }
 
-static void set_mapping_recv(void *private_data, BOOL success)
+static void set_mapping_recv(void *private_data, bool success)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);
@@ -389,7 +377,7 @@ void winbindd_set_mapping(struct winbindd_cli_state *state)
 			set_mapping_recv, state);
 }
 
-static void set_hwm_recv(void *private_data, BOOL success)
+static void set_hwm_recv(void *private_data, bool success)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);
@@ -423,7 +411,7 @@ void winbindd_set_hwm(struct winbindd_cli_state *state)
 
 /* Convert a uid to a sid */
 
-static void uid2sid_recv(void *private_data, BOOL success, const char *sid)
+static void uid2sid_recv(void *private_data, bool success, const char *sid)
 {
 	struct winbindd_cli_state *state =
 		(struct winbindd_cli_state *)private_data;
@@ -452,7 +440,7 @@ void winbindd_uid_to_sid(struct winbindd_cli_state *state)
 
 /* Convert a gid to a sid */
 
-static void gid2sid_recv(void *private_data, BOOL success, const char *sid)
+static void gid2sid_recv(void *private_data, bool success, const char *sid)
 {
 	struct winbindd_cli_state *state =
 		(struct winbindd_cli_state *)private_data;
@@ -528,7 +516,7 @@ enum winbindd_result winbindd_dual_allocate_gid(struct winbindd_domain *domain,
 	return WINBINDD_OK;
 }
 
-static void dump_maps_recv(void *private_data, BOOL success)
+static void dump_maps_recv(void *private_data, bool success)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data, struct winbindd_cli_state);

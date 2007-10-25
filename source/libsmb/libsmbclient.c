@@ -111,7 +111,7 @@ smbc_lseek_ctx(SMBCCTX *context,
                off_t offset,
                int whence);
 
-extern BOOL in_client;
+extern bool in_client;
 
 /*
  * Is the logging working / configfile read ? 
@@ -626,7 +626,7 @@ find_server(SMBCCTX *context,
  * Connect to a server, possibly on an existing connection
  *
  * Here, what we want to do is: If the server and username
- * match an existing connection, reuse that, otherwise, establish a 
+ * match an existing connection, reuse that, otherwise, establish a
  * new connection.
  *
  * If we have to create a new connection, call the auth_fn to get the
@@ -635,11 +635,11 @@ find_server(SMBCCTX *context,
 
 static SMBCSRV *
 smbc_server(SMBCCTX *context,
-            BOOL connect_if_not_found,
+            bool connect_if_not_found,
             const char *server,
-            const char *share, 
+            const char *share,
             fstring workgroup,
-            fstring username, 
+            fstring username,
             fstring password)
 {
 	SMBCSRV *srv=NULL;
@@ -647,14 +647,14 @@ smbc_server(SMBCCTX *context,
 	struct nmb_name called, calling;
 	const char *server_n = server;
 	pstring ipenv;
-	struct in_addr ip;
+	struct sockaddr_storage ss;
 	int tried_reverse = 0;
         int port_try_first;
         int port_try_next;
         const char *username_used;
  	NTSTATUS status;
 
-	zero_ip_v4(&ip);
+	zero_addr(&ss, AF_INET);
 	ZERO_STRUCT(c);
 
 	if (server[0] == 0) {
@@ -665,7 +665,7 @@ smbc_server(SMBCCTX *context,
         /* Look for a cached connection */
         srv = find_server(context, server, share,
                           workgroup, username, password);
-        
+
         /*
          * If we found a connection and we're only allowed one share per
          * server...
@@ -699,7 +699,7 @@ smbc_server(SMBCCTX *context,
 
                         if (! cli_send_tconX(srv->cli, share, "?????",
                                              password, strlen(password)+1)) {
-                        
+
                                 errno = smbc_errno(context, srv->cli);
                                 cli_shutdown(srv->cli);
 				srv->cli = NULL;
@@ -718,7 +718,7 @@ smbc_server(SMBCCTX *context,
                         }
                 }
         }
-        
+
         /* If we have a connection... */
         if (srv) {
 
@@ -736,13 +736,13 @@ smbc_server(SMBCCTX *context,
 	make_nmb_name(&called , server, 0x20);
 
 	DEBUG(4,("smbc_server: server_n=[%s] server=[%s]\n", server_n, server));
-  
+
 	DEBUG(4,(" -> server_n=[%s] server=[%s]\n", server_n, server));
 
  again:
 	slprintf(ipenv,sizeof(ipenv)-1,"HOST_%s", server_n);
 
-	zero_ip_v4(&ip);
+	zero_addr(&ss, AF_INET);
 
 	/* have to open a new connection */
 	if ((c = cli_initialise()) == NULL) {
@@ -773,13 +773,13 @@ smbc_server(SMBCCTX *context,
 
         c->port = port_try_first;
 
-	status = cli_connect(c, server_n, &ip);
+	status = cli_connect(c, server_n, &ss);
 	if (!NT_STATUS_IS_OK(status)) {
 
                 /* First connection attempt failed.  Try alternate port. */
                 c->port = port_try_next;
 
-                status = cli_connect(c, server_n, &ip);
+                status = cli_connect(c, server_n, &ss);
 		if (!NT_STATUS_IS_OK(status)) {
 			cli_shutdown(c);
 			errno = ETIMEDOUT;
@@ -796,20 +796,22 @@ smbc_server(SMBCCTX *context,
 
 			/* Only try this if server is an IP address ... */
 
-			if (is_ipaddress_v4(server) && !tried_reverse) {
+			if (is_ipaddress(server) && !tried_reverse) {
 				fstring remote_name;
-				struct in_addr rem_ip;
+				struct sockaddr_storage rem_ss;
 
-				if ((rem_ip.s_addr=inet_addr(server)) == INADDR_NONE) {
+				if (!interpret_string_addr(&rem_ss, server,
+							NI_NUMERICHOST)) {
 					DEBUG(4, ("Could not convert IP address "
-						"%s to struct in_addr\n", server));
+						"%s to struct sockaddr_storage\n",
+						server));
 					errno = ETIMEDOUT;
 					return NULL;
 				}
 
 				tried_reverse++; /* Yuck */
 
-				if (name_status_find("*", 0, 0, rem_ip, remote_name)) {
+				if (name_status_find("*", 0, 0, &rem_ss, remote_name)) {
 					make_nmb_name(&called, remote_name, 0x20);
 					goto again;
 				}
@@ -818,9 +820,9 @@ smbc_server(SMBCCTX *context,
 		errno = ETIMEDOUT;
 		return NULL;
 	}
-  
+
 	DEBUG(4,(" session request ok\n"));
-  
+
 	if (!cli_negprot(c)) {
 		cli_shutdown(c);
 		errno = ETIMEDOUT;
@@ -829,11 +831,11 @@ smbc_server(SMBCCTX *context,
 
         username_used = username;
 
-	if (!NT_STATUS_IS_OK(cli_session_setup(c, username_used, 
+	if (!NT_STATUS_IS_OK(cli_session_setup(c, username_used,
 					       password, strlen(password),
 					       password, strlen(password),
 					       workgroup))) {
-                
+
                 /* Failed.  Try an anonymous login, if allowed by flags. */
                 username_used = "";
 
@@ -857,9 +859,9 @@ smbc_server(SMBCCTX *context,
 		cli_shutdown(c);
 		return NULL;
 	}
-  
+
 	DEBUG(4,(" tconx ok\n"));
-  
+
 	/*
 	 * Ok, we have got a nice connection
 	 * Let's allocate a server structure.
@@ -892,8 +894,8 @@ smbc_server(SMBCCTX *context,
 		}
 		goto failed;
 	}
-	
-	DEBUG(2, ("Server connect ok: //%s/%s: %p\n", 
+
+	DEBUG(2, ("Server connect ok: //%s/%s: %p\n",
 		  server, share, srv));
 
 	DLIST_ADD(context->internal->_servers, srv);
@@ -904,7 +906,7 @@ smbc_server(SMBCCTX *context,
 	if (!srv) {
 		return NULL;
 	}
-  
+
 	SAFE_FREE(srv);
 	return NULL;
 }
@@ -916,14 +918,14 @@ smbc_server(SMBCCTX *context,
 static SMBCSRV *
 smbc_attr_server(SMBCCTX *context,
                  const char *server,
-                 const char *share, 
+                 const char *share,
                  fstring workgroup,
                  fstring username,
                  fstring password,
                  POLICY_HND *pol)
 {
         int flags;
-        struct in_addr ip;
+        struct sockaddr_storage ss;
 	struct cli_state *ipc_cli;
 	struct rpc_pipe_client *pipe_hnd;
         NTSTATUS nt_status;
@@ -956,16 +958,16 @@ smbc_attr_server(SMBCCTX *context,
                                         password, sizeof(fstring));
                         }
                 }
-        
+
                 flags = 0;
                 if (context->flags & SMB_CTX_FLAG_USE_KERBEROS) {
                         flags |= CLI_FULL_CONNECTION_USE_KERBEROS;
                 }
 
-                zero_ip_v4(&ip);
+                zero_addr(&ss, AF_INET);
                 nt_status = cli_full_connection(&ipc_cli,
-                                                global_myname(), server, 
-                                                &ip, 0, "IPC$", "?????",  
+                                                global_myname(), server,
+                                                &ss, 0, "IPC$", "?????",
                                                 username, workgroup,
                                                 password, flags,
                                                 Undefined, NULL);
@@ -1481,7 +1483,7 @@ smbc_close_ctx(SMBCCTX *context,
  * Get info from an SMB server on a file. Use a qpathinfo call first
  * and if that fails, use getatr, as Win95 sometimes refuses qpathinfo
  */
-static BOOL
+static bool
 smbc_getatr(SMBCCTX * context,
             SMBCSRV *srv,
             char *path, 
@@ -1580,7 +1582,7 @@ smbc_getatr(SMBCCTX * context,
  *
  * "mode" (attributes) parameter may be set to -1 if it is not to be set.
  */
-static BOOL
+static bool
 smbc_setatr(SMBCCTX * context, SMBCSRV *srv, char *path, 
             time_t create_time,
             time_t access_time,
@@ -2557,7 +2559,7 @@ smbc_opendir_ctx(SMBCCTX *context,
 	SMBCSRV *srv  = NULL;
 	SMBCFILE *dir = NULL;
         struct _smbc_callbacks *cb;
-	struct in_addr rem_ip;
+	struct sockaddr_storage rem_ss;
 
 	if (!context || !context->internal ||
 	    !context->internal->_initialized) {
@@ -2602,10 +2604,8 @@ smbc_opendir_ctx(SMBCCTX *context,
 	dir = SMB_MALLOC_P(SMBCFILE);
 
 	if (!dir) {
-
 		errno = ENOMEM;
 		return NULL;
-
 	}
 
 	ZERO_STRUCTP(dir);
@@ -2661,7 +2661,7 @@ smbc_opendir_ctx(SMBCCTX *context,
 
                         SAFE_FREE(ip_list);
 
-                        if (!find_master_ip(workgroup, &server_addr.ip)) {
+                        if (!find_master_ip(workgroup, &server_addr.ss)) {
 
 				if (dir) {
 					SAFE_FREE(dir->fname);
@@ -2676,13 +2676,15 @@ smbc_opendir_ctx(SMBCCTX *context,
                 }
 
                 for (i = 0; i < count && i < max_lmb_count; i++) {
+			char addr[INET6_ADDRSTRLEN];
+			print_sockaddr(addr, sizeof(addr), &ip_list[i].ss);
                         DEBUG(99, ("Found master browser %d of %d: %s\n",
                                    i+1, MAX(count, max_lmb_count),
-                                   inet_ntoa(ip_list[i].ip)));
-                        
+                                   addr));
+
                         cli = get_ipc_connect_master_ip(&ip_list[i],
                                                         workgroup, &u_info);
-			/* cli == NULL is the master browser refused to talk or 
+			/* cli == NULL is the master browser refused to talk or
 			   could not be found */
 			if ( !cli )
 				continue;
@@ -2699,18 +2701,18 @@ smbc_opendir_ctx(SMBCCTX *context,
                          * already have one, and determine the
                          * workgroups/domains that it knows about.
                          */
-                
+
                         srv = smbc_server(context, True, server, "IPC$",
                                           workgroup, user, password);
                         if (!srv) {
                                 continue;
                         }
-                
+
                         dir->srv = srv;
                         dir->dir_type = SMBC_WORKGROUP;
 
                         /* Now, list the stuff ... */
-                        
+
                         if (!cli_NetServerEnum(srv->cli,
                                                workgroup,
                                                SV_TYPE_DOMAIN_ENUM,
@@ -2721,7 +2723,7 @@ smbc_opendir_ctx(SMBCCTX *context,
                 }
 
                 SAFE_FREE(ip_list);
-        } else { 
+        } else {
                 /*
                  * Server not an empty string ... Check the rest and see what
                  * gives
@@ -2761,9 +2763,9 @@ smbc_opendir_ctx(SMBCCTX *context,
                          * LMB or DMB
                          */
 			if (!srv &&
-                            !is_ipaddress_v4(server) &&
-			    (resolve_name(server, &rem_ip, 0x1d) ||   /* LMB */
-                             resolve_name(server, &rem_ip, 0x1b) )) { /* DMB */
+                            !is_ipaddress(server) &&
+			    (resolve_name(server, &rem_ss, 0x1d) ||   /* LMB */
+                             resolve_name(server, &rem_ss, 0x1b) )) { /* DMB */
 
 				fstring buserver;
 
@@ -2773,7 +2775,7 @@ smbc_opendir_ctx(SMBCCTX *context,
 				 * Get the backup list ...
 				 */
 				if (!name_status_find(server, 0, 0,
-                                                      rem_ip, buserver)) {
+                                                      &rem_ss, buserver)) {
 
                                         DEBUG(0, ("Could not get name of "
                                                   "local/domain master browser "
@@ -2818,8 +2820,8 @@ smbc_opendir_ctx(SMBCCTX *context,
 					return NULL;
 				}
 			} else if (srv ||
-                                   (resolve_name(server, &rem_ip, 0x20))) {
-                                
+                                   (resolve_name(server, &rem_ss, 0x20))) {
+
                                 /* If we hadn't found the server, get one now */
                                 if (!srv) {
                                         srv = smbc_server(context, True,
@@ -2848,9 +2850,9 @@ smbc_opendir_ctx(SMBCCTX *context,
                                             (void *) dir) < 0 &&
                                     cli_RNetShareEnum(
                                             srv->cli,
-                                            list_fn, 
+                                            list_fn,
                                             (void *)dir) < 0) {
-                                                
+
                                         errno = cli_errno(srv->cli);
                                         if (dir) {
                                                 SAFE_FREE(dir->fname);
@@ -2861,7 +2863,7 @@ smbc_opendir_ctx(SMBCCTX *context,
                                 }
                         } else {
                                 /* Neither the workgroup nor server exists */
-                                errno = ECONNREFUSED;   
+                                errno = ECONNREFUSED;
                                 if (dir) {
                                         SAFE_FREE(dir->fname);
                                         SAFE_FREE(dir);
@@ -3741,8 +3743,8 @@ static int
 ace_compare(SEC_ACE *ace1,
             SEC_ACE *ace2)
 {
-        BOOL b1;
-        BOOL b2;
+        bool b1;
+        bool b2;
 
         /* If the ACEs are equal, we have nothing more to do. */
         if (sec_ace_equal(ace1, ace2)) {
@@ -3851,7 +3853,7 @@ static void
 convert_sid_to_string(struct cli_state *ipc_cli,
                       POLICY_HND *pol,
                       fstring str,
-                      BOOL numeric,
+                      bool numeric,
                       DOM_SID *sid)
 {
 	char **domains = NULL;
@@ -3885,16 +3887,16 @@ convert_sid_to_string(struct cli_state *ipc_cli,
 }
 
 /* convert a string to a SID, either numeric or username/group */
-static BOOL
+static bool
 convert_string_to_sid(struct cli_state *ipc_cli,
                       POLICY_HND *pol,
-                      BOOL numeric,
+                      bool numeric,
                       DOM_SID *sid,
                       const char *str)
 {
 	enum lsa_SidType *types = NULL;
 	DOM_SID *sids = NULL;
-	BOOL result = True;
+	bool result = True;
 	struct rpc_pipe_client *pipe_hnd = find_lsa_pipe_hnd(ipc_cli);
 
 	if (!pipe_hnd) {
@@ -3925,11 +3927,11 @@ convert_string_to_sid(struct cli_state *ipc_cli,
 
 
 /* parse an ACE in the same format as print_ace() */
-static BOOL
+static bool
 parse_ace(struct cli_state *ipc_cli,
           POLICY_HND *pol,
           SEC_ACE *ace,
-          BOOL numeric,
+          bool numeric,
           char *str)
 {
 	char *p;
@@ -4024,7 +4026,7 @@ parse_ace(struct cli_state *ipc_cli,
 	p = tok;
 
 	while(*p) {
-		BOOL found = False;
+		bool found = False;
 
 		for (v = special_values; v->perm; v++) {
 			if (v->perm[0] == *p) {
@@ -4048,7 +4050,7 @@ parse_ace(struct cli_state *ipc_cli,
 }
 
 /* add an ACE to a list of ACEs in a SEC_ACL */
-static BOOL
+static bool
 add_ace(SEC_ACL **the_acl,
         SEC_ACE *ace,
         TALLOC_CTX *ctx)
@@ -4079,7 +4081,7 @@ static SEC_DESC *
 sec_desc_parse(TALLOC_CTX *ctx,
                struct cli_state *ipc_cli,
                POLICY_HND *pol,
-               BOOL numeric,
+               bool numeric,
                char *str)
 {
 	const char *p = str;
@@ -4359,25 +4361,25 @@ cacl_get(SMBCCTX *context,
 	uint32 i;
         int n = 0;
         int n_used;
-        BOOL all;
-        BOOL all_nt;
-        BOOL all_nt_acls;
-        BOOL all_dos;
-        BOOL some_nt;
-        BOOL some_dos;
-        BOOL exclude_nt_revision = False;
-        BOOL exclude_nt_owner = False;
-        BOOL exclude_nt_group = False;
-        BOOL exclude_nt_acl = False;
-        BOOL exclude_dos_mode = False;
-        BOOL exclude_dos_size = False;
-        BOOL exclude_dos_create_time = False;
-        BOOL exclude_dos_access_time = False;
-        BOOL exclude_dos_write_time = False;
-        BOOL exclude_dos_change_time = False;
-        BOOL exclude_dos_inode = False;
-        BOOL numeric = True;
-        BOOL determine_size = (bufsize == 0);
+        bool all;
+        bool all_nt;
+        bool all_nt_acls;
+        bool all_dos;
+        bool some_nt;
+        bool some_dos;
+        bool exclude_nt_revision = False;
+        bool exclude_nt_owner = False;
+        bool exclude_nt_group = False;
+        bool exclude_nt_acl = False;
+        bool exclude_dos_mode = False;
+        bool exclude_dos_size = False;
+        bool exclude_dos_create_time = False;
+        bool exclude_dos_access_time = False;
+        bool exclude_dos_write_time = False;
+        bool exclude_dos_change_time = False;
+        bool exclude_dos_inode = False;
+        bool numeric = True;
+        bool determine_size = (bufsize == 0);
 	int fnum = -1;
 	SEC_DESC *sd;
 	fstring sidstr;
@@ -5147,7 +5149,7 @@ cacl_set(TALLOC_CTX *ctx,
 	size_t sd_size;
 	int ret = 0;
         char *p;
-        BOOL numeric = True;
+        bool numeric = True;
 
         /* the_acl will be null for REMOVE_ALL operations */
         if (the_acl) {
@@ -5208,7 +5210,7 @@ cacl_set(TALLOC_CTX *ctx,
 
         case SMBC_XATTR_MODE_REMOVE:
 		for (i=0;sd->dacl && i<sd->dacl->num_aces;i++) {
-			BOOL found = False;
+			bool found = False;
 
 			for (j=0;old->dacl && j<old->dacl->num_aces;j++) {
                                 if (sec_ace_equal(&sd->dacl->aces[i],
@@ -5235,7 +5237,7 @@ cacl_set(TALLOC_CTX *ctx,
 
 	case SMBC_XATTR_MODE_ADD:
 		for (i=0;sd->dacl && i<sd->dacl->num_aces;i++) {
-			BOOL found = False;
+			bool found = False;
 
 			for (j=0;old->dacl && j<old->dacl->num_aces;j++) {
 				if (sid_equal(&sd->dacl->aces[i].trustee,
@@ -6387,7 +6389,7 @@ smbc_option_set(SMBCCTX *context,
         va_list ap;
         union {
                 int i;
-                BOOL b;
+                bool b;
                 smbc_get_auth_data_with_context_fn auth_fn;
                 void *v;
         } option_value;
@@ -6398,7 +6400,7 @@ smbc_option_set(SMBCCTX *context,
                 /*
                  * Log to standard error instead of standard output.
                  */
-                option_value.b = (BOOL) va_arg(ap, int);
+                option_value.b = (bool) va_arg(ap, int);
                 context->internal->_debug_stderr = option_value.b;
 
         } else if (strcmp(option_name, "full_time_names") == 0) {
@@ -6410,7 +6412,7 @@ smbc_option_set(SMBCCTX *context,
                  * be CHANGE_TIME but was confused and sometimes referred to
                  * CREATE_TIME.)
                  */
-                option_value.b = (BOOL) va_arg(ap, int);
+                option_value.b = (bool) va_arg(ap, int);
                 context->internal->_full_time_names = option_value.b;
 
         } else if (strcmp(option_name, "open_share_mode") == 0) {
@@ -6533,7 +6535,7 @@ smbc_init_context(SMBCCTX *context)
                  * Do some library-wide intializations the first time we get
                  * called
                  */
-		BOOL conf_loaded = False;
+		bool conf_loaded = False;
 
                 /* Set this to what the user wants */
                 DEBUGLEVEL = context->debug;

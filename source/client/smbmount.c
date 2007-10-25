@@ -23,7 +23,7 @@
 #include <asm/types.h>
 #include <linux/smb_fs.h>
 
-extern BOOL in_client;
+extern bool in_client;
 extern pstring user_socket_options;
 extern char *optarg;
 extern int optind;
@@ -38,20 +38,20 @@ static pstring service;
 static pstring options;
 
 static struct in_addr dest_ip;
-static BOOL have_ip;
+static bool have_ip;
 static int smb_port = 0;
-static BOOL got_user;
-static BOOL got_pass;
+static bool got_user;
+static bool got_pass;
 static uid_t mount_uid;
 static gid_t mount_gid;
 static int mount_ro;
 static unsigned mount_fmask;
 static unsigned mount_dmask;
-static BOOL use_kerberos;
+static bool use_kerberos;
 /* TODO: Add code to detect smbfs version in kernel */
-static BOOL status32_smbfs = False;
-static BOOL smbfs_has_unicode = False;
-static BOOL smbfs_has_lfs = False;
+static bool status32_smbfs = False;
+static bool smbfs_has_unicode = False;
+static bool smbfs_has_lfs = False;
 
 static void usage(void);
 
@@ -146,7 +146,7 @@ static struct cli_state *do_connection(char *the_service)
 	make_nmb_name(&called , server, 0x20);
 
  again:
-        zero_ip(&ip);
+        zero_ip_v4(&ip);
 	if (have_ip) ip = dest_ip;
 
 	/* have to open a new connection */
@@ -435,7 +435,7 @@ static void init_mount(void)
 	pstring tmp;
 	pstring svc2;
 	struct cli_state *c;
-	char *args[20];
+	const char *args[20];
 	int i, status;
 
 	if (realpath(mpoint, mount_point) == NULL) {
@@ -503,12 +503,12 @@ static void init_mount(void)
 		asprintf(&smbmnt_path, "%s/smbmnt", dyn_BINDIR);
 		
 		if (file_exist(smbmnt_path, NULL)) {
-			execv(smbmnt_path, args);
+			execv(smbmnt_path, (char * const *)args);
 			fprintf(stderr,
 				"smbfs/init_mount: execv of %s failed. Error was %s.",
 				smbmnt_path, strerror(errno));
 		} else {
-			execvp("smbmnt", args);
+			execvp("smbmnt", (char * const *)args);
 			fprintf(stderr,
 				"smbfs/init_mount: execv of %s failed. Error was %s.",
 				"smbmnt", strerror(errno));
@@ -549,7 +549,7 @@ static void get_password_file(void)
 {
 	int fd = -1;
 	char *p;
-	BOOL close_it = False;
+	bool close_it = False;
 	pstring spec;
 	char pass[128];
 
@@ -799,7 +799,7 @@ static void parse_mount_smb(int argc, char **argv)
 				DEBUGLEVEL = val;
 			} else if(!strcmp(opts, "ip")) {
 				dest_ip = *interpret_addr2(opteq+1);
-				if (is_zero_ip(dest_ip)) {
+				if (is_zero_ip_v4(dest_ip)) {
 					fprintf(stderr,"Can't resolve address %s\n", opteq+1);
 					exit(1);
 				}

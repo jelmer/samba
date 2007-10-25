@@ -38,17 +38,17 @@ static struct server_id	Ucrit_pid[SMB_MAXPIDS];  /* Ugly !!! */   /* added by OH
 static int		Ucrit_MaxPid=0;                    /* added by OH */
 static unsigned int	Ucrit_IsActive = 0;                /* added by OH */
 
-static int verbose, brief;
-static int            shares_only = 0;            /* Added by RJS */
-static int            locks_only  = 0;            /* Added by RJS */
-static BOOL processes_only=False;
-static int show_brl;
-static BOOL numeric_only = False;
+static bool verbose, brief;
+static bool shares_only;            /* Added by RJS */
+static bool locks_only;            /* Added by RJS */
+static bool processes_only;
+static bool show_brl;
+static bool numeric_only;
 
 const char *username = NULL;
 
-extern BOOL status_profile_dump(BOOL be_verbose);
-extern BOOL status_profile_rates(BOOL be_verbose);
+extern bool status_profile_dump(bool be_verbose);
+extern bool status_profile_rates(bool be_verbose);
 
 /* added by OH */
 static void Ucrit_addUid(uid_t uid)
@@ -83,7 +83,7 @@ static unsigned int Ucrit_checkPid(struct server_id pid)
 	return 0;
 }
 
-static BOOL Ucrit_addPid( struct server_id pid )
+static bool Ucrit_addPid( struct server_id pid )
 {
 	if ( !Ucrit_IsActive )
 		return True;
@@ -277,20 +277,20 @@ static int traverse_sessionid(struct db_record *db, void *state)
 {
 	int c;
 	int profile_only = 0;
-	BOOL show_processes, show_locks, show_shares;
+	bool show_processes, show_locks, show_shares;
 	poptContext pc;
 	struct poptOption long_options[] = {
 		POPT_AUTOHELP
-		{"processes",	'p', POPT_ARG_NONE,	&processes_only, 'p', "Show processes only" },
-		{"verbose",	'v', POPT_ARG_NONE, &verbose, 'v', "Be verbose" },
-		{"locks",	'L', POPT_ARG_NONE,	&locks_only, 'L', "Show locks only" },
-		{"shares",	'S', POPT_ARG_NONE,	&shares_only, 'S', "Show shares only" },
+		{"processes",	'p', POPT_ARG_NONE,	NULL, 'p', "Show processes only" },
+		{"verbose",	'v', POPT_ARG_NONE, 	NULL, 'v', "Be verbose" },
+		{"locks",	'L', POPT_ARG_NONE,	NULL, 'L', "Show locks only" },
+		{"shares",	'S', POPT_ARG_NONE,	NULL, 'S', "Show shares only" },
 		{"user", 	'u', POPT_ARG_STRING,	&username, 'u', "Switch to user" },
-		{"brief",	'b', POPT_ARG_NONE, 	&brief, 'b', "Be brief" },
+		{"brief",	'b', POPT_ARG_NONE, 	NULL, 'b', "Be brief" },
 		{"profile",     'P', POPT_ARG_NONE, NULL, 'P', "Do profiling" },
 		{"profile-rates", 'R', POPT_ARG_NONE, NULL, 'R', "Show call rates" },
-		{"byterange",	'B', POPT_ARG_NONE,	&show_brl, 'B', "Include byte range locks"},
-		{"numeric",	'n', POPT_ARG_NONE,	&numeric_only, 'n', "Numeric uid/gid"},
+		{"byterange",	'B', POPT_ARG_NONE,	NULL, 'B', "Include byte range locks"},
+		{"numeric",	'n', POPT_ARG_NONE,	NULL, 'n', "Numeric uid/gid"},
 		POPT_COMMON_SAMBA
 		POPT_TABLEEND
 	};
@@ -315,12 +315,34 @@ static int traverse_sessionid(struct db_record *db, void *state)
 	
 	while ((c = poptGetNextOpt(pc)) != -1) {
 		switch (c) {
-		case 'u':                                      
+		case 'p':
+			processes_only = true;
+			break;
+		case 'v':
+			verbose = true;
+			break;
+		case 'L':
+			locks_only = true;
+			break;
+		case 'S':
+			shares_only = true;
+			break;
+		case 'b':
+			brief = true;
+			break;
+		case 'u':
 			Ucrit_addUid(nametouid(poptGetOptArg(pc)));
 			break;
 		case 'P':
 		case 'R':
 			profile_only = c;
+			break;
+		case 'B':
+			show_brl = true;
+			break;
+		case 'n':
+			numeric_only = true;
+			break;
 		}
 	}
 
@@ -404,6 +426,19 @@ static int traverse_sessionid(struct db_record *db, void *state)
 
 	if ( show_locks ) {
 		int result;
+		struct db_context *db;
+		db = db_open(NULL, lock_path("locking.tdb"), 0,
+			     TDB_DEFAULT, O_RDONLY, 0);
+
+		if (!db) {
+			d_printf("%s not initialised\n",
+				 lock_path("locking.tdb"));
+			d_printf("This is normal if an SMB client has never "
+				 "connected to your server.\n");
+			exit(0);
+		} else {
+			TALLOC_FREE(db);
+		}
 
 		if (!locking_init(1)) {
 			d_printf("Can't initialise locking module - exiting\n");

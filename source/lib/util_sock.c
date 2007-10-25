@@ -29,23 +29,87 @@ static int client_fd = -1;
 static char client_ip_string[INET6_ADDRSTRLEN];
 
 /****************************************************************************
- Return true if a string could be a pure IPv4 address.
+ Return true if a string could be an IPv4 address.
 ****************************************************************************/
 
 bool is_ipaddress_v4(const char *str)
 {
-	bool pure_address = true;
-	int i;
+	int ret = -1;
+	struct in_addr dest;
 
-	for (i=0; pure_address && str[i]; i++) {
-		if (!(isdigit((int)str[i]) || str[i] == '.')) {
-			pure_address = false;
-		}
+	ret = inet_pton(AF_INET, str, &dest);
+	if (ret > 0) {
+		return true;
 	}
+	return false;
+}
 
-	/* Check that a pure number is not misinterpreted as an IP */
-	pure_address = pure_address && (strchr_m(str, '.') != NULL);
-	return pure_address;
+/****************************************************************************
+ Return true if a string could be an IPv4 or IPv6 address.
+****************************************************************************/
+
+bool is_ipaddress(const char *str)
+{
+	int ret = -1;
+
+#if defined(HAVE_IPV6)
+	struct in6_addr dest6;
+
+	ret = inet_pton(AF_INET6, str, &dest6);
+	if (ret > 0) {
+		return true;
+	}
+#endif
+	return is_ipaddress_v4(str);
+}
+
+/****************************************************************************
+ Is a sockaddr_storage a broadcast address ? 
+****************************************************************************/
+
+bool is_broadcast_addr(const struct sockaddr_storage *pss)
+{
+#if defined(HAVE_IPV6)
+	if (pss->ss_family == AF_INET6) {
+		const struct in6_addr *sin6 =
+			&((const struct sockaddr_in6 *)pss)->sin6_addr;
+		return IN6_IS_ADDR_MULTICAST(sin6);
+	}
+#endif
+	if (pss->ss_family == AF_INET) {
+		uint32_t addr =
+		ntohl(((const struct sockaddr_in *)pss)->sin_addr.s_addr);
+		return addr == INADDR_BROADCAST;
+	}
+	return false;
+}
+
+/*******************************************************************
+ Wrap getaddrinfo...
+******************************************************************/
+
+static bool interpret_string_addr_internal(struct addrinfo **ppres,
+					const char *str, int flags)
+{
+	int ret;
+	struct addrinfo hints;
+
+	memset(&hints, '\0', sizeof(hints));
+	/* By default make sure it supports TCP. */
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = flags;
+
+	ret = getaddrinfo(str, NULL,
+			&hints,
+			ppres);
+	if (ret) {
+		DEBUG(3,("interpret_string_addr_interal: getaddrinfo failed "
+			"for name %s [%s]\n",
+			str,
+			gai_strerror(ret) ));
+		return false;
+	}
+	return true;
 }
 
 /*******************************************************************
@@ -53,31 +117,20 @@ bool is_ipaddress_v4(const char *str)
  struct sockaddr_storage.
 ******************************************************************/
 
-bool interpret_string_addr(struct sockaddr_storage *pss, const char *str)
+bool interpret_string_addr(struct sockaddr_storage *pss,
+		const char *str,
+		int flags)
 {
-	int ret;
 	struct addrinfo *res = NULL;
-	struct addrinfo hints;
 
-	memset(pss,'\0', sizeof(*pss));
+	zero_addr(pss, AF_INET);
 
-	memset(&hints, '\0', sizeof(hints));
-	/* By default make sure it supports TCP. */
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_ADDRCONFIG;
-
-	ret = getaddrinfo(str, NULL,
-			&hints,
-			&res);
-
-	if (ret) {
-		DEBUG(3,("interpret_string_addr: getaddrinfo failed for "
-			"name %s [%s]\n",
-			str,
-			gai_strerror(ret) ));
+	if (!interpret_string_addr_internal(&res, str, flags|AI_ADDRCONFIG)) {
 		return false;
 	}
-
+	if (!res) {
+		return false;
+	}
 	/* Copy the first sockaddr. */
 	memcpy(pss, res->ai_addr, res->ai_addrlen);
 	freeaddrinfo(res);
@@ -101,9 +154,10 @@ bool is_loopback_ip_v4(struct in_addr ip)
 
 bool is_loopback_addr(const struct sockaddr_storage *pss)
 {
-#if defined(AF_INET6)
+#if defined(HAVE_IPV6)
 	if (pss->ss_family == AF_INET) {
-		struct in6_addr *pin6 = &((struct sockaddr_in6 *)pss)->sin6_addr;
+		struct in6_addr *pin6 =
+			&((struct sockaddr_in6 *)pss)->sin6_addr;
 		return IN6_IS_ADDR_LOOPBACK(pin6);
 	}
 #endif
@@ -131,9 +185,10 @@ bool is_zero_ip_v4(struct in_addr ip)
 
 bool is_zero_addr(const struct sockaddr_storage *pss)
 {
-#if defined(AF_INET6)
+#if defined(HAVE_IPV6)
 	if (pss->ss_family == AF_INET) {
-		struct in6_addr *pin6 = &((struct sockaddr_in6 *)pss)->sin6_addr;
+		struct in6_addr *pin6 =
+			&((struct sockaddr_in6 *)pss)->sin6_addr;
 		return IN6_IS_ADDR_UNSPECIFIED(pin6);
 	}
 #endif
@@ -159,6 +214,17 @@ void zero_ip_v4(struct in_addr *ip)
         }
 
         *ip = ipzero;
+}
+
+/*******************************************************************
+ Set an address to INADDR_ANY, or IN6ADDR_ANY.
+******************************************************************/
+
+void zero_addr(struct sockaddr_storage *pss, int family)
+{
+	memset(pss, '\0', sizeof(*pss));
+	/* Ensure we're at least a valid sockaddr-storage. */
+	pss->ss_family = family;
 }
 
 /*******************************************************************
@@ -189,7 +255,7 @@ void in_addr_to_sockaddr_storage(struct sockaddr_storage *ss,
 	sa->sin_addr = ip;
 }
 
-#ifdef AF_INET6
+#if defined(HAVE_IPV6)
 /*******************************************************************
  Convert an IPv6 struct in_addr to a struct sockaddr_storage.
 ********************************************************************/
@@ -217,7 +283,7 @@ bool same_net(const struct sockaddr_storage *ip1,
 		return false;
 	}
 
-#ifdef AF_INET6
+#if defined(HAVE_IPV6)
 	if (ip1->ss_family == AF_INET6) {
 		struct sockaddr_in6 ip1_6 = *(struct sockaddr_in6 *)ip1;
 		struct sockaddr_in6 ip2_6 = *(struct sockaddr_in6 *)ip2;
@@ -257,7 +323,7 @@ bool addr_equal(const struct sockaddr_storage *ip1,
 		return false;
 	}
 
-#ifdef AF_INET6
+#if defined(HAVE_IPV6)
 	if (ip1->ss_family == AF_INET6) {
 		return (memcmp(&((const struct sockaddr_in6 *)ip1)->sin6_addr,
 				&((const struct sockaddr_in6 *)ip2)->sin6_addr,
@@ -272,14 +338,13 @@ bool addr_equal(const struct sockaddr_storage *ip1,
 	return false;
 }
 
-
 /****************************************************************************
  Is an IP address the INADDR_ANY or in6addr_any value ?
 ****************************************************************************/
 
 bool is_address_any(const struct sockaddr_storage *psa)
 {
-#ifdef AF_INET6
+#if defined(HAVE_IPV6)
 	if (psa->ss_family == AF_INET6) {
 		struct sockaddr_in6 *si6 = (struct sockaddr_in6 *)psa;
 		if (memcmp(&in6addr_any,
@@ -304,7 +369,7 @@ bool is_address_any(const struct sockaddr_storage *psa)
  Print out an IPv4 or IPv6 address from a struct sockaddr_storage.
 ****************************************************************************/
 
-char *print_sockaddr(char *dest,
+char *print_sockaddr_len(char *dest,
 			size_t destlen,
 			const struct sockaddr_storage *psa,
 			socklen_t psalen)
@@ -317,6 +382,75 @@ char *print_sockaddr(char *dest,
 			dest, destlen,
 			NULL, 0,
 			NI_NUMERICHOST);
+	return dest;
+}
+
+/****************************************************************************
+ Print out an IPv4 or IPv6 address from a struct sockaddr_storage.
+****************************************************************************/
+
+char *print_sockaddr(char *dest,
+			size_t destlen,
+			const struct sockaddr_storage *psa)
+{
+	return print_sockaddr_len(dest, destlen, psa, sizeof(*psa));
+}
+
+/****************************************************************************
+ Print out a canonical IPv4 or IPv6 address from a struct sockaddr_storage.
+****************************************************************************/
+
+char *print_canonical_sockaddr(TALLOC_CTX *ctx,
+			const struct sockaddr_storage *pss)
+{
+	char addr[INET6_ADDRSTRLEN];
+	char *dest = NULL;
+	int ret;
+
+	ret = getnameinfo((const struct sockaddr *)pss,
+			sizeof(struct sockaddr_storage),
+			addr, sizeof(addr),
+			NULL, 0,
+			NI_NUMERICHOST);
+	if (ret) {
+		return NULL;
+	}
+	if (pss->ss_family != AF_INET) {
+#if defined(HAVE_IPV6)
+		/* IPv6 */
+		const struct sockaddr_in6 *sa6 =
+			(const struct sockaddr_in6 *)pss;
+		uint16_t port = ntohs(sa6->sin6_port);
+
+		if (port) {
+			dest = talloc_asprintf(ctx,
+					"[%s]:%d",
+					addr,
+					(unsigned int)port);
+		} else {
+			dest = talloc_asprintf(ctx,
+					"[%s]",
+					addr);
+		}
+#else
+		return NULL;
+#endif
+	} else {
+		const struct sockaddr_in *sa =
+			(const struct sockaddr_in *)pss;
+		uint16_t port = ntohs(sa->sin_port);
+
+		if (port) {
+			dest = talloc_asprintf(ctx,
+					"%s:%d",
+					addr,
+					(unsigned int)port);
+		} else {
+			dest = talloc_asprintf(ctx,
+					"%s",
+					addr);
+		}
+	}
 	return dest;
 }
 
@@ -359,7 +493,7 @@ static const char *get_socket_addr(int fd)
 		return addr_buf;
 	}
 
-	return print_sockaddr(addr_buf, sizeof(addr_buf), &sa, length);
+	return print_sockaddr_len(addr_buf, sizeof(addr_buf), &sa, length);
 }
 
 /****************************************************************************
@@ -381,7 +515,7 @@ static int get_socket_port(int fd)
 		return -1;
 	}
 
-#ifdef AF_INET6
+#if defined(HAVE_IPV6)
 	if (sa.ss_family == AF_INET6) {
 		return ntohs(((struct sockaddr_in6 *)&sa)->sin6_port);
 	}
@@ -1161,24 +1295,26 @@ bool send_smb(int fd, char *buffer)
 ****************************************************************************/
 
 int open_socket_in(int type,
-		int port,
+		uint16_t port,
 		int dlevel,
-		uint32 socket_addr,
-		bool rebind )
+		const struct sockaddr_storage *psock,
+		bool rebind)
 {
-	struct sockaddr_in sock;
+	struct sockaddr_storage sock;
 	int res;
 
-	memset( (char *)&sock, '\0', sizeof(sock) );
+	sock = *psock;
 
-#ifdef HAVE_SOCK_SIN_LEN
-	sock.sin_len         = sizeof(sock);
+#if defined(HAVE_IPV6)
+	if (sock.ss_family == AF_INET6) {
+		((struct sockaddr_in6 *)&sock)->sin6_port = htons(port);
+	}
 #endif
-	sock.sin_port        = htons( port );
-	sock.sin_family      = AF_INET;
-	sock.sin_addr.s_addr = socket_addr;
+	if (sock.ss_family == AF_INET) {
+		((struct sockaddr_in *)&sock)->sin_port = htons(port);
+	}
 
-	res = socket( AF_INET, type, 0 );
+	res = socket(sock.ss_family, type, 0 );
 	if( res == -1 ) {
 		if( DEBUGLVL(0) ) {
 			dbgtext( "open_socket_in(): socket() call failed: " );
@@ -1206,9 +1342,9 @@ int open_socket_in(int type,
 			if( DEBUGLVL( dlevel ) ) {
 				dbgtext( "open_socket_in(): setsockopt: ");
 				dbgtext( "SO_REUSEPORT = %s ",
-						val?"true":"false" );
-				dbgtext( "on port %d failed ", port );
-				dbgtext( "with error = %s\n", strerror(errno) );
+						val?"true":"false");
+				dbgtext( "on port %d failed ", port);
+				dbgtext( "with error = %s\n", strerror(errno));
 			}
 		}
 #endif /* SO_REUSEPORT */
@@ -1218,17 +1354,18 @@ int open_socket_in(int type,
 	if( bind( res, (struct sockaddr *)&sock, sizeof(sock) ) == -1 ) {
 		if( DEBUGLVL(dlevel) && (port == SMB_PORT1 ||
 				port == SMB_PORT2 || port == NMB_PORT) ) {
-			dbgtext( "bind failed on port %d ", port );
-			dbgtext( "socket_addr = %s.\n",
-					inet_ntoa( sock.sin_addr ) );
-			dbgtext( "Error = %s\n", strerror(errno) );
+			char addr[INET6_ADDRSTRLEN];
+			print_sockaddr(addr, sizeof(addr),
+					&sock);
+			dbgtext( "bind failed on port %d ", port);
+			dbgtext( "socket_addr = %s.\n", addr);
+			dbgtext( "Error = %s\n", strerror(errno));
 		}
-		close( res );
+		close(res);
 		return -1;
 	}
 
 	DEBUG( 10, ( "bind succeeded on port %d\n", port ) );
-
 	return( res );
  }
 
@@ -1236,33 +1373,46 @@ int open_socket_in(int type,
  Create an outgoing socket. timeout is in milliseconds.
 **************************************************************************/
 
-int open_socket_out(int type, struct in_addr *addr, int port ,int timeout)
+int open_socket_out(int type,
+		const struct sockaddr_storage *pss,
+		uint16_t port,
+		int timeout)
 {
-	struct sockaddr_in sock_out;
+	char addr[INET6_ADDRSTRLEN];
+	struct sockaddr_storage sock_out = *pss;
 	int res,ret;
 	int connect_loop = 10;
 	int increment = 10;
 
 	/* create a socket to write to */
-	res = socket(PF_INET, type, 0);
+	res = socket(pss->ss_family, type, 0);
 	if (res == -1) {
                 DEBUG(0,("socket error (%s)\n", strerror(errno)));
 		return -1;
 	}
 
-	if (type != SOCK_STREAM)
-		return(res);
+	if (type != SOCK_STREAM) {
+		return res;
+	}
 
-	memset((char *)&sock_out,'\0',sizeof(sock_out));
-	putip((char *)&sock_out.sin_addr,(char *)addr);
-
-	sock_out.sin_port = htons( port );
-	sock_out.sin_family = PF_INET;
+#if defined(HAVE_IPV6)
+	if (pss->ss_family == AF_INET6) {
+		struct sockaddr_in6 *psa6 = (struct sockaddr_in6 *)&sock_out;
+		psa6->sin6_port = htons(port);
+	}
+#endif
+	if (pss->ss_family == AF_INET) {
+		struct sockaddr_in *psa = (struct sockaddr_in *)&sock_out;
+		psa->sin_port = htons(port);
+	}
 
 	/* set it non-blocking */
 	set_blocking(res,false);
 
-	DEBUG(3,("Connecting to %s at port %d\n",inet_ntoa(*addr),port));
+	print_sockaddr(addr, sizeof(addr), &sock_out);
+	DEBUG(3,("Connecting to %s at port %u\n",
+				addr,
+				(unsigned int)port));
 
 	/* and connect it to the destination */
   connect_again:
@@ -1284,8 +1434,9 @@ int open_socket_out(int type, struct in_addr *addr, int port ,int timeout)
 
 	if (ret < 0 && (errno == EINPROGRESS || errno == EALREADY ||
 			errno == EAGAIN)) {
-		DEBUG(1,("timeout connecting to %s:%d\n",
-					inet_ntoa(*addr),port));
+		DEBUG(1,("timeout connecting to %s:%u\n",
+					addr,
+					(unsigned int)port));
 		close(res);
 		return -1;
 	}
@@ -1299,7 +1450,9 @@ int open_socket_out(int type, struct in_addr *addr, int port ,int timeout)
 
 	if (ret < 0) {
 		DEBUG(2,("error connecting to %s:%d (%s)\n",
-				inet_ntoa(*addr),port,strerror(errno)));
+				addr,
+				(unsigned int)port,
+				strerror(errno)));
 		close(res);
 		return -1;
 	}
@@ -1316,7 +1469,7 @@ int open_socket_out(int type, struct in_addr *addr, int port ,int timeout)
  of DC's all of which are equivalent for our purposes.
 **************************************************************************/
 
-bool open_any_socket_out(struct sockaddr_in *addrs, int num_addrs,
+bool open_any_socket_out(struct sockaddr_storage *addrs, int num_addrs,
 			 int timeout, int *fd_index, int *fd)
 {
 	int i, resulting_index, res;
@@ -1342,7 +1495,7 @@ bool open_any_socket_out(struct sockaddr_in *addrs, int num_addrs,
 		sockets[i] = -1;
 
 	for (i=0; i<num_addrs; i++) {
-		sockets[i] = socket(PF_INET, SOCK_STREAM, 0);
+		sockets[i] = socket(addrs[i].ss_family, SOCK_STREAM, 0);
 		if (sockets[i] < 0)
 			goto done;
 		set_blocking(sockets[i], false);
@@ -1526,7 +1679,7 @@ static const char *get_peer_addr_internal(int fd,
 		return addr_buf;
 	}
 
-	print_sockaddr(addr_buf,
+	print_sockaddr_len(addr_buf,
 			sizeof(addr_buf),
 			pss,
 			*plength);
@@ -1543,22 +1696,14 @@ static bool matchname(const char *remotehost,
 		const struct sockaddr_storage *pss,
 		socklen_t len)
 {
-	struct addrinfo hints;
 	struct addrinfo *res = NULL;
 	struct addrinfo *ailist = NULL;
 	char addr_buf[INET6_ADDRSTRLEN];
-	int ret = -1;
+	bool ret = interpret_string_addr_internal(&ailist,
+			remotehost,
+			AI_ADDRCONFIG|AI_CANONNAME);
 
-	memset(&hints,'\0',sizeof(struct addrinfo));
-	/* By default make sure it supports TCP. */
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_ADDRCONFIG|AI_CANONNAME;
-
-	ret = getaddrinfo(remotehost, NULL,
-			&hints,
-			&res);
-
-	if (ret || res == NULL) {
+	if (!ret || ailist == NULL) {
 		DEBUG(3,("matchname: getaddrinfo failed for "
 			"name %s [%s]\n",
 			remotehost,
@@ -1570,24 +1715,25 @@ static bool matchname(const char *remotehost,
 	 * Make sure that getaddrinfo() returns the "correct" host name.
 	 */
 
-	if (res->ai_canonname == NULL ||
-		(!strequal(remotehost, res->ai_canonname) &&
+	if (ailist->ai_canonname == NULL ||
+		(!strequal(remotehost, ailist->ai_canonname) &&
 		 !strequal(remotehost, "localhost"))) {
 		DEBUG(0,("matchname: host name/name mismatch: %s != %s\n",
 			 remotehost,
-			 res->ai_canonname ? res->ai_canonname : "(NULL)"));
-		freeaddrinfo(res);
+			 ailist->ai_canonname ?
+				 ailist->ai_canonname : "(NULL)"));
+		freeaddrinfo(ailist);
 		return false;
 	}
 
 	/* Look up the host address in the address list we just got. */
-	for (ailist = res; ailist; ailist = ailist->ai_next) {
-		if (!ailist->ai_addr) {
+	for (res = ailist; res; res = res->ai_next) {
+		if (!res->ai_addr) {
 			continue;
 		}
-		if (addr_equal((const struct sockaddr_storage *)ailist->ai_addr,
+		if (addr_equal((const struct sockaddr_storage *)res->ai_addr,
 					pss)) {
-			freeaddrinfo(res);
+			freeaddrinfo(ailist);
 			return true;
 		}
 	}
@@ -1599,13 +1745,15 @@ static bool matchname(const char *remotehost,
 	 */
 
 	DEBUG(0,("matchname: host name/address mismatch: %s != %s\n",
-		print_sockaddr(addr_buf,
+		print_sockaddr_len(addr_buf,
 			sizeof(addr_buf),
 			pss,
 			len),
-		 res->ai_canonname ? res->ai_canonname : "(NULL)"));
+		 ailist->ai_canonname ? ailist->ai_canonname : "(NULL)"));
 
-	freeaddrinfo(res);
+	if (ailist) {
+		freeaddrinfo(ailist);
+	}
 	return false;
 }
 
@@ -1785,8 +1933,62 @@ out_umask:
 #endif /* HAVE_UNIXSOCKET */
 }
 
+/****************************************************************************
+ Get my own canonical name, including domain.
+****************************************************************************/
+
+bool get_mydnsfullname(fstring my_dnsname)
+{
+	static fstring dnshostname;
+
+	if (!*dnshostname) {
+		struct addrinfo *res = NULL;
+		bool ret;
+
+		/* get my host name */
+		if (gethostname(dnshostname, sizeof(dnshostname)) == -1) {
+			*dnshostname = '\0';
+			DEBUG(0,("get_mydnsfullname: gethostname failed\n"));
+			return false;
+		}
+
+		/* Ensure null termination. */
+		dnshostname[sizeof(dnshostname)-1] = '\0';
+
+		ret = interpret_string_addr_internal(&res,
+					dnshostname,
+					AI_ADDRCONFIG|AI_CANONNAME);
+
+		if (!ret || res == NULL) {
+			DEBUG(3,("get_mydnsfullname: getaddrinfo failed for "
+				"name %s [%s]\n",
+				dnshostname,
+				gai_strerror(ret) ));
+			return false;
+		}
+
+		/*
+		 * Make sure that getaddrinfo() returns the "correct" host name.
+		 */
+
+		if (res->ai_canonname == NULL) {
+			DEBUG(3,("get_mydnsfullname: failed to get "
+				"canonical name for %s\n",
+				dnshostname));
+			freeaddrinfo(res);
+			return false;
+		}
+
+
+		fstrcpy(dnshostname, res->ai_canonname);
+		freeaddrinfo(res);
+	}
+	fstrcpy(my_dnsname, dnshostname);
+	return true;
+}
+
 /************************************************************
- Is this my name ? Needs fixing for IPv6.
+ Is this my name ?
 ************************************************************/
 
 bool is_myname_or_ipaddr(const char *s)
@@ -1794,83 +1996,81 @@ bool is_myname_or_ipaddr(const char *s)
 	fstring name, dnsname;
 	char *servername;
 
-	if ( !s ) {
+	if (!s) {
 		return false;
 	}
 
-	/* santize the string from '\\name' */
+	/* Santize the string from '\\name' */
+	fstrcpy(name, s);
 
-	fstrcpy( name, s );
-
-	servername = strrchr_m( name, '\\' );
-	if ( !servername )
+	servername = strrchr_m(name, '\\' );
+	if (!servername) {
 		servername = name;
-	else
+	} else {
 		servername++;
+	}
 
-	/* optimize for the common case */
-
-	if (strequal(servername, global_myname()))
+	/* Optimize for the common case */
+	if (strequal(servername, global_myname())) {
 		return true;
+	}
 
-	/* check for an alias */
-
-	if (is_myname(servername))
+	/* Check for an alias */
+	if (is_myname(servername)) {
 		return true;
+	}
 
-	/* check for loopback */
-
-	if (strequal(servername, "127.0.0.1"))
+	/* Check for loopback */
+	if (strequal(servername, "127.0.0.1") ||
+			strequal(servername, "::1")) {
 		return true;
+	}
 
-	if (strequal(servername, "localhost"))
+	if (strequal(servername, "localhost")) {
 		return true;
+	}
 
-	/* maybe it's my dns name */
-
-	if ( get_mydnsfullname( dnsname ) )
-		if ( strequal( servername, dnsname ) )
+	/* Maybe it's my dns name */
+	if (get_mydnsfullname(dnsname)) {
+		if (strequal(servername, dnsname)) {
 			return true;
+		}
+	}
 
-	/* handle possible CNAME records */
-
-	if ( !is_ipaddress_v4( servername ) ) {
-		/* use DNS to resolve the name, but only the first address */
-		struct hostent *hp;
-
-		if (((hp = sys_gethostbyname(name)) != NULL) && (hp->h_addr != NULL)) {
-			struct in_addr return_ip;
-			putip( (char*)&return_ip, (char*)hp->h_addr );
-			fstrcpy( name, inet_ntoa( return_ip ) );
+	/* Handle possible CNAME records - convert to an IP addr. */
+	if (!is_ipaddress(servername)) {
+		/* Use DNS to resolve the name, but only the first address */
+		struct sockaddr_storage ss;
+		if (interpret_string_addr(&ss, servername,0)) {
+			print_sockaddr(name,
+					sizeof(name),
+					&ss);
 			servername = name;
 		}
 	}
 
-	/* maybe its an IP address? */
-	if (is_ipaddress_v4(servername)) {
+	/* Maybe its an IP address? */
+	if (is_ipaddress(servername)) {
 		struct sockaddr_storage ss;
 		struct iface_struct nics[MAX_INTERFACES];
 		int i, n;
-		struct in_addr ip;
 
-		ip = *interpret_addr2(servername);
-		if (is_zero_ip_v4(ip) || is_loopback_ip_v4(ip)) {
+		if (!interpret_string_addr(&ss, servername, AI_NUMERICHOST)) {
 			return false;
 		}
 
-		in_addr_to_sockaddr_storage(&ss, ip);
+		if (is_zero_addr(&ss) || is_loopback_addr(&ss)) {
+			return false;
+		}
 
 		n = get_interfaces(nics, MAX_INTERFACES);
 		for (i=0; i<n; i++) {
-			if (nics[i].ip.ss_family != AF_INET) {
-				continue;
-			}
 			if (addr_equal(&nics[i].ip, &ss)) {
 				return true;
 			}
 		}
 	}
 
-	/* no match */
+	/* No match */
 	return false;
 }

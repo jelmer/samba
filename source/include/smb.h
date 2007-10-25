@@ -46,8 +46,8 @@
 #define SMB_PORTS "445 139"
 
 #define Undefined (-1)
-#define False (0)
-#define True (1)
+#define False false
+#define True true
 #define Auto (2)
 #define Required (3)
 
@@ -307,7 +307,7 @@ struct id_map {
 #include "librpc/gen_ndr/svcctl.h"
 
 struct lsa_dom_info {
-	BOOL valid;
+	bool valid;
 	DOM_SID sid;
 	const char *name;
 	int num_idxs;
@@ -479,7 +479,7 @@ typedef struct files_struct {
 	struct timeval open_time;
 	uint32 access_mask;		/* NTCreateX access bits (FILE_READ_DATA etc.) */
 	uint32 share_access;		/* NTCreateX share constants (FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE). */
-	BOOL pending_modtime_owner;
+	bool pending_modtime_owner;
 	struct timespec pending_modtime;
 	struct timespec last_write_time;
 	int oplock_type;
@@ -491,17 +491,17 @@ typedef struct files_struct {
 	struct share_mode_entry *pending_break_messages;
 	int num_pending_break_messages;
 
-	BOOL can_lock;
-	BOOL can_read;
-	BOOL can_write;
-	BOOL print_file;
-	BOOL modified;
-	BOOL is_directory;
-	BOOL is_stat;
-	BOOL aio_write_behind;
-	BOOL lockdb_clean;
-	BOOL initial_delete_on_close; /* Only set at NTCreateX if file was created. */
-	BOOL posix_open;
+	bool can_lock;
+	bool can_read;
+	bool can_write;
+	bool print_file;
+	bool modified;
+	bool is_directory;
+	bool is_stat;
+	bool aio_write_behind;
+	bool lockdb_clean;
+	bool initial_delete_on_close; /* Only set at NTCreateX if file was created. */
+	bool posix_open;
 	char *fsp_name;
 
 	struct vfs_fsp_data *vfs_extension;
@@ -527,8 +527,8 @@ typedef struct {
 
 struct vuid_cache_entry {
 	uint16 vuid;
-	BOOL read_only;
-	BOOL admin_user;
+	bool read_only;
+	bool admin_user;
 };
 
 struct vuid_cache {
@@ -538,7 +538,7 @@ struct vuid_cache {
 
 typedef struct {
 	char *name;
-	BOOL is_wild;
+	bool is_wild;
 } name_compare_entry;
 
 struct trans_state {
@@ -555,8 +555,8 @@ struct trans_state {
 	fstring name;		/* for trans requests */
 	uint16 call;		/* for trans2 and nttrans requests */
 
-	BOOL close_on_completion;
-	BOOL one_way;
+	bool close_on_completion;
+	bool one_way;
 
 	unsigned int setup_count;
 	uint16 *setup;
@@ -599,14 +599,14 @@ typedef struct connection_struct {
 	TALLOC_CTX *mem_ctx; /* long-lived memory context for things hanging off this struct. */
 	unsigned cnum; /* an index passed over the wire */
 	struct share_params *params;
-	BOOL force_user;
-	BOOL force_group;
+	bool force_user;
+	bool force_group;
 	struct vuid_cache vuid_cache;
 	struct dptr_struct *dirptr;
-	BOOL printer;
-	BOOL ipc;
-	BOOL read_only; /* Attributes for the current user of the share. */
-	BOOL admin_user; /* Attributes for the current user of the share. */
+	bool printer;
+	bool ipc;
+	bool read_only; /* Attributes for the current user of the share. */
+	bool admin_user; /* Attributes for the current user of the share. */
 	char *dirpath;
 	char *connectpath;
 	char *origpath;
@@ -618,7 +618,7 @@ typedef struct connection_struct {
 	char *user; /* name of user who *opened* this connection */
 	uid_t uid; /* uid of user who *opened* this connection */
 	gid_t gid; /* gid of user who *opened* this connection */
-	char client_address[18]; /* String version of client IP address. */
+	char client_address[INET6_ADDRSTRLEN]; /* String version of client IP address. */
 
 	uint16 vuid; /* vuid of user who *opened* this connection, or UID_FIELD_INVALID */
 
@@ -631,13 +631,13 @@ typedef struct connection_struct {
 	
 	time_t lastused;
 	time_t lastused_count;
-	BOOL used;
+	bool used;
 	int num_files_open;
 	unsigned int num_smb_operations; /* Count of smb operations on this tree. */
 
-	BOOL case_sensitive;
-	BOOL case_preserve;
-	BOOL short_case_preserve;
+	bool case_sensitive;
+	bool case_preserve;
+	bool short_case_preserve;
 
 	name_compare_entry *hide_list; /* Per-share list of files to return as hidden. */
 	name_compare_entry *veto_list; /* Per-share list of files to veto (never show). */
@@ -709,7 +709,7 @@ struct server_info_struct {
 	uint32 type;
 	fstring comment;
 	fstring domain; /* used ONLY in ipc.c NOT namework.c */
-	BOOL server_added; /* used ONLY in ipc.c NOT namework.c */
+	bool server_added; /* used ONLY in ipc.c NOT namework.c */
 };
 
 /* used for network interfaces */
@@ -784,9 +784,9 @@ struct share_mode_lock {
 	int num_share_modes;
 	struct share_mode_entry *share_modes;
 	UNIX_USER_TOKEN *delete_token;
-	BOOL delete_on_close;
-	BOOL fresh;
-	BOOL modified;
+	bool delete_on_close;
+	bool fresh;
+	bool modified;
 	struct db_record *record;
 };
 
@@ -799,7 +799,7 @@ struct locking_data {
 	union {
 		struct {
 			int num_share_mode_entries;
-			BOOL delete_on_close;
+			bool delete_on_close;
 			uint32 delete_token_size; /* Only valid if either of
 						     the two previous fields
 						     are True. */
@@ -903,11 +903,11 @@ struct parm_struct {
 	parm_type type;
 	parm_class p_class;
 	void *ptr;
-	BOOL (*special)(int snum, const char *, char **);
+	bool (*special)(int snum, const char *, char **);
 	const struct enum_list *enum_list;
 	unsigned flags;
 	union {
-		BOOL bvalue;
+		bool bvalue;
 		int ivalue;
 		char *svalue;
 		char cvalue;
@@ -1681,9 +1681,9 @@ enum smbd_capability {
    typee is used to describe how to interact with the kernel */
 struct kernel_oplocks {
 	files_struct * (*receive_message)(fd_set *fds);
-	BOOL (*set_oplock)(files_struct *fsp, int oplock_type);
+	bool (*set_oplock)(files_struct *fsp, int oplock_type);
 	void (*release_oplock)(files_struct *fsp);
-	BOOL (*msg_waiting)(fd_set *fds);
+	bool (*msg_waiting)(fd_set *fds);
 	int notification_fd;
 };
 
@@ -1716,8 +1716,8 @@ struct node_status_extra {
 };
 
 struct pwd_info {
-	BOOL null_pwd;
-	BOOL cleartext;
+	bool null_pwd;
+	bool cleartext;
 
 	fstring password;
 };
@@ -1742,7 +1742,7 @@ typedef struct user_struct {
 	const char *unix_homedir;
 	const char *logon_script;
 	
-	BOOL guest;
+	bool guest;
 
 	/* following groups stuff added by ih */
 	/* This groups info is needed for when we become_user() for this uid */
@@ -1832,7 +1832,7 @@ typedef struct _smb_iconv_t {
 
 /* used by the IP comparison function */
 struct ip_service {
-	struct in_addr ip;
+	struct sockaddr_storage ss;
 	unsigned port;
 };
 
@@ -1843,15 +1843,15 @@ struct ip_service {
 
 typedef struct smb_sign_info {
 	void (*sign_outgoing_message)(char *outbuf, struct smb_sign_info *si);
-	BOOL (*check_incoming_message)(const char *inbuf, struct smb_sign_info *si, BOOL must_be_ok);
+	bool (*check_incoming_message)(const char *inbuf, struct smb_sign_info *si, bool must_be_ok);
 	void (*free_signing_context)(struct smb_sign_info *si);
 	void *signing_context;
 
-	BOOL negotiated_smb_signing;
-	BOOL allow_smb_signing;
-	BOOL doing_signing;
-	BOOL mandatory_signing;
-	BOOL seen_valid; /* Have I ever seen a validly signed packet? */
+	bool negotiated_smb_signing;
+	bool allow_smb_signing;
+	bool doing_signing;
+	bool mandatory_signing;
+	bool seen_valid; /* Have I ever seen a validly signed packet? */
 } smb_sign_info;
 
 struct ea_struct {

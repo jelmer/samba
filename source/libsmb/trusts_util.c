@@ -140,18 +140,18 @@ NTSTATUS trust_pw_find_change_and_store_it(struct rpc_pipe_client *cli,
  Enumerate the list of trusted domains from a DC
 *********************************************************************/
 
-BOOL enumerate_domain_trusts( TALLOC_CTX *mem_ctx, const char *domain,
+bool enumerate_domain_trusts( TALLOC_CTX *mem_ctx, const char *domain,
                                      char ***domain_names, uint32 *num_domains,
 				     DOM_SID **sids )
 {
 	POLICY_HND 	pol;
 	NTSTATUS 	result = NT_STATUS_UNSUCCESSFUL;
 	fstring 	dc_name;
-	struct in_addr 	dc_ip;
+	struct sockaddr_storage	dc_ss;
 	uint32 		enum_ctx = 0;
 	struct cli_state *cli = NULL;
 	struct rpc_pipe_client *lsa_pipe;
-	BOOL 		retry;
+	bool 		retry;
 
 	*domain_names = NULL;
 	*num_domains = 0;
@@ -159,7 +159,7 @@ BOOL enumerate_domain_trusts( TALLOC_CTX *mem_ctx, const char *domain,
 
 	/* lookup a DC first */
 
-	if ( !get_dc_name(domain, NULL, dc_name, &dc_ip) ) {
+	if ( !get_dc_name(domain, NULL, dc_name, &dc_ss) ) {
 		DEBUG(3,("enumerate_domain_trusts: can't locate a DC for domain %s\n",
 			domain));
 		return False;
@@ -167,7 +167,7 @@ BOOL enumerate_domain_trusts( TALLOC_CTX *mem_ctx, const char *domain,
 
 	/* setup the anonymous connection */
 
-	result = cli_full_connection( &cli, global_myname(), dc_name, &dc_ip, 0, "IPC$", "IPC",
+	result = cli_full_connection( &cli, global_myname(), dc_name, &dc_ss, 0, "IPC$", "IPC",
 		"", "", "", 0, Undefined, &retry);
 	if ( !NT_STATUS_IS_OK(result) )
 		goto done;

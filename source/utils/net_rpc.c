@@ -1547,7 +1547,7 @@ static NTSTATUS rpc_sh_user_flag_edit_internals(TALLOC_CTX *mem_ctx,
 	const char *username;
 	const char *oldval = "unknown";
 	uint32 oldflags, newflags;
-	BOOL newval;
+	bool newval;
 
 	if ((argc > 1) ||
 	    ((argc == 1) && !strequal(argv[0], "yes") &&
@@ -1712,7 +1712,7 @@ static NTSTATUS rpc_group_delete_internals(const DOM_SID *domain_sid,
 					const char **argv)
 {
 	POLICY_HND connect_pol, domain_pol, group_pol, user_pol;
-	BOOL group_is_primary = False;
+	bool group_is_primary = False;
 	NTSTATUS result = NT_STATUS_UNSUCCESSFUL;
 
 	uint32 *group_rids, num_rids, *name_types, num_members, 
@@ -2447,9 +2447,9 @@ static NTSTATUS rpc_group_list_internals(const DOM_SID *domain_sid,
 	NTSTATUS result = NT_STATUS_UNSUCCESSFUL;
 	uint32 start_idx=0, max_entries=250, num_entries, i, loop_count = 0;
 	struct acct_info *groups;
-	BOOL global = False;
-	BOOL local = False;
-	BOOL builtin = False;
+	bool global = False;
+	bool local = False;
+	bool builtin = False;
 
 	if (argc == 0) {
 		global = True;
@@ -3328,7 +3328,7 @@ static int rpc_share_list(int argc, const char **argv)
 	return run_rpc_command(NULL, PI_SRVSVC, 0, rpc_share_list_internals, argc, argv);
 }
 
-static BOOL check_share_availability(struct cli_state *cli, const char *netname)
+static bool check_share_availability(struct cli_state *cli, const char *netname)
 {
 	if (!cli_send_tconX(cli, netname, "A:", "", 0)) {
 		d_printf("skipping   [%s]: not a file share.\n", netname);
@@ -3341,7 +3341,7 @@ static BOOL check_share_availability(struct cli_state *cli, const char *netname)
 	return True;
 }
 
-static BOOL check_share_sanity(struct cli_state *cli, fstring netname, uint32 type)
+static bool check_share_sanity(struct cli_state *cli, fstring netname, uint32 type)
 {
 	/* only support disk shares */
 	if (! ( type == STYPE_DISKTREE || type == (STYPE_DISKTREE | STYPE_HIDDEN)) ) {
@@ -3588,7 +3588,7 @@ static void copy_fn(const char *mnt, file_info *f, const char *mask, void *state
  *
  * @return 		Boolean result
  **/
-BOOL sync_files(struct copy_clistate *cp_clistate, pstring mask)
+bool sync_files(struct copy_clistate *cp_clistate, pstring mask)
 {
 	struct cli_state *targetcli;
 	pstring targetpath;
@@ -3616,7 +3616,7 @@ BOOL sync_files(struct copy_clistate *cp_clistate, pstring mask)
  * Should set up ACL inheritance.
  **/
 
-BOOL copy_top_level_perms(struct copy_clistate *cp_clistate, 
+bool copy_top_level_perms(struct copy_clistate *cp_clistate, 
 				const char *sharename)
 {
 	NTSTATUS nt_status = NT_STATUS_UNSUCCESSFUL;
@@ -3677,8 +3677,8 @@ static NTSTATUS rpc_share_migrate_files_internals(const DOM_SID *domain_sid,
 	uint32 i;
 	uint32 level = 502;
 	struct copy_clistate cp_clistate;
-	BOOL got_src_share = False;
-	BOOL got_dst_share = False;
+	bool got_src_share = False;
+	bool got_dst_share = False;
 	pstring mask = "\\*";
 	char *dst = NULL;
 
@@ -3728,7 +3728,7 @@ static NTSTATUS rpc_share_migrate_files_internals(const DOM_SID *domain_sid,
 
 	        /* open share source */
 		nt_status = connect_to_service(&cp_clistate.cli_share_src,
-					       &cli->dest_ip, cli->desthost,
+					       &cli->dest_ss, cli->desthost,
 					       netname, "A:");
 		if (!NT_STATUS_IS_OK(nt_status))
 			goto done;
@@ -4184,7 +4184,7 @@ static void free_user_token(NT_USER_TOKEN *token)
 	SAFE_FREE(token->user_sids);
 }
 
-static BOOL is_sid_in_token(NT_USER_TOKEN *token, DOM_SID *sid)
+static bool is_sid_in_token(NT_USER_TOKEN *token, DOM_SID *sid)
 {
 	int i;
 
@@ -4226,7 +4226,7 @@ static void dump_user_token(struct user_token *token)
 	}
 }
 
-static BOOL is_alias_member(DOM_SID *sid, struct full_alias *alias)
+static bool is_alias_member(DOM_SID *sid, struct full_alias *alias)
 {
 	int i;
 
@@ -4265,7 +4265,7 @@ static void collect_alias_memberships(NT_USER_TOKEN *token)
 	}
 }
 
-static BOOL get_user_sids(const char *domain, const char *user, NT_USER_TOKEN *token)
+static bool get_user_sids(const char *domain, const char *user, NT_USER_TOKEN *token)
 {
 	struct winbindd_request request;
 	struct winbindd_response response;
@@ -4352,7 +4352,7 @@ static BOOL get_user_sids(const char *domain, const char *user, NT_USER_TOKEN *t
  * Get a list of all user tokens we want to look at
  **/
 
-static BOOL get_user_tokens(int *num_tokens, struct user_token **user_tokens)
+static bool get_user_tokens(int *num_tokens, struct user_token **user_tokens)
 {
 	struct winbindd_request request;
 	struct winbindd_response response;
@@ -4431,7 +4431,7 @@ static BOOL get_user_tokens(int *num_tokens, struct user_token **user_tokens)
 	return True;
 }
 
-static BOOL get_user_tokens_from_file(FILE *f,
+static bool get_user_tokens_from_file(FILE *f,
 				      int *num_tokens,
 				      struct user_token **tokens)
 {
@@ -4624,7 +4624,7 @@ static NTSTATUS rpc_share_allowedusers_internals(const DOM_SID *domain_sid,
 						const char **argv)
 {
 	int ret;
-	BOOL r;
+	bool r;
 	ENUM_HND hnd;
 	uint32 i;
 	FILE *f;
@@ -5590,13 +5590,13 @@ static int rpc_trustdom_del(int argc, const char **argv)
 static int rpc_trustdom_establish(int argc, const char **argv)
 {
 	struct cli_state *cli = NULL;
-	struct in_addr server_ip;
+	struct sockaddr_storage server_ss;
 	struct rpc_pipe_client *pipe_hnd = NULL;
 	POLICY_HND connect_hnd;
 	TALLOC_CTX *mem_ctx;
 	NTSTATUS nt_status;
 	DOM_SID *domain_sid;
-	
+
 	char* domain_name;
 	char* domain_name_pol;
 	char* acct_name;
@@ -5617,7 +5617,7 @@ static int rpc_trustdom_establish(int argc, const char **argv)
 	/* account name used at first is our domain's name with '$' */
 	asprintf(&acct_name, "%s$", lp_workgroup());
 	strupper_m(acct_name);
-	
+
 	/*
 	 * opt_workgroup will be used by connection functions further,
 	 * hence it should be set to remote domain name instead of ours
@@ -5625,17 +5625,17 @@ static int rpc_trustdom_establish(int argc, const char **argv)
 	if (opt_workgroup) {
 		opt_workgroup = smb_xstrdup(domain_name);
 	};
-	
+
 	opt_user_name = acct_name;
 
 	/* find the domain controller */
-	if (!net_find_pdc(&server_ip, pdc_name, domain_name)) {
+	if (!net_find_pdc(&server_ss, pdc_name, domain_name)) {
 		DEBUG(0, ("Couldn't find domain controller for domain %s\n", domain_name));
 		return -1;
 	}
 
 	/* connect to ipc$ as username/password */
-	nt_status = connect_to_ipc(&cli, &server_ip, pdc_name);
+	nt_status = connect_to_ipc(&cli, &server_ss, pdc_name);
 	if (!NT_STATUS_EQUAL(nt_status, NT_STATUS_NOLOGON_INTERDOMAIN_TRUST_ACCOUNT)) {
 
 		/* Is it trusting domain account for sure ? */
@@ -5647,12 +5647,12 @@ static int rpc_trustdom_establish(int argc, const char **argv)
 	/* store who we connected to */
 
 	saf_store( domain_name, pdc_name );
-	
+
 	/*
 	 * Connect to \\server\ipc$ again (this time anonymously)
 	 */
-	
-	nt_status = connect_to_ipc_anonymous(&cli, &server_ip, (char*)pdc_name);
+
+	nt_status = connect_to_ipc_anonymous(&cli, &server_ss, (char*)pdc_name);
 	
 	if (NT_STATUS_IS_ERR(nt_status)) {
 		DEBUG(0, ("Couldn't connect to domain %s controller. Error was %s.\n",
@@ -6310,29 +6310,29 @@ static int rpc_trustdom(int argc, const char **argv)
  * Check if a server will take rpc commands
  * @param flags	Type of server to connect to (PDC, DMB, localhost)
  *		if the host is not explicitly specified
- * @return  BOOL (true means rpc supported)
+ * @return  bool (true means rpc supported)
  */
-BOOL net_rpc_check(unsigned flags)
+bool net_rpc_check(unsigned flags)
 {
 	struct cli_state *cli;
-	BOOL ret = False;
-	struct in_addr server_ip;
+	bool ret = False;
+	struct sockaddr_storage server_ss;
 	char *server_name = NULL;
 	NTSTATUS status;
 
 	/* flags (i.e. server type) may depend on command */
-	if (!net_find_server(NULL, flags, &server_ip, &server_name))
+	if (!net_find_server(NULL, flags, &server_ss, &server_name))
 		return False;
 
 	if ((cli = cli_initialise()) == NULL) {
 		return False;
 	}
 
-	status = cli_connect(cli, server_name, &server_ip);
+	status = cli_connect(cli, server_name, &server_ss);
 	if (!NT_STATUS_IS_OK(status))
 		goto done;
-	if (!attempt_netbios_session_request(&cli, global_myname(), 
-					     server_name, &server_ip))
+	if (!attempt_netbios_session_request(&cli, global_myname(),
+					     server_name, &server_ss))
 		goto done;
 	if (!cli_negprot(cli))
 		goto done;

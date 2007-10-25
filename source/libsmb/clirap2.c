@@ -1021,7 +1021,10 @@ int cli_NetFileGetInfo(struct cli_state *cli, uint32 file_id, void (*fn)(const c
 *             False     - failure
 *
 ****************************************************************************/
-int cli_NetFileEnum(struct cli_state *cli, char * user, char * base_path, void (*fn)(const char *, const char *, uint16, uint16, uint32))
+int cli_NetFileEnum(struct cli_state *cli, const char * user,
+		    const char * base_path,
+		    void (*fn)(const char *, const char *, uint16, uint16,
+			       uint32))
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -1228,7 +1231,7 @@ int cli_NetShareDelete(struct cli_state *cli, const char * share_name )
 *             False     - failure
 *
 ************************************************************************/
-BOOL cli_get_pdc_name(struct cli_state *cli, char *workgroup, char *pdc_name)
+bool cli_get_pdc_name(struct cli_state *cli, char *workgroup, char *pdc_name)
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -1308,7 +1311,7 @@ BOOL cli_get_pdc_name(struct cli_state *cli, char *workgroup, char *pdc_name)
 * Origins:  samba 2.0.6 source/libsmb/clientgen.c cli_NetServerEnum()
 *
 ************************************************************************/
-BOOL cli_get_server_domain(struct cli_state *cli)
+bool cli_get_server_domain(struct cli_state *cli)
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -1373,7 +1376,7 @@ BOOL cli_get_server_domain(struct cli_state *cli)
 * Origins:  samba 2.0.6 source/libsmb/clientgen.c cli_NetServerEnum()
 *
 ************************************************************************/
-BOOL cli_get_server_type(struct cli_state *cli, uint32 *pstype)
+bool cli_get_server_type(struct cli_state *cli, uint32 *pstype)
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -1413,7 +1416,7 @@ BOOL cli_get_server_type(struct cli_state *cli, uint32 *pstype)
   return(res == 0 || res == ERRmoredata);
 }
 
-BOOL cli_get_server_name(TALLOC_CTX *mem_ctx, struct cli_state *cli,
+bool cli_get_server_name(TALLOC_CTX *mem_ctx, struct cli_state *cli,
 			 char **servername)
 {
 	char *rparam = NULL;
@@ -1425,7 +1428,7 @@ BOOL cli_get_server_name(TALLOC_CTX *mem_ctx, struct cli_state *cli,
 		   +sizeof(RAP_SERVER_INFO_L1)     /* return string */
 		   +WORDSIZE                       /* info level    */
 		   +WORDSIZE];                     /* buffer size   */
-	BOOL res = False;
+	bool res = False;
 	fstring tmp;
   
 	/* send a SMBtrans command with api NetServerGetInfo */
@@ -1496,7 +1499,7 @@ BOOL cli_get_server_name(TALLOC_CTX *mem_ctx, struct cli_state *cli,
 *             False     - failure
 *
 ************************************************************************/
-BOOL cli_ns_check_server_type(struct cli_state *cli, char *workgroup, uint32 stype)
+bool cli_ns_check_server_type(struct cli_state *cli, char *workgroup, uint32 stype)
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -1509,7 +1512,7 @@ BOOL cli_ns_check_server_type(struct cli_state *cli, char *workgroup, uint32 sty
 	    +WORDSIZE                       /* buffer size   */
 	    +DWORDSIZE                      /* server type   */
 	    +RAP_MACHNAME_LEN];             /* workgroup     */
-  BOOL found_server = False;
+  bool found_server = False;
   int res = -1;
   
   /* send a SMBtrans command with api NetServerEnum */
@@ -1563,7 +1566,7 @@ BOOL cli_ns_check_server_type(struct cli_state *cli, char *workgroup, uint32 sty
 /****************************************************************************
  perform a NetWkstaUserLogoff
 ****************************************************************************/
-BOOL cli_NetWkstaUserLogoff(struct cli_state *cli,char *user, char *workstation)
+bool cli_NetWkstaUserLogoff(struct cli_state *cli,char *user, char *workstation)
 {
   char *rparam = NULL;
   char *rdata = NULL;

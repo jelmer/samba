@@ -487,6 +487,7 @@ VFS_GPFS_OBJ = modules/vfs_gpfs.o modules/gpfs.o modules/nfs4_acls.o
 VFS_NOTIFY_FAM_OBJ = modules/vfs_notify_fam.o
 VFS_READAHEAD_OBJ = modules/vfs_readahead.o
 VFS_FILEID_OBJ = modules/vfs_fileid.o
+VFS_SYNCOPS_OBJ = modules/vfs_syncops.o
 
 PLAINTEXT_AUTH_OBJ = auth/pampass.o auth/pass_check.o
 
@@ -876,6 +877,8 @@ WINBINDD_OBJ1 = \
 		winbindd/winbindd_creds.o \
 		winbindd/winbindd_cred_cache.o \
 		winbindd/winbindd_ccache_access.o \
+		winbindd/winbindd_idmap.o \
+		winbindd/winbindd_locator.o \
 		auth/token_util.o
 
 WINBINDD_OBJ = \
@@ -1580,6 +1583,10 @@ bin/readonly.@SHLIBEXT@: $(BINARY_PREREQS) $(VFS_READONLY_OBJ)
 bin/shadow_copy.@SHLIBEXT@: $(BINARY_PREREQS) $(VFS_SHADOW_COPY_OBJ)
 	@echo "Building plugin $@"
 	@$(SHLD_MODULE) $(VFS_SHADOW_COPY_OBJ)
+
+bin/syncops.@SHLIBEXT@: $(BINARY_PREREQS) $(VFS_SYNCOPS_OBJ)
+	@echo "Building plugin $@"
+	@$(SHLD_MODULE) $(VFS_SYNCOPS_OBJ)
 
 bin/cap.@SHLIBEXT@: $(BINARY_PREREQS) $(VFS_CAP_OBJ)
 	@echo "Building plugin $@"

@@ -33,7 +33,7 @@
 #undef DBGC_CLASS
 #define DBGC_CLASS DBGC_WINBIND
 
-extern BOOL override_logfile;
+extern bool override_logfile;
 
 /* Read some data from a client connection */
 
@@ -94,22 +94,22 @@ struct winbindd_async_request {
 	struct winbindd_child *child;
 	struct winbindd_request *request;
 	struct winbindd_response *response;
-	void (*continuation)(void *private_data, BOOL success);
+	void (*continuation)(void *private_data, bool success);
 	struct timed_event *reply_timeout_event;
 	pid_t child_pid; /* pid of the child we're waiting on. Used to detect
 			    a restart of the child (child->pid != child_pid). */
 	void *private_data;
 };
 
-static void async_main_request_sent(void *private_data, BOOL success);
-static void async_request_sent(void *private_data, BOOL success);
-static void async_reply_recv(void *private_data, BOOL success);
+static void async_main_request_sent(void *private_data, bool success);
+static void async_request_sent(void *private_data, bool success);
+static void async_reply_recv(void *private_data, bool success);
 static void schedule_async_request(struct winbindd_child *child);
 
 void async_request(TALLOC_CTX *mem_ctx, struct winbindd_child *child,
 		   struct winbindd_request *request,
 		   struct winbindd_response *response,
-		   void (*continuation)(void *private_data, BOOL success),
+		   void (*continuation)(void *private_data, bool success),
 		   void *private_data)
 {
 	struct winbindd_async_request *state;
@@ -138,7 +138,7 @@ void async_request(TALLOC_CTX *mem_ctx, struct winbindd_child *child,
 	return;
 }
 
-static void async_main_request_sent(void *private_data, BOOL success)
+static void async_main_request_sent(void *private_data, bool success)
 {
 	struct winbindd_async_request *state =
 		talloc_get_type_abort(private_data, struct winbindd_async_request);
@@ -211,7 +211,7 @@ static void async_request_fail(struct winbindd_async_request *state)
 	state->continuation(state->private_data, False);
 }
 
-static void async_request_sent(void *private_data_data, BOOL success)
+static void async_request_sent(void *private_data_data, bool success)
 {
 	struct winbindd_async_request *state =
 		talloc_get_type_abort(private_data_data, struct winbindd_async_request);
@@ -247,7 +247,7 @@ static void async_request_sent(void *private_data_data, BOOL success)
 	}
 }
 
-static void async_reply_recv(void *private_data, BOOL success)
+static void async_reply_recv(void *private_data, bool success)
 {
 	struct winbindd_async_request *state =
 		talloc_get_type_abort(private_data, struct winbindd_async_request);
@@ -278,7 +278,7 @@ static void async_reply_recv(void *private_data, BOOL success)
 	state->continuation(state->private_data, True);
 }
 
-static BOOL fork_domain_child(struct winbindd_child *child);
+static bool fork_domain_child(struct winbindd_child *child);
 
 static void schedule_async_request(struct winbindd_child *child)
 {
@@ -319,17 +319,17 @@ struct domain_request_state {
 	struct winbindd_domain *domain;
 	struct winbindd_request *request;
 	struct winbindd_response *response;
-	void (*continuation)(void *private_data_data, BOOL success);
+	void (*continuation)(void *private_data_data, bool success);
 	void *private_data_data;
 };
 
-static void domain_init_recv(void *private_data_data, BOOL success);
+static void domain_init_recv(void *private_data_data, bool success);
 
 void async_domain_request(TALLOC_CTX *mem_ctx,
 			  struct winbindd_domain *domain,
 			  struct winbindd_request *request,
 			  struct winbindd_response *response,
-			  void (*continuation)(void *private_data_data, BOOL success),
+			  void (*continuation)(void *private_data_data, bool success),
 			  void *private_data_data)
 {
 	struct domain_request_state *state;
@@ -357,7 +357,7 @@ void async_domain_request(TALLOC_CTX *mem_ctx,
 	init_child_connection(domain, domain_init_recv, state);
 }
 
-static void domain_init_recv(void *private_data_data, BOOL success)
+static void domain_init_recv(void *private_data_data, bool success)
 {
 	struct domain_request_state *state =
 		talloc_get_type_abort(private_data_data, struct domain_request_state);
@@ -373,7 +373,7 @@ static void domain_init_recv(void *private_data_data, BOOL success)
 		      state->continuation, state->private_data_data);
 }
 
-static void recvfrom_child(void *private_data_data, BOOL success)
+static void recvfrom_child(void *private_data_data, bool success)
 {
 	struct winbindd_cli_state *state =
 		talloc_get_type_abort(private_data_data, struct winbindd_cli_state);
@@ -408,23 +408,14 @@ void sendto_domain(struct winbindd_cli_state *state,
 			     recvfrom_child, state);
 }
 
+const struct winbindd_child_dispatch_table domain_dispatch_table[] = {
 
-struct winbindd_child_dispatch_table {
-	enum winbindd_cmd cmd;
-	enum winbindd_result (*fn)(struct winbindd_domain *domain,
-				   struct winbindd_cli_state *state);
-	const char *winbindd_cmd_name;
-};
-
-static struct winbindd_child_dispatch_table child_dispatch_table[] = {
-	
 	{ WINBINDD_LOOKUPSID,            winbindd_dual_lookupsid,             "LOOKUPSID" },
 	{ WINBINDD_LOOKUPNAME,           winbindd_dual_lookupname,            "LOOKUPNAME" },
 	{ WINBINDD_LOOKUPRIDS,           winbindd_dual_lookuprids,            "LOOKUPRIDS" },
 	{ WINBINDD_LIST_TRUSTDOM,        winbindd_dual_list_trusted_domains,  "LIST_TRUSTDOM" },
 	{ WINBINDD_INIT_CONNECTION,      winbindd_dual_init_connection,       "INIT_CONNECTION" },
 	{ WINBINDD_GETDCNAME,            winbindd_dual_getdcname,             "GETDCNAME" },
-	{ WINBINDD_DSGETDCNAME,          winbindd_dual_dsgetdcname,           "DSGETDCNAME" },
 	{ WINBINDD_SHOW_SEQUENCE,        winbindd_dual_show_sequence,         "SHOW_SEQUENCE" },
 	{ WINBINDD_PAM_AUTH,             winbindd_dual_pam_auth,              "PAM_AUTH" },
 	{ WINBINDD_PAM_AUTH_CRAP,        winbindd_dual_pam_auth_crap,         "AUTH_CRAP" },
@@ -432,23 +423,7 @@ static struct winbindd_child_dispatch_table child_dispatch_table[] = {
 	{ WINBINDD_PAM_CHNG_PSWD_AUTH_CRAP,winbindd_dual_pam_chng_pswd_auth_crap,"CHNG_PSWD_AUTH_CRAP" },
 	{ WINBINDD_PAM_CHAUTHTOK,        winbindd_dual_pam_chauthtok,         "PAM_CHAUTHTOK" },
 	{ WINBINDD_CHECK_MACHACC,        winbindd_dual_check_machine_acct,    "CHECK_MACHACC" },
-	{ WINBINDD_DUAL_SID2UID,         winbindd_dual_sid2uid,               "DUAL_SID2UID" },
-	{ WINBINDD_DUAL_SID2GID,         winbindd_dual_sid2gid,               "DUAL_SID2GID" },
-#if 0   /* DISABLED until we fix the interface in Samba 3.0.26 --jerry */
-	{ WINBINDD_DUAL_SIDS2XIDS,       winbindd_dual_sids2xids,             "DUAL_SIDS2XIDS" },
-#endif  /* end DISABLED */
-	{ WINBINDD_DUAL_UID2SID,         winbindd_dual_uid2sid,               "DUAL_UID2SID" },
-	{ WINBINDD_DUAL_GID2SID,         winbindd_dual_gid2sid,               "DUAL_GID2SID" },
-	{ WINBINDD_DUAL_UID2NAME,        winbindd_dual_uid2name,              "DUAL_UID2NAME" },
-	{ WINBINDD_DUAL_NAME2UID,        winbindd_dual_name2uid,              "DUAL_NAME2UID" },
-	{ WINBINDD_DUAL_GID2NAME,        winbindd_dual_gid2name,              "DUAL_GID2NAME" },
-	{ WINBINDD_DUAL_NAME2GID,        winbindd_dual_name2gid,              "DUAL_NAME2GID" },
-	{ WINBINDD_DUAL_SET_MAPPING,     winbindd_dual_set_mapping,           "DUAL_SET_MAPPING" },
-	{ WINBINDD_DUAL_SET_HWM,         winbindd_dual_set_hwm,               "DUAL_SET_HWMS" },
-	{ WINBINDD_DUAL_DUMP_MAPS,       winbindd_dual_dump_maps,             "DUAL_DUMP_MAPS" },
 	{ WINBINDD_DUAL_USERINFO,        winbindd_dual_userinfo,              "DUAL_USERINFO" },
-	{ WINBINDD_ALLOCATE_UID,         winbindd_dual_allocate_uid,          "ALLOCATE_UID" },
-	{ WINBINDD_ALLOCATE_GID,         winbindd_dual_allocate_gid,          "ALLOCATE_GID" },
 	{ WINBINDD_GETUSERDOMGROUPS,     winbindd_dual_getuserdomgroups,      "GETUSERDOMGROUPS" },
 	{ WINBINDD_DUAL_GETSIDALIASES,   winbindd_dual_getsidaliases,         "GETSIDALIASES" },
 	{ WINBINDD_CCACHE_NTLMAUTH,      winbindd_dual_ccache_ntlm_auth,      "CCACHE_NTLM_AUTH" },
@@ -457,10 +432,11 @@ static struct winbindd_child_dispatch_table child_dispatch_table[] = {
 	{ WINBINDD_NUM_CMDS, NULL, "NONE" }
 };
 
-static void child_process_request(struct winbindd_domain *domain,
+static void child_process_request(struct winbindd_child *child,
 				  struct winbindd_cli_state *state)
 {
-	struct winbindd_child_dispatch_table *table;
+	struct winbindd_domain *domain = child->domain;
+	const struct winbindd_child_dispatch_table *table = child->table;
 
 	/* Free response data - we may be interrupted and receive another
 	   command before being able to send this data off. */
@@ -473,7 +449,7 @@ static void child_process_request(struct winbindd_domain *domain,
 
 	/* Process command */
 
-	for (table = child_dispatch_table; table->fn; table++) {
+	for (; table->fn; table++) {
 		if (state->request.cmd == table->cmd) {
 			DEBUG(10,("process_request: request fn %s\n",
 				  table->winbindd_cmd_name ));
@@ -483,7 +459,7 @@ static void child_process_request(struct winbindd_domain *domain,
 	}
 
 	if (!table->fn) {
-		DEBUG(10,("process_request: unknown request fn number %d\n",
+		DEBUG(1 ,("child_process_request: unknown request fn number %d\n",
 			  (int)state->request.cmd ));
 		state->response.result = WINBINDD_ERROR;
 	}
@@ -491,6 +467,7 @@ static void child_process_request(struct winbindd_domain *domain,
 
 void setup_domain_child(struct winbindd_domain *domain,
 			struct winbindd_child *child,
+			const struct winbindd_child_dispatch_table *table,
 			const char *explicit_logfile)
 {
 	if (explicit_logfile != NULL) {
@@ -505,6 +482,7 @@ void setup_domain_child(struct winbindd_domain *domain,
 	}
 
 	child->domain = domain;
+	child->table = table;
 }
 
 struct winbindd_child *children = NULL;
@@ -920,7 +898,7 @@ static void child_msg_dump_event_list(struct messaging_context *msg,
 }
 
 
-static BOOL fork_domain_child(struct winbindd_child *child)
+static bool fork_domain_child(struct winbindd_child *child)
 {
 	int fdpair[2];
 	struct winbindd_cli_state state;
@@ -1106,7 +1084,7 @@ static BOOL fork_domain_child(struct winbindd_child *child)
 
 		ZERO_STRUCT(state.response);
 		state.request.null_term = '\0';
-		child_process_request(child->domain, &state);
+		child_process_request(child, &state);
 
 		SAFE_FREE(state.request.extra_data.data);
 

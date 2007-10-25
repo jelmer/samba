@@ -679,7 +679,7 @@ dnl These have to be built static:
 default_static_modules="pdb_smbpasswd pdb_tdbsam rpc_lsa rpc_samr rpc_winreg rpc_initshutdown rpc_lsa_ds rpc_wkssvc rpc_svcctl2 rpc_ntsvcs rpc_net rpc_netdfs rpc_srvsvc2 rpc_spoolss rpc_eventlog2 auth_sam auth_unix auth_winbind auth_server auth_domain auth_builtin vfs_default nss_info_template"
 
 dnl These are preferably build shared, and static if dlopen() is not available
-default_shared_modules="vfs_recycle vfs_audit vfs_extd_audit vfs_full_audit vfs_netatalk vfs_fake_perms vfs_default_quota vfs_readonly vfs_cap vfs_expand_msdfs vfs_shadow_copy charset_CP850 charset_CP437 auth_script vfs_readahead"
+default_shared_modules="vfs_recycle vfs_audit vfs_extd_audit vfs_full_audit vfs_netatalk vfs_fake_perms vfs_default_quota vfs_readonly vfs_cap vfs_expand_msdfs vfs_shadow_copy charset_CP850 charset_CP437 auth_script vfs_readahead vfs_syncops"
 
 if test "x$developer" = xyes; then
    default_static_modules="$default_static_modules rpc_rpcecho"
@@ -2939,40 +2939,6 @@ SMB_CHECK_SYSCONF(_SC_NPROCESSORS_ONLN)
 SMB_CHECK_SYSCONF(_SC_PAGESIZE)
 AC_CHECK_FUNCS(getpagesize)
 
-dnl test for socklen_t
-AC_CACHE_CHECK([for socklen_t],samba_cv_HAVE_SA_FAMILY_T,[
-AC_TRY_COMPILE([
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-],
-[
-socklen_t foo;
-],
-samba_cv_HAVE_SOCKLEN_T=yes,samba_cv_HAVE_SOCKLEN_T=no)])
-if test x"$samba_cv_HAVE_SOCKLEN_T" = x"yes"; then
-    AC_DEFINE(HAVE_SOCKLEN_T,1,[Whether the system has socklen_t])
-fi
-
-dnl test for sa_family_t
-AC_CACHE_CHECK([for sa_family_t],samba_cv_HAVE_SA_FAMILY_T,[
-AC_TRY_COMPILE([
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-],
-[
-sa_family_t foo;
-],
-samba_cv_HAVE_SA_FAMILY_T=yes,samba_cv_HAVE_SA_FAMILY_T=no)])
-if test x"$samba_cv_HAVE_SA_FAMILY_T" = x"yes"; then
-    AC_DEFINE(HAVE_SA_FAMILY_T,1,[Whether the system has sa_family_t])
-fi
-
 dnl test for getifaddrs and freeifaddrs
 AC_CACHE_CHECK([for getifaddrs and freeifaddrs],samba_cv_HAVE_GETIFADDRS,[
 AC_TRY_COMPILE([
@@ -2996,23 +2962,6 @@ fi
 ##################
 # look for a method of finding the list of network interfaces
 iface=no;
-AC_CACHE_CHECK([for iface AIX],samba_cv_HAVE_IFACE_AIX,[
-SAVE_CPPFLAGS="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS ${SAMBA_CONFIGURE_CPPFLAGS}"
-AC_TRY_RUN([
-#define NO_CONFIG_H 1
-#define HAVE_IFACE_AIX 1
-#define AUTOCONF_TEST 1
-#undef _XOPEN_SOURCE_EXTENDED
-#include "${srcdir-.}/lib/replace/replace.c"
-#include "${srcdir-.}/lib/interfaces.c"],
-           samba_cv_HAVE_IFACE_AIX=yes,samba_cv_HAVE_IFACE_AIX=no,samba_cv_HAVE_IFACE_AIX=cross)])
-CPPFLAGS="$SAVE_CPPFLAGS"
-if test x"$samba_cv_HAVE_IFACE_AIX" = x"yes"; then
-    iface=yes;AC_DEFINE(HAVE_IFACE_AIX,1,[Whether iface AIX is available])
-fi
-
-if test $iface = no; then
 AC_CACHE_CHECK([for iface getifaddrs],samba_cv_HAVE_IFACE_GETIFADDRS,[
 SAVE_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS ${SAMBA_CONFIGURE_CPPFLAGS}"
@@ -3026,7 +2975,6 @@ AC_TRY_RUN([
 CPPFLAGS="$SAVE_CPPFLAGS"
 if test x"$samba_cv_HAVE_IFACE_GETIFADDRS" = x"yes"; then
     iface=yes;AC_DEFINE(HAVE_IFACE_GETIFADDRS,1,[Whether iface getifaddrs is available])
-fi
 fi
 
 if test $iface = no; then
@@ -3063,6 +3011,24 @@ if test x"$samba_cv_HAVE_IFACE_IFREQ" = x"yes"; then
 fi
 fi
 
+if test $iface = no; then
+AC_CACHE_CHECK([for iface AIX],samba_cv_HAVE_IFACE_AIX,[
+SAVE_CPPFLAGS="$CPPFLAGS"
+CPPFLAGS="$CPPFLAGS ${SAMBA_CONFIGURE_CPPFLAGS}"
+AC_TRY_RUN([
+#define NO_CONFIG_H 1
+#define HAVE_IFACE_AIX 1
+#define AUTOCONF_TEST 1
+#undef _XOPEN_SOURCE_EXTENDED
+#include "${srcdir-.}/lib/replace/replace.c"
+#include "${srcdir-.}/lib/interfaces.c"],
+           samba_cv_HAVE_IFACE_AIX=yes,samba_cv_HAVE_IFACE_AIX=no,samba_cv_HAVE_IFACE_AIX=cross)])
+CPPFLAGS="$SAVE_CPPFLAGS"
+if test x"$samba_cv_HAVE_IFACE_AIX" = x"yes"; then
+    iface=yes;AC_DEFINE(HAVE_IFACE_AIX,1,[Whether iface AIX is available])
+fi
+fi
+
 dnl test for ipv6
 AC_CACHE_CHECK([for ipv6 support],samba_cv_HAVE_IPV6,[
 AC_TRY_COMPILE([
@@ -3072,6 +3038,7 @@ AC_TRY_COMPILE([
 [
 struct sockaddr_storage sa_store;
 struct addrinfo *ai = NULL;
+struct in6_addr in6addr;
 int s = socket(AF_INET6, SOCK_STREAM, 0);
 int ret = getaddrinfo(NULL, NULL, NULL, &ai);
 if (ret != 0) {
@@ -3082,34 +3049,6 @@ freeaddrinfo(ai);
 samba_cv_HAVE_IPV6=yes,samba_cv_HAVE_IPV6=no)])
 if test x"$samba_cv_HAVE_IPV6" = x"yes"; then
     AC_DEFINE(HAVE_IPV6,1,[Whether the system has IPv6 support])
-fi
-
-dnl test for struct sockaddr_storage
-AC_CACHE_CHECK([for struct sockaddr_storage],samba_cv_HAVE_STRUCT_SOCKADDR_STORAGE,[
-AC_TRY_COMPILE([
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>],
-[
-struct sockaddr_storage sa_store;
-],
-samba_cv_HAVE_STRUCT_SOCKADDR_STORAGE=yes,samba_cv_HAVE_STRUCT_SOCKADDR_STORAGE=no)])
-if test x"$samba_cv_HAVE_STRUCT_SOCKADDR_STORAGE" = x"yes"; then
-    AC_DEFINE(HAVE_STRUCT_SOCKADDR_STORAGE,1,[Whether the system has struct sockaddr_storage])
-fi
-
-dnl test for struct struct sockaddr_in6
-AC_CACHE_CHECK([for struct sockaddr_in6],samba_cv_HAVE_STRUCT_SOCKADDR_IN6,[
-AC_TRY_COMPILE([
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>],
-[
-struct sockaddr_in6 sa6;
-],
-samba_cv_HAVE_STRUCT_SOCKADDR_IN6=yes,samba_cv_HAVE_STRUCT_SOCKADDR_IN6=no)])
-if test x"$samba_cv_HAVE_STRUCT_SOCKADDR_IN6" = x"yes"; then
-    AC_DEFINE(HAVE_STRUCT_SOCKADDR_IN6,1,[Whether the system has struct sockaddr_in6])
 fi
 
 ################################################
@@ -6034,18 +5973,6 @@ case "$host_os" in
 		;;
 esac
 
-AC_CHECK_LIB(pthread, pthread_mutex_lock, [WINBIND_NSS_PTHREAD="-lpthread"
-			AC_DEFINE(HAVE_PTHREAD, 1, [whether pthread exists])])
-AC_SUBST(WINBIND_NSS_PTHREAD)
-AC_SUBST(WINBIND_NSS)
-AC_SUBST(WINBIND_WINS_NSS)
-AC_SUBST(WINBIND_NSS_LDSHFLAGS)
-AC_SUBST(WINBIND_NSS_EXTRA_OBJS)
-AC_SUBST(WINBIND_NSS_EXTRA_LIBS)
-AC_SUBST(NSSSONAMEVERSIONSUFFIX)
-
-AC_SUBST(WINBIND_KRB5_LOCATOR)
-
 # Check the setting of --with-winbind
 
 AC_ARG_WITH(winbind,
@@ -6096,6 +6023,19 @@ if test x"$HAVE_WINBIND" = x"yes"; then
 else
         AC_MSG_RESULT(no$winbind_no_reason)
 fi
+
+AC_CHECK_LIB(pthread, pthread_mutex_lock, [WINBIND_NSS_PTHREAD="-lpthread"
+			AC_DEFINE(HAVE_PTHREAD, 1, [whether pthread exists])])
+
+AC_SUBST(WINBIND_NSS_PTHREAD)
+AC_SUBST(WINBIND_NSS)
+AC_SUBST(WINBIND_WINS_NSS)
+AC_SUBST(WINBIND_NSS_LDSHFLAGS)
+AC_SUBST(WINBIND_NSS_EXTRA_OBJS)
+AC_SUBST(WINBIND_NSS_EXTRA_LIBS)
+AC_SUBST(NSSSONAMEVERSIONSUFFIX)
+
+AC_SUBST(WINBIND_KRB5_LOCATOR)
 
 # Solaris 10 does have new member in nss_XbyY_key
 AC_CHECK_MEMBER(union nss_XbyY_key.ipnode.af_family,
@@ -6354,6 +6294,7 @@ SMB_MODULE(vfs_commit, \$(VFS_COMMIT_OBJ), "bin/commit.$SHLIBEXT", VFS)
 SMB_MODULE(vfs_gpfs, \$(VFS_GPFS_OBJ), "bin/gpfs.$SHLIBEXT", VFS)
 SMB_MODULE(vfs_readahead, \$(VFS_READAHEAD_OBJ), "bin/readahead.$SHLIBEXT", VFS)
 SMB_MODULE(vfs_fileid, \$(VFS_FILEID_OBJ), "bin/fileid.$SHLIBEXT", VFS)
+SMB_MODULE(vfs_syncops, \$(VFS_SYNCOPS_OBJ), "bin/syncops.$SHLIBEXT", VFS)
 
 SMB_SUBSYSTEM(VFS,smbd/vfs.o)
 

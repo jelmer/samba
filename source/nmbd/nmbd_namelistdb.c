@@ -97,7 +97,7 @@ void remove_name_from_namelist(struct subnet_record *subrec,
 
 struct name_record *find_name_on_subnet(struct subnet_record *subrec,
 				const struct nmb_name *nmbname,
-				BOOL self_only)
+				bool self_only)
 {
 	struct nmb_name uc_name;
 	struct name_record *name_ret;
@@ -139,7 +139,7 @@ struct name_record *find_name_on_subnet(struct subnet_record *subrec,
 ************************************************************************/
 
 struct name_record *find_name_for_remote_broadcast_subnet(struct nmb_name *nmbname,
-						BOOL self_only)
+						bool self_only)
 {
 	struct subnet_record *subrec;
 	struct name_record *namerec;
@@ -179,7 +179,7 @@ void update_name_ttl( struct name_record *namerec, int ttl )
  Add an entry to a subnet name list.
 ***********************************************************************/
 
-BOOL add_name_to_subnet( struct subnet_record *subrec,
+bool add_name_to_subnet( struct subnet_record *subrec,
 			const char *name,
 			int type,
 			uint16 nb_flags,
@@ -188,7 +188,7 @@ BOOL add_name_to_subnet( struct subnet_record *subrec,
 			int num_ips,
 			struct in_addr *iplist)
 {
-	BOOL ret = False;
+	bool ret = False;
 	struct name_record *namerec;
 	time_t time_now = time(NULL);
 
@@ -333,12 +333,12 @@ static void remove_nth_ip_in_record( struct name_record *namerec, int ind)
  Utility function to check if an IP address exists in a name record.
  ******************************************************************/
 
-BOOL find_ip_in_name_record( struct name_record *namerec, struct in_addr ip )
+bool find_ip_in_name_record( struct name_record *namerec, struct in_addr ip )
 {
 	int i;
 
 	for(i = 0; i < namerec->data.num_ips; i++) {
-		if(ip_equal( namerec->data.ip[i], ip)) {
+		if(ip_equal_v4( namerec->data.ip[i], ip)) {
 			return True;
 		}
 	}
@@ -391,7 +391,7 @@ void remove_ip_from_name_record( struct name_record *namerec,
 	int orig_num = namerec->data.num_ips;
 
 	for(i = 0; i < orig_num; i++) {
-		if( ip_equal( remove_ip, namerec->data.ip[i]) ) {
+		if( ip_equal_v4( remove_ip, namerec->data.ip[i]) ) {
 			remove_nth_ip_in_record( namerec, i);
 			break;
 		}

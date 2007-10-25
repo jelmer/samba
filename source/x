@@ -1,0 +1,1956 @@
+param/loadparm.c:668: error: ‘SEC_SHARE’ undeclared here (not in a function)
+param/loadparm.c:669: error: ‘SEC_USER’ undeclared here (not in a function)
+param/loadparm.c:670: error: ‘SEC_SERVER’ undeclared here (not in a function)
+param/loadparm.c:671: error: ‘SEC_DOMAIN’ undeclared here (not in a function)
+param/loadparm.c:673: error: ‘SEC_ADS’ undeclared here (not in a function)
+param/loadparm.c: In function ‘init_printer_values’:
+param/loadparm.c:1341: error: implicit declaration of function ‘string_set’
+param/loadparm.c: In function ‘init_globals’:
+param/loadparm.c:1435: error: implicit declaration of function ‘string_free’
+param/loadparm.c:1486: error: implicit declaration of function ‘set_global_myname’
+param/loadparm.c:1486: error: implicit declaration of function ‘myhostname’
+param/loadparm.c:1487: error: implicit declaration of function ‘global_myname’
+param/loadparm.c:1489: error: implicit declaration of function ‘set_global_myworkgroup’
+param/loadparm.c:1490: error: implicit declaration of function ‘lp_workgroup’
+param/loadparm.c:1496: error: implicit declaration of function ‘safe_strcpy_fn’
+param/loadparm.c:1496: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:1496: warning: value computed is not used
+param/loadparm.c:1497: error: implicit declaration of function ‘safe_strcat_fn’
+param/loadparm.c:1497: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:1497: warning: value computed is not used
+param/loadparm.c:1506: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:1506: warning: value computed is not used
+param/loadparm.c:1537: warning: assignment makes integer from pointer without a cast
+param/loadparm.c:1673: warning: passing argument 1 of ‘str_list_make’ discards qualifiers from pointer target type
+param/loadparm.c:1673: error: too few arguments to function ‘str_list_make’
+param/loadparm.c:1673: warning: assignment from incompatible pointer type
+param/loadparm.c:1698: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:1698: warning: value computed is not used
+param/loadparm.c:1699: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:1699: warning: value computed is not used
+param/loadparm.c: In function ‘lp_string’:
+param/loadparm.c:1735: error: implicit declaration of function ‘trim_char’
+param/loadparm.c: At top level:
+param/loadparm.c:2175: error: conflicting types for ‘set_boolean’
+./lib/util/util.h:374: error: previous declaration of ‘set_boolean’ was here
+param/loadparm.c: In function ‘lp_parm_string_list’:
+param/loadparm.c:2368: error: too few arguments to function ‘str_list_make’
+param/loadparm.c:2368: warning: assignment from incompatible pointer type
+param/loadparm.c: In function ‘free_service’:
+param/loadparm.c:2465: error: implicit declaration of function ‘str_list_free’
+param/loadparm.c: In function ‘add_a_service’:
+param/loadparm.c:2556: error: too many arguments to function ‘realloc_array’
+param/loadparm.c:2562: error: implicit declaration of function ‘malloc_’
+param/loadparm.c:2570: error: too many arguments to function ‘realloc_array’
+param/loadparm.c: In function ‘canonicalize_servicename’:
+param/loadparm.c:2612: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:2612: warning: value computed is not used
+param/loadparm.c:2613: error: implicit declaration of function ‘strlower_m’
+param/loadparm.c: In function ‘lp_add_home’:
+param/loadparm.c:2665: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:2665: warning: value computed is not used
+param/loadparm.c: In function ‘copy_service’:
+param/loadparm.c:3229: error: implicit declaration of function ‘strupper_m’
+param/loadparm.c:3265: error: implicit declaration of function ‘smb_xmalloc_array’
+param/loadparm.c: In function ‘lp_regdb_open’:
+param/loadparm.c:3339: error: implicit declaration of function ‘tdb_wrap_open’
+param/loadparm.c:3339: error: implicit declaration of function ‘lock_path’
+param/loadparm.c:3340: warning: assignment makes pointer from integer without a cast
+param/loadparm.c:3343: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+param/loadparm.c:3351: error: dereferencing pointer to incomplete type
+param/loadparm.c:3351: error: request for member ‘tdb’ in something not a structure or union
+param/loadparm.c:3351: warning: passing argument 1 of ‘tdb_fetch_int32’ from incompatible pointer type
+param/loadparm.c:3353: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+param/loadparm.c: In function ‘process_registry_globals’:
+param/loadparm.c:3414: error: dereferencing pointer to incomplete type
+param/loadparm.c:3414: error: request for member ‘tdb’ in something not a structure or union
+param/loadparm.c:3414: warning: passing argument 1 of ‘tdb_fetch_bystring’ from incompatible pointer type
+param/loadparm.c:3424: warning: passing argument 1 of ‘tdb_unpack’ from incompatible pointer type
+param/loadparm.c:3424: warning: passing argument 2 of ‘tdb_unpack’ makes pointer from integer without a cast
+param/loadparm.c:3424: warning: passing argument 3 of ‘tdb_unpack’ makes integer from pointer without a cast
+param/loadparm.c:3424: warning: passing argument 4 of ‘tdb_unpack’ from incompatible pointer type
+param/loadparm.c:3437: warning: passing argument 1 of ‘tdb_unpack’ from incompatible pointer type
+param/loadparm.c:3437: warning: passing argument 2 of ‘tdb_unpack’ makes pointer from integer without a cast
+param/loadparm.c:3437: warning: passing argument 3 of ‘tdb_unpack’ makes integer from pointer without a cast
+param/loadparm.c:3473: error: dereferencing pointer to incomplete type
+param/loadparm.c:3473: error: request for member ‘tdb’ in something not a structure or union
+param/loadparm.c:3473: warning: passing argument 1 of ‘tdb_get_seqnum’ from incompatible pointer type
+param/loadparm.c: In function ‘lp_file_list_changed’:
+param/loadparm.c:3618: error: dereferencing pointer to incomplete type
+param/loadparm.c:3618: error: request for member ‘tdb’ in something not a structure or union
+param/loadparm.c:3618: warning: passing argument 1 of ‘tdb_get_seqnum’ from incompatible pointer type
+param/loadparm.c:3620: error: dereferencing pointer to incomplete type
+param/loadparm.c:3620: error: request for member ‘tdb’ in something not a structure or union
+param/loadparm.c:3620: warning: passing argument 1 of ‘tdb_get_seqnum’ from incompatible pointer type
+param/loadparm.c:3631: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:3631: warning: value computed is not used
+param/loadparm.c: In function ‘handle_netbios_name’:
+param/loadparm.c:3666: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:3666: warning: value computed is not used
+param/loadparm.c:3674: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+param/loadparm.c: In function ‘handle_netbios_scope’:
+param/loadparm.c:3705: error: implicit declaration of function ‘set_global_scope’
+param/loadparm.c:3706: error: implicit declaration of function ‘global_scope’
+param/loadparm.c: In function ‘handle_netbios_aliases’:
+param/loadparm.c:3714: warning: passing argument 1 of ‘str_list_make’ discards qualifiers from pointer target type
+param/loadparm.c:3714: error: too few arguments to function ‘str_list_make’
+param/loadparm.c:3714: warning: assignment from incompatible pointer type
+param/loadparm.c:3715: error: implicit declaration of function ‘set_netbios_aliases’
+param/loadparm.c: In function ‘handle_include’:
+param/loadparm.c:3725: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:3725: warning: value computed is not used
+param/loadparm.c:3745: error: too many arguments to function ‘file_exist’
+param/loadparm.c: In function ‘handle_debug_list’:
+param/loadparm.c:3880: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:3880: warning: value computed is not used
+param/loadparm.c: In function ‘init_copymap’:
+param/loadparm.c:3985: error: implicit declaration of function ‘malloc_array’
+param/loadparm.c: In function ‘lp_do_parameter’:
+param/loadparm.c:4028: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4028: warning: value computed is not used
+param/loadparm.c:4131: warning: passing argument 1 of ‘str_list_make’ discards qualifiers from pointer target type
+param/loadparm.c:4131: error: too few arguments to function ‘str_list_make’
+param/loadparm.c:4131: warning: assignment from incompatible pointer type
+param/loadparm.c:4144: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4144: warning: value computed is not used
+param/loadparm.c:4148: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4148: warning: value computed is not used
+param/loadparm.c: In function ‘print_parameter’:
+param/loadparm.c:4213: error: implicit declaration of function ‘octal_string’
+param/loadparm.c:4213: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+param/loadparm.c:4222: error: implicit declaration of function ‘strchr_m’
+param/loadparm.c: In function ‘equal_parameter’:
+param/loadparm.c:4268: error: implicit declaration of function ‘str_list_compare’
+param/loadparm.c: In function ‘dump_a_parameter’:
+param/loadparm.c:4504: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4504: warning: value computed is not used
+param/loadparm.c: In function ‘parse_usershare_file’:
+param/loadparm.c:4990: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4990: warning: value computed is not used
+param/loadparm.c:4997: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:4997: warning: value computed is not used
+param/loadparm.c: In function ‘process_usershare_file’:
+param/loadparm.c:5133: error: implicit declaration of function ‘validate_net_name’
+param/loadparm.c:5140: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5140: warning: value computed is not used
+param/loadparm.c:5142: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5142: warning: value computed is not used
+param/loadparm.c:5143: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5143: warning: value computed is not used
+param/loadparm.c:5144: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5144: warning: value computed is not used
+param/loadparm.c:5208: warning: passing argument 3 of ‘fd_lines_load’ makes pointer from integer without a cast
+param/loadparm.c:5220: error: implicit declaration of function ‘file_lines_free’
+param/loadparm.c: In function ‘usershare_exists’:
+param/loadparm.c:5293: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5293: warning: value computed is not used
+param/loadparm.c:5294: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5294: warning: value computed is not used
+param/loadparm.c:5295: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5295: warning: value computed is not used
+param/loadparm.c: In function ‘lp_load’:
+param/loadparm.c:5597: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5597: warning: value computed is not used
+param/loadparm.c: In function ‘lp_servicenumber’:
+param/loadparm.c:5743: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:5743: warning: value computed is not used
+param/loadparm.c: In function ‘lp_major_announce_version’:
+param/loadparm.c:6034: warning: assignment makes pointer from integer without a cast
+param/loadparm.c: In function ‘lp_minor_announce_version’:
+param/loadparm.c:6056: warning: assignment makes pointer from integer without a cast
+param/loadparm.c: In function ‘lp_set_logfile’:
+param/loadparm.c:6090: warning: pointer/integer type mismatch in conditional expression
+param/loadparm.c:6090: warning: value computed is not used
+param/loadparm.c: In function ‘lp_use_sendfile’:
+param/loadparm.c:6162: error: implicit declaration of function ‘get_remote_arch’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c param/loadparm.c -o param/loadparm.o
+make: *** [param/loadparm.o] Error 1
+param/params.c: In function ‘FindSectionEnd’:
+param/params.c:133: error: implicit declaration of function ‘strchr_m’
+param/params.c:133: warning: assignment makes pointer from integer without a cast
+param/params.c: In function ‘Section’:
+param/params.c:264: error: implicit declaration of function ‘Realloc’
+param/params.c: In function ‘OpenConfFile’:
+param/params.c:528: error: implicit declaration of function ‘malloc_’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c param/params.c -o param/params.o
+make: *** [param/params.o] Error 1
+lib/sharesec.c: In function ‘share_info_db_init’:
+lib/sharesec.c:49: error: implicit declaration of function ‘tdb_open_log’
+lib/sharesec.c:49: error: implicit declaration of function ‘lock_path’
+lib/sharesec.c:49: warning: assignment makes pointer from integer without a cast
+lib/sharesec.c:51: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+lib/sharesec.c: In function ‘set_share_security’:
+lib/sharesec.c:181: error: implicit declaration of function ‘tdb_trans_store_bystring’
+lib/sharesec.c: In function ‘delete_share_security’:
+lib/sharesec.c:209: error: implicit declaration of function ‘string_term_tdb_data’
+lib/sharesec.c:209: error: incompatible types in assignment
+lib/sharesec.c:211: error: implicit declaration of function ‘tdb_trans_delete’
+lib/sharesec.c: In function ‘parse_usershare_acl’:
+lib/sharesec.c:296: error: implicit declaration of function ‘next_token’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c lib/sharesec.c -o lib/sharesec.o
+make: *** [lib/sharesec.o] Error 1
+smbd/files.c: In function ‘file_new’:
+smbd/files.c:86: error: implicit declaration of function ‘malloc_’
+smbd/files.c:116: error: implicit declaration of function ‘string_set’
+smbd/files.c: In function ‘file_init’:
+smbd/files.c:182: error: implicit declaration of function ‘set_maxfiles’
+smbd/files.c: In function ‘fsp_set_pending_modtime’:
+smbd/files.c:386: error: implicit declaration of function ‘null_timespec’
+smbd/files.c: In function ‘file_free’:
+smbd/files.c:424: error: implicit declaration of function ‘string_free’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/files.c -o smbd/files.o
+make: *** [smbd/files.o] Error 1
+smbd/chgpasswd.c: In function ‘findpty’:
+smbd/chgpasswd.c:93: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/chgpasswd.c:93: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:93: warning: value computed is not used
+smbd/chgpasswd.c:98: error: implicit declaration of function ‘readdirname’
+smbd/chgpasswd.c:98: warning: assignment makes pointer from integer without a cast
+smbd/chgpasswd.c: In function ‘expect’:
+smbd/chgpasswd.c:266: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:266: warning: value computed is not used
+smbd/chgpasswd.c:267: error: implicit declaration of function ‘trim_char’
+smbd/chgpasswd.c:269: error: implicit declaration of function ‘unix_wild_match’
+smbd/chgpasswd.c: In function ‘talktochild’:
+smbd/chgpasswd.c:306: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:306: warning: value computed is not used
+smbd/chgpasswd.c:308: error: implicit declaration of function ‘next_token’
+smbd/chgpasswd.c:320: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:320: warning: value computed is not used
+smbd/chgpasswd.c:326: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:326: warning: value computed is not used
+smbd/chgpasswd.c: In function ‘chgpasswd’:
+smbd/chgpasswd.c:524: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:524: warning: value computed is not used
+smbd/chgpasswd.c:525: warning: pointer/integer type mismatch in conditional expression
+smbd/chgpasswd.c:525: warning: value computed is not used
+smbd/chgpasswd.c:539: error: implicit declaration of function ‘strstr_m’
+smbd/chgpasswd.c:539: warning: comparison between pointer and integer
+smbd/chgpasswd.c:546: error: implicit declaration of function ‘pstring_sub’
+smbd/chgpasswd.c: In function ‘change_oem_password’:
+smbd/chgpasswd.c:1057: warning: passing argument 1 of ‘http_timestring’ makes pointer from integer without a cast
+smbd/chgpasswd.c:1057: error: too few arguments to function ‘http_timestring’
+smbd/chgpasswd.c:1066: error: implicit declaration of function ‘str_charnum’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/chgpasswd.c -o smbd/chgpasswd.o
+make: *** [smbd/chgpasswd.o] Error 1
+smbd/connection.c: In function ‘count_fn’:
+smbd/connection.c:73: error: incompatible type for argument 1 of ‘process_exists’
+smbd/connection.c:75: error: implicit declaration of function ‘procid_str_static’
+smbd/connection.c:75: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/connection.c: In function ‘claim_connection’:
+smbd/connection.c:142: error: implicit declaration of function ‘procid_self’
+smbd/connection.c:142: error: incompatible types in assignment
+smbd/connection.c: In function ‘make_pipe_rec_key’:
+smbd/connection.c:233: error: implicit declaration of function ‘procid_to_pid’
+smbd/connection.c:235: error: implicit declaration of function ‘string_term_tdb_data’
+smbd/connection.c:235: error: incompatible types in assignment
+smbd/connection.c: In function ‘fill_pipe_open_rec’:
+smbd/connection.c:247: error: implicit declaration of function ‘pid_to_procid’
+smbd/connection.c:247: error: incompatible types in assignment
+smbd/connection.c:250: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/connection.c:250: warning: pointer/integer type mismatch in conditional expression
+smbd/connection.c:250: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/connection.c -o smbd/connection.o
+make: *** [smbd/connection.o] Error 1
+smbd/utmp.c: In function ‘uw_pathname’:
+smbd/utmp.c:214: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/utmp.c:214: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:214: warning: value computed is not used
+smbd/utmp.c:218: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:218: warning: value computed is not used
+smbd/utmp.c:219: error: implicit declaration of function ‘trim_char’
+smbd/utmp.c:223: warning: the address of ‘dirname’ will never be NULL
+smbd/utmp.c:224: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:224: warning: value computed is not used
+smbd/utmp.c:229: warning: the address of ‘dirname’ will never be NULL
+smbd/utmp.c:230: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:230: warning: value computed is not used
+smbd/utmp.c:231: error: implicit declaration of function ‘safe_strcat_fn’
+smbd/utmp.c:231: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:231: warning: value computed is not used
+smbd/utmp.c:232: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:232: warning: value computed is not used
+smbd/utmp.c:243: warning: pointer/integer type mismatch in conditional expression
+smbd/utmp.c:243: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/utmp.c -o smbd/utmp.o
+make: *** [smbd/utmp.o] Error 1
+smbd/session.c: In function ‘session_db_ctx’:
+smbd/session.c:41: error: implicit declaration of function ‘lock_path’
+smbd/session.c:43: warning: passing argument 2 of ‘db_open’ makes pointer from integer without a cast
+smbd/session.c: In function ‘session_claim’:
+smbd/session.c:66: error: implicit declaration of function ‘procid_self’
+smbd/session.c:66: error: invalid initializer
+smbd/session.c:101: error: implicit declaration of function ‘string_term_tdb_data’
+smbd/session.c:101: error: incompatible types in assignment
+smbd/session.c:117: error: incompatible type for argument 1 of ‘process_exists’
+smbd/session.c:118: error: implicit declaration of function ‘procid_str_static’
+smbd/session.c:118: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/session.c:138: warning: format ‘%s’ expects type ‘char *’, but argument 4 has type ‘int’
+smbd/session.c:138: warning: format ‘%s’ expects type ‘char *’, but argument 4 has type ‘int’
+smbd/session.c:139: error: incompatible types in assignment
+smbd/session.c:166: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/session.c:166: warning: pointer/integer type mismatch in conditional expression
+smbd/session.c:166: warning: value computed is not used
+smbd/session.c:167: warning: pointer/integer type mismatch in conditional expression
+smbd/session.c:167: warning: value computed is not used
+smbd/session.c:172: warning: pointer/integer type mismatch in conditional expression
+smbd/session.c:172: warning: value computed is not used
+smbd/session.c:173: warning: pointer/integer type mismatch in conditional expression
+smbd/session.c:173: warning: value computed is not used
+smbd/session.c: In function ‘session_yield’:
+smbd/session.c:229: error: incompatible types in assignment
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/session.c -o smbd/session.o
+make: *** [smbd/session.o] Error 1
+smbd/map_username.c: In function ‘map_username’:
+smbd/map_username.c:54: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/map_username.c:54: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:54: warning: value computed is not used
+smbd/map_username.c:86: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:86: warning: value computed is not used
+smbd/map_username.c:89: error: implicit declaration of function ‘file_lines_free’
+smbd/map_username.c:114: error: implicit declaration of function ‘strchr_m’
+smbd/map_username.c:114: warning: initialization makes pointer from integer without a cast
+smbd/map_username.c:146: error: too few arguments to function ‘str_list_make’
+smbd/map_username.c:156: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:156: warning: value computed is not used
+smbd/map_username.c:157: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:157: warning: value computed is not used
+smbd/map_username.c:158: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:158: warning: value computed is not used
+smbd/map_username.c:160: error: implicit declaration of function ‘str_list_free’
+smbd/map_username.c:175: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:175: warning: value computed is not used
+smbd/map_username.c:176: warning: pointer/integer type mismatch in conditional expression
+smbd/map_username.c:176: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/map_username.c -o smbd/map_username.o
+make: *** [smbd/map_username.o] Error 1
+smbd/dfree.c: In function ‘sys_disk_free’:
+smbd/dfree.c:98: error: implicit declaration of function ‘file_lines_pload’
+smbd/dfree.c:98: warning: assignment makes pointer from integer without a cast
+smbd/dfree.c:104: error: implicit declaration of function ‘STR_TO_SMB_BIG_UINT’
+smbd/dfree.c:115: error: implicit declaration of function ‘file_lines_free’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/dfree.c -o smbd/dfree.o
+make: *** [smbd/dfree.o] Error 1
+smbd/dir.c: In function ‘make_dir_struct’:
+smbd/dir.c:97: error: implicit declaration of function ‘strchr_m’
+smbd/dir.c:97: warning: assignment makes pointer from integer without a cast
+smbd/dir.c:108: error: implicit declaration of function ‘srv_put_dos_date’
+smbd/dir.c: In function ‘dptr_close_internal’:
+smbd/dir.c:272: error: implicit declaration of function ‘string_set’
+smbd/dir.c: In function ‘dptr_create’:
+smbd/dir.c:425: error: implicit declaration of function ‘malloc_’
+smbd/dir.c: In function ‘mangle_mask_match’:
+smbd/dir.c:788: error: implicit declaration of function ‘mask_match_search’
+smbd/dir.c: In function ‘is_visible_file’:
+smbd/dir.c:1070: error: implicit declaration of function ‘is_in_path’
+smbd/dir.c: In function ‘OpenDir’:
+smbd/dir.c:1140: error: implicit declaration of function ‘calloc_array’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/dir.c -o smbd/dir.o
+make: *** [smbd/dir.o] Error 1
+smbd/password.c: In function ‘register_initial_vuid’:
+smbd/password.c:158: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/password.c:158: error: (Each undeclared identifier is reported only once
+smbd/password.c:158: error: for each function it appears in.)
+smbd/password.c: In function ‘register_existing_vuid’:
+smbd/password.c:257: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/password.c:257: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:257: warning: value computed is not used
+smbd/password.c:260: error: implicit declaration of function ‘alpha_strcpy_fn’
+smbd/password.c:263: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:263: warning: value computed is not used
+smbd/password.c:264: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:264: warning: value computed is not used
+smbd/password.c: In function ‘add_session_user’:
+smbd/password.c:392: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:392: warning: value computed is not used
+smbd/password.c:397: error: implicit declaration of function ‘in_list’
+smbd/password.c:410: error: implicit declaration of function ‘Realloc’
+smbd/password.c:424: error: implicit declaration of function ‘safe_strcat_fn’
+smbd/password.c:424: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:424: warning: value computed is not used
+smbd/password.c:425: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:425: warning: value computed is not used
+smbd/password.c: In function ‘user_in_netgroup’:
+smbd/password.c:483: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:483: warning: value computed is not used
+smbd/password.c:484: error: implicit declaration of function ‘strlower_m’
+smbd/password.c: In function ‘user_ok’:
+smbd/password.c:595: error: implicit declaration of function ‘str_list_substitute’
+smbd/password.c:600: error: implicit declaration of function ‘str_list_sub_basic’
+smbd/password.c:607: error: implicit declaration of function ‘str_list_free’
+smbd/password.c:626: error: too few arguments to function ‘str_list_make’
+smbd/password.c: In function ‘validate_group’:
+smbd/password.c:692: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:692: warning: value computed is not used
+smbd/password.c:707: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:707: warning: value computed is not used
+smbd/password.c: In function ‘authorise_login’:
+smbd/password.c:775: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:775: warning: value computed is not used
+smbd/password.c:781: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:781: warning: value computed is not used
+smbd/password.c:795: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:795: warning: value computed is not used
+smbd/password.c:797: error: implicit declaration of function ‘pstring_sub’
+smbd/password.c:805: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:805: warning: value computed is not used
+smbd/password.c:812: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:812: warning: value computed is not used
+smbd/password.c:816: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:816: warning: value computed is not used
+smbd/password.c:829: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:829: warning: value computed is not used
+smbd/password.c:831: warning: pointer/integer type mismatch in conditional expression
+smbd/password.c:831: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/password.c -o smbd/password.o
+make: *** [smbd/password.o] Error 1
+smbd/conn.c: In function ‘conn_new’:
+smbd/conn.c:161: error: implicit declaration of function ‘string_set’
+smbd/conn.c: In function ‘conn_free_internal’:
+smbd/conn.c:285: error: implicit declaration of function ‘free_namearray’
+smbd/conn.c:290: error: implicit declaration of function ‘string_free’
+smbd/conn.c: In function ‘msg_force_tdis’:
+smbd/conn.c:331: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/conn.c:331: warning: pointer/integer type mismatch in conditional expression
+smbd/conn.c:331: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/conn.c -o smbd/conn.o
+make: *** [smbd/conn.o] Error 1
+smbd/share_access.c: In function ‘token_contains_name’:
+smbd/share_access.c:82: error: implicit declaration of function ‘talloc_string_sub’
+smbd/share_access.c:82: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/share_access.c -o smbd/share_access.o
+make: *** [smbd/share_access.o] Error 1
+smbd/fileio.c: In function ‘real_write_file’:
+smbd/fileio.c:151: error: implicit declaration of function ‘null_timespec’
+smbd/fileio.c:157: error: implicit declaration of function ‘timespec_current’
+smbd/fileio.c:157: error: incompatible types in assignment
+smbd/fileio.c: In function ‘setup_write_cache’:
+smbd/fileio.c:755: error: implicit declaration of function ‘malloc_’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/fileio.c -o smbd/fileio.o
+make: *** [smbd/fileio.o] Error 1
+smbd/ipc.c: In function ‘send_trans_reply’:
+smbd/ipc.c:131: error: implicit declaration of function ‘show_msg’
+smbd/ipc.c: In function ‘api_rpc_trans_reply’:
+smbd/ipc.c:194: error: implicit declaration of function ‘malloc_’
+smbd/ipc.c: In function ‘handle_trans’:
+smbd/ipc.c:445: error: implicit declaration of function ‘strnequal’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/ipc.c -o smbd/ipc.o
+make: *** [smbd/ipc.o] Error 1
+smbd/lanman.c: In function ‘smb_realloc_limit’:
+smbd/lanman.c:60: error: implicit declaration of function ‘Realloc’
+smbd/lanman.c: In function ‘CopyExpanded’:
+smbd/lanman.c:90: error: implicit declaration of function ‘StrnCpy_fn’
+smbd/lanman.c:91: error: implicit declaration of function ‘pstring_sub’
+smbd/lanman.c: In function ‘get_driver_name’:
+smbd/lanman.c:582: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/lanman.c:582: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:582: warning: value computed is not used
+smbd/lanman.c: In function ‘fill_printq_info_52’:
+smbd/lanman.c:628: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:628: warning: value computed is not used
+smbd/lanman.c: In function ‘api_DosPrintQGetInfo’:
+smbd/lanman.c:797: error: implicit declaration of function ‘get_safe_str_ptr’
+smbd/lanman.c:797: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:798: error: implicit declaration of function ‘skip_string’
+smbd/lanman.c:798: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:799: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:816: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:820: error: implicit declaration of function ‘get_safe_SVAL’
+smbd/lanman.c:821: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:825: error: implicit declaration of function ‘strchr_m’
+smbd/lanman.c:825: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:876: error: implicit declaration of function ‘malloc_’
+smbd/lanman.c: In function ‘api_DosPrintQEnum’:
+smbd/lanman.c:925: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:926: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:927: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:929: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:973: error: implicit declaration of function ‘malloc_array’
+smbd/lanman.c: In function ‘get_server_info’:
+smbd/lanman.c:1105: error: implicit declaration of function ‘lock_path’
+smbd/lanman.c:1105: warning: passing argument 1 of ‘file_lines_load’ makes pointer from integer without a cast
+smbd/lanman.c:1107: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/lanman.c:1132: error: too many arguments to function ‘realloc_array’
+smbd/lanman.c:1135: error: implicit declaration of function ‘file_lines_free’
+smbd/lanman.c:1142: error: implicit declaration of function ‘next_token’
+smbd/lanman.c:1153: error: implicit declaration of function ‘lp_workgroup’
+smbd/lanman.c:1153: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:1153: warning: value computed is not used
+smbd/lanman.c: In function ‘api_RNetServerEnum’:
+smbd/lanman.c:1299: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1300: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1301: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1304: error: implicit declaration of function ‘get_safe_IVAL’
+smbd/lanman.c:1354: warning: comparison between pointer and integer
+smbd/lanman.c:1359: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:1359: warning: value computed is not used
+smbd/lanman.c: In function ‘api_RNetGroupGetUsers’:
+smbd/lanman.c:1454: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1455: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1456: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetShareGetInfo’:
+smbd/lanman.c:1644: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1645: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1646: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1647: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetShareEnum’:
+smbd/lanman.c:1710: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1711: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1712: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetShareAdd’:
+smbd/lanman.c:1814: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1815: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1816: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1842: warning: comparison between pointer and integer
+smbd/lanman.c:1868: warning: comparison between pointer and integer
+smbd/lanman.c:1881: warning: comparison between pointer and integer
+smbd/lanman.c: In function ‘api_RNetGroupEnum’:
+smbd/lanman.c:1955: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1956: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:1957: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2014: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:2014: warning: value computed is not used
+smbd/lanman.c: In function ‘api_NetUserGetGroups’:
+smbd/lanman.c:2058: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2059: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2060: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2061: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2166: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:2166: warning: value computed is not used
+smbd/lanman.c: In function ‘api_RNetUserEnum’:
+smbd/lanman.c:2205: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2206: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2207: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2265: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:2265: warning: value computed is not used
+smbd/lanman.c: In function ‘api_NetRemoteTOD’:
+smbd/lanman.c:2323: error: implicit declaration of function ‘srv_put_dos_date3’
+smbd/lanman.c: In function ‘api_SetUserPassword’:
+smbd/lanman.c:2360: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2366: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:2367: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:2374: warning: comparison between pointer and integer
+smbd/lanman.c:2379: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:2390: error: implicit declaration of function ‘is_offset_safe’
+smbd/lanman.c: In function ‘api_SamOEMChangePassword’:
+smbd/lanman.c:2472: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2498: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:2511: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RDosPrintJobDel’:
+smbd/lanman.c:2550: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2551: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2552: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2573: error: implicit declaration of function ‘strcsequal’
+smbd/lanman.c: In function ‘api_WPrintQueueCtrl’:
+smbd/lanman.c:2633: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2634: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2635: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2655: warning: comparison between pointer and integer
+smbd/lanman.c: In function ‘api_PrintJobInfo’:
+smbd/lanman.c:2725: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2726: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2727: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetServerGetInfo’:
+smbd/lanman.c:2812: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2813: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2814: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2880: error: implicit declaration of function ‘global_myname’
+smbd/lanman.c:2880: warning: passing argument 6 of ‘srvstr_push_fn’ makes pointer from integer without a cast
+smbd/lanman.c:2892: warning: passing argument 3 of ‘get_server_info’ makes pointer from integer without a cast
+smbd/lanman.c:2894: warning: passing argument 2 of ‘strequal’ makes pointer from integer without a cast
+smbd/lanman.c:2917: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_NetWkstaGetInfo’:
+smbd/lanman.c:2953: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2954: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2955: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:2986: error: implicit declaration of function ‘get_safe_ptr’
+smbd/lanman.c:2986: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:2992: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:2992: warning: value computed is not used
+smbd/lanman.c:2993: error: implicit declaration of function ‘strupper_m’
+smbd/lanman.c:2994: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3001: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3001: warning: value computed is not used
+smbd/lanman.c:3002: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3009: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3009: warning: value computed is not used
+smbd/lanman.c:3011: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3022: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3022: warning: value computed is not used
+smbd/lanman.c:3023: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3030: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3030: warning: value computed is not used
+smbd/lanman.c:3031: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetUserGetInfo’:
+smbd/lanman.c:3221: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3222: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3223: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3224: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3277: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3283: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3283: warning: value computed is not used
+smbd/lanman.c:3292: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3292: warning: value computed is not used
+smbd/lanman.c:3293: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3299: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3299: warning: value computed is not used
+smbd/lanman.c:3300: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3307: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3307: warning: value computed is not used
+smbd/lanman.c:3308: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3320: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3320: warning: value computed is not used
+smbd/lanman.c:3321: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3326: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3326: warning: value computed is not used
+smbd/lanman.c:3327: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3336: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3336: warning: value computed is not used
+smbd/lanman.c:3337: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3344: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3344: warning: value computed is not used
+smbd/lanman.c:3345: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3357: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3371: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3371: warning: value computed is not used
+smbd/lanman.c:3372: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3380: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3380: warning: value computed is not used
+smbd/lanman.c:3381: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3388: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3388: warning: value computed is not used
+smbd/lanman.c:3389: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3395: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3395: warning: value computed is not used
+smbd/lanman.c:3396: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3414: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3414: warning: value computed is not used
+smbd/lanman.c:3416: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3416: warning: value computed is not used
+smbd/lanman.c:3418: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WWkstaUserLogon’:
+smbd/lanman.c:3441: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3442: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3443: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3461: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c:3507: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3507: warning: value computed is not used
+smbd/lanman.c:3508: error: implicit declaration of function ‘safe_strcat_fn’
+smbd/lanman.c:3508: warning: pointer/integer type mismatch in conditional expression
+smbd/lanman.c:3508: warning: value computed is not used
+smbd/lanman.c:3513: warning: passing argument 3 of ‘PACKS’ makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WAccessGetUserPerms’:
+smbd/lanman.c:3544: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3545: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3546: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3547: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3553: warning: comparison between pointer and integer
+smbd/lanman.c: In function ‘api_WPrintJobGetInfo’:
+smbd/lanman.c:3589: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3590: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3591: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintJobEnumerate’:
+smbd/lanman.c:3688: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3689: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3690: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3707: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintDestGetInfo’:
+smbd/lanman.c:3845: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3846: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3847: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3860: warning: assignment makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintDestEnum’:
+smbd/lanman.c:3925: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3926: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:3927: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintDriverEnum’:
+smbd/lanman.c:4006: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4007: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4008: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintQProcEnum’:
+smbd/lanman.c:4069: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4070: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4071: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_WPrintPortEnum’:
+smbd/lanman.c:4132: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4133: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4134: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_RNetSessionEnum’:
+smbd/lanman.c:4202: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4203: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c:4204: warning: initialization makes pointer from integer without a cast
+smbd/lanman.c: In function ‘api_reply’:
+smbd/lanman.c:4413: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/lanman.c -o smbd/lanman.o
+make: *** [smbd/lanman.o] Error 1
+smbd/negprot.c: In function ‘reply_lanman1’:
+smbd/negprot.c:97: error: ‘SEC_USER’ undeclared (first use in this function)
+smbd/negprot.c:97: error: (Each undeclared identifier is reported only once
+smbd/negprot.c:97: error: for each function it appears in.)
+smbd/negprot.c:122: error: implicit declaration of function ‘set_server_zone_offset’
+smbd/negprot.c:124: error: implicit declaration of function ‘srv_put_dos_date’
+smbd/negprot.c: In function ‘reply_lanman2’:
+smbd/negprot.c:141: error: ‘SEC_USER’ undeclared (first use in this function)
+smbd/negprot.c: In function ‘negprot_spnego’:
+smbd/negprot.c:193: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/negprot.c:193: error: implicit declaration of function ‘global_myname’
+smbd/negprot.c:193: warning: pointer/integer type mismatch in conditional expression
+smbd/negprot.c:193: warning: value computed is not used
+smbd/negprot.c:194: error: implicit declaration of function ‘strlower_m’
+smbd/negprot.c:196: warning: pointer/integer type mismatch in conditional expression
+smbd/negprot.c:196: warning: value computed is not used
+smbd/negprot.c:219: error: ‘SEC_ADS’ undeclared (first use in this function)
+smbd/negprot.c:230: error: implicit declaration of function ‘name_to_fqdn’
+smbd/negprot.c: In function ‘reply_nt1’:
+smbd/negprot.c:268: error: implicit declaration of function ‘get_remote_arch’
+smbd/negprot.c:269: error: implicit declaration of function ‘set_remote_arch’
+smbd/negprot.c:279: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/negprot.c:312: error: ‘SEC_USER’ undeclared (first use in this function)
+smbd/negprot.c:344: error: implicit declaration of function ‘put_long_date’
+smbd/negprot.c:355: error: implicit declaration of function ‘message_push_blob’
+smbd/negprot.c:365: error: implicit declaration of function ‘lp_workgroup’
+smbd/negprot.c:367: warning: passing argument 2 of ‘message_push_string’ makes pointer from integer without a cast
+smbd/negprot.c: In function ‘reply_negprot’:
+smbd/negprot.c:575: error: implicit declaration of function ‘strcsequal’
+smbd/negprot.c:670: warning: pointer/integer type mismatch in conditional expression
+smbd/negprot.c:670: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/negprot.c -o smbd/negprot.o
+make: *** [smbd/negprot.o] Error 1
+smbd/message.c: In function ‘msg_deliver’:
+smbd/message.c:56: error: implicit declaration of function ‘smb_mkstemp’
+smbd/message.c:100: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/message.c:100: warning: pointer/integer type mismatch in conditional expression
+smbd/message.c:100: warning: value computed is not used
+smbd/message.c:101: error: implicit declaration of function ‘pstring_sub’
+smbd/message.c:101: error: implicit declaration of function ‘alpha_strcpy_fn’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/message.c -o smbd/message.o
+make: *** [smbd/message.o] Error 1
+smbd/nttrans.c: In function ‘nttrans_realloc’:
+smbd/nttrans.c:55: error: implicit declaration of function ‘Realloc’
+smbd/nttrans.c: In function ‘send_nt_replies’:
+smbd/nttrans.c:90: error: implicit declaration of function ‘show_msg’
+smbd/nttrans.c: In function ‘is_ntfs_stream_name’:
+smbd/nttrans.c:279: error: implicit declaration of function ‘strchr_m’
+smbd/nttrans.c:279: warning: comparison between pointer and integer
+smbd/nttrans.c: In function ‘reply_ntcreate_and_X’:
+smbd/nttrans.c:1012: error: implicit declaration of function ‘get_create_timespec’
+smbd/nttrans.c:1012: error: incompatible types in assignment
+smbd/nttrans.c:1013: error: implicit declaration of function ‘get_atimespec’
+smbd/nttrans.c:1013: error: incompatible types in assignment
+smbd/nttrans.c:1014: error: implicit declaration of function ‘get_mtimespec’
+smbd/nttrans.c:1014: error: incompatible types in assignment
+smbd/nttrans.c:1017: error: implicit declaration of function ‘dos_filetime_timespec’
+smbd/nttrans.c:1022: error: implicit declaration of function ‘put_long_date_timespec’
+smbd/nttrans.c: In function ‘call_nt_transact_create’:
+smbd/nttrans.c:1775: error: incompatible types in assignment
+smbd/nttrans.c:1776: error: incompatible types in assignment
+smbd/nttrans.c:1777: error: incompatible types in assignment
+smbd/nttrans.c: In function ‘copy_internals’:
+smbd/nttrans.c:1966: error: incompatible type for argument 2 of ‘fsp_set_pending_modtime’
+smbd/nttrans.c:1974: error: implicit declaration of function ‘parent_dirname’
+smbd/nttrans.c:1974: warning: passing argument 5 of ‘file_set_dosmode’ makes pointer from integer without a cast
+smbd/nttrans.c: In function ‘reply_ntrename’:
+smbd/nttrans.c:2031: error: implicit declaration of function ‘ms_has_wild’
+smbd/nttrans.c: In function ‘reply_nttrans’:
+smbd/nttrans.c:3411: error: implicit declaration of function ‘malloc_’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/nttrans.c -o smbd/nttrans.o
+make: *** [smbd/nttrans.o] Error 1
+smbd/pipes.c: In function ‘reply_open_pipe_and_X’:
+smbd/pipes.c:134: error: implicit declaration of function ‘srv_put_dos_date3’
+smbd/pipes.c: In function ‘reply_pipe_read_and_X’:
+smbd/pipes.c:294: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/pipes.c -o smbd/pipes.o
+make: *** [smbd/pipes.o] Error 1
+smbd/reply.c: In function ‘reply_special’:
+smbd/reply.c:405: error: implicit declaration of function ‘smb_setlen’
+smbd/reply.c:443: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/reply.c:443: error: (Each undeclared identifier is reported only once
+smbd/reply.c:443: error: for each function it appears in.)
+smbd/reply.c: In function ‘reply_tcon’:
+smbd/reply.c:516: error: implicit declaration of function ‘strrchr_m’
+smbd/reply.c:516: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘reply_tcon_and_X’:
+smbd/reply.c:591: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/reply.c:622: error: implicit declaration of function ‘strchr_m’
+smbd/reply.c:622: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘reply_ioctl’:
+smbd/reply.c:809: error: implicit declaration of function ‘global_myname’
+smbd/reply.c:809: warning: passing argument 6 of ‘srvstr_push_fn’ makes pointer from integer without a cast
+smbd/reply.c: In function ‘reply_getatr’:
+smbd/reply.c:1021: error: implicit declaration of function ‘srv_put_dos_date3’
+smbd/reply.c: In function ‘reply_setatr’:
+smbd/reply.c:1109: error: implicit declaration of function ‘srv_make_unix_date3’
+smbd/reply.c:1124: error: implicit declaration of function ‘convert_time_t_to_timespec’
+smbd/reply.c:1124: error: incompatible type for argument 3 of ‘set_filetime’
+smbd/reply.c: In function ‘reply_search’:
+smbd/reply.c:1297: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:1350: error: implicit declaration of function ‘string_set’
+smbd/reply.c:1359: error: implicit declaration of function ‘ms_has_wild’
+smbd/reply.c:1380: error: implicit declaration of function ‘message_push_blob’
+smbd/reply.c:1397: error: implicit declaration of function ‘in_list’
+smbd/reply.c: In function ‘reply_ulogoffX’:
+smbd/reply.c:1926: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/reply.c: In function ‘reply_mknew’:
+smbd/reply.c:1973: error: incompatible types in assignment
+smbd/reply.c:2047: error: implicit declaration of function ‘get_atimespec’
+smbd/reply.c:2047: error: incompatible types in assignment
+smbd/reply.c: In function ‘reply_ctemp’:
+smbd/reply.c:2150: error: implicit declaration of function ‘smb_mkstemp’
+smbd/reply.c:2187: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘unlink_internals’:
+smbd/reply.c:2398: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:2498: error: implicit declaration of function ‘mask_match’
+smbd/reply.c: In function ‘fake_sendfile’:
+smbd/reply.c:2638: error: implicit declaration of function ‘malloc_array’
+smbd/reply.c: In function ‘reply_lockread’:
+smbd/reply.c:3020: error: implicit declaration of function ‘set_message’
+smbd/reply.c: In function ‘reply_writebraw’:
+smbd/reply.c:3531: error: implicit declaration of function ‘show_msg’
+smbd/reply.c: In function ‘reply_close’:
+smbd/reply.c:4197: error: incompatible type for argument 2 of ‘fsp_set_pending_modtime’
+smbd/reply.c: In function ‘reply_writeclose’:
+smbd/reply.c:4256: error: incompatible types in assignment
+smbd/reply.c: In function ‘reply_printqueue’:
+smbd/reply.c:4647: error: implicit declaration of function ‘srv_put_dos_date2’
+smbd/reply.c: In function ‘rmdir_internals’:
+smbd/reply.c:4943: error: implicit declaration of function ‘is_in_path’
+smbd/reply.c: In function ‘resolve_wildcards’:
+smbd/reply.c:5099: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:5100: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:5120: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:5127: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘notify_rename’:
+smbd/reply.c:5286: error: implicit declaration of function ‘parent_dirname_talloc’
+smbd/reply.c: In function ‘rename_internals_fsp’:
+smbd/reply.c:5366: warning: assignment makes pointer from integer without a cast
+smbd/reply.c:5373: error: implicit declaration of function ‘strcsequal’
+smbd/reply.c: In function ‘rename_internals’:
+smbd/reply.c:5553: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘copy_file’:
+smbd/reply.c:5921: warning: initialization makes pointer from integer without a cast
+smbd/reply.c:6003: error: implicit declaration of function ‘get_mtimespec’
+smbd/reply.c:6003: error: incompatible type for argument 2 of ‘fsp_set_pending_modtime’
+smbd/reply.c: In function ‘reply_copy’:
+smbd/reply.c:6160: warning: assignment makes pointer from integer without a cast
+smbd/reply.c: In function ‘reply_setattrE’:
+smbd/reply.c:6904: error: implicit declaration of function ‘srv_make_unix_date2’
+smbd/reply.c:6904: error: incompatible types in assignment
+smbd/reply.c:6906: error: incompatible types in assignment
+smbd/reply.c:6915: error: implicit declaration of function ‘null_timespec’
+smbd/reply.c: In function ‘reply_getattrE’:
+smbd/reply.c:7020: error: implicit declaration of function ‘get_create_time’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/reply.c -o smbd/reply.o
+make: *** [smbd/reply.o] Error 1
+smbd/sesssetup.c: In function ‘push_signature’:
+smbd/sesssetup.c:90: error: implicit declaration of function ‘lp_workgroup’
+smbd/sesssetup.c:90: warning: passing argument 2 of ‘message_push_string’ makes pointer from integer without a cast
+smbd/sesssetup.c: In function ‘reply_sesssetup_blob’:
+smbd/sesssetup.c:135: error: implicit declaration of function ‘message_push_blob’
+smbd/sesssetup.c:141: error: implicit declaration of function ‘show_msg’
+smbd/sesssetup.c: In function ‘reply_spnego_kerberos’:
+smbd/sesssetup.c:360: error: implicit declaration of function ‘strchr_m’
+smbd/sesssetup.c:360: warning: assignment makes pointer from integer without a cast
+smbd/sesssetup.c:425: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/sesssetup.c:425: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:425: warning: value computed is not used
+smbd/sesssetup.c:432: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:432: warning: value computed is not used
+smbd/sesssetup.c:475: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:475: warning: value computed is not used
+smbd/sesssetup.c: In function ‘reply_spnego_negotiate’:
+smbd/sesssetup.c:783: error: ‘SEC_ADS’ undeclared (first use in this function)
+smbd/sesssetup.c:783: error: (Each undeclared identifier is reported only once
+smbd/sesssetup.c:783: error: for each function it appears in.)
+smbd/sesssetup.c: In function ‘reply_spnego_auth’:
+smbd/sesssetup.c:860: error: ‘SEC_ADS’ undeclared (first use in this function)
+smbd/sesssetup.c: In function ‘check_spnego_blob_complete’:
+smbd/sesssetup.c:1086: error: implicit declaration of function ‘malloc_’
+smbd/sesssetup.c: In function ‘reply_sesssetup_and_X_spnego’:
+smbd/sesssetup.c:1116: error: implicit declaration of function ‘get_remote_arch’
+smbd/sesssetup.c:1164: error: implicit declaration of function ‘set_remote_arch’
+smbd/sesssetup.c:1170: error: implicit declaration of function ‘ra_lanman_string’
+smbd/sesssetup.c: In function ‘shutdown_other_smbds’:
+smbd/sesssetup.c:1291: error: incompatible type for argument 1 of ‘process_exists’
+smbd/sesssetup.c:1295: error: implicit declaration of function ‘procid_is_me’
+smbd/sesssetup.c:1304: warning: passing argument 4 of ‘messaging_send’ from incompatible pointer type
+smbd/sesssetup.c: In function ‘reply_sesssetup_and_X’:
+smbd/sesssetup.c:1544: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:1544: warning: value computed is not used
+smbd/sesssetup.c:1581: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:1581: warning: value computed is not used
+smbd/sesssetup.c:1583: warning: pointer/integer type mismatch in conditional expression
+smbd/sesssetup.c:1583: warning: value computed is not used
+smbd/sesssetup.c:1590: error: ‘SEC_SHARE’ undeclared (first use in this function)
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/sesssetup.c -o smbd/sesssetup.o
+make: *** [smbd/sesssetup.o] Error 1
+smbd/trans2.c: In function ‘smb_roundup’:
+smbd/trans2.c:57: error: implicit declaration of function ‘get_remote_arch’
+smbd/trans2.c: In function ‘get_ea_value’:
+smbd/trans2.c:152: error: implicit declaration of function ‘strnequal’
+smbd/trans2.c: In function ‘fill_ea_buffer’:
+smbd/trans2.c:280: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/trans2.c:280: warning: pointer/integer type mismatch in conditional expression
+smbd/trans2.c:280: warning: value computed is not used
+smbd/trans2.c: In function ‘canonicalize_ea_name’:
+smbd/trans2.c:321: warning: pointer/integer type mismatch in conditional expression
+smbd/trans2.c:321: warning: value computed is not used
+smbd/trans2.c: In function ‘set_ea’:
+smbd/trans2.c:342: warning: pointer/integer type mismatch in conditional expression
+smbd/trans2.c:342: warning: value computed is not used
+smbd/trans2.c:343: error: implicit declaration of function ‘safe_strcat_fn’
+smbd/trans2.c:343: warning: pointer/integer type mismatch in conditional expression
+smbd/trans2.c:343: warning: value computed is not used
+smbd/trans2.c: In function ‘send_trans2_replies’:
+smbd/trans2.c:618: error: implicit declaration of function ‘show_msg’
+smbd/trans2.c: In function ‘call_trans2open’:
+smbd/trans2.c:967: error: implicit declaration of function ‘Realloc’
+smbd/trans2.c:976: error: implicit declaration of function ‘srv_put_dos_date2’
+smbd/trans2.c: In function ‘exact_match’:
+smbd/trans2.c:1019: error: implicit declaration of function ‘StrCaseCmp’
+smbd/trans2.c: In function ‘get_lanman2_dir_entry’:
+smbd/trans2.c:1190: error: implicit declaration of function ‘strrchr_m’
+smbd/trans2.c:1190: warning: assignment makes pointer from integer without a cast
+smbd/trans2.c:1243: error: implicit declaration of function ‘mask_match’
+smbd/trans2.c:1333: error: implicit declaration of function ‘get_mtimespec’
+smbd/trans2.c:1333: error: incompatible types in assignment
+smbd/trans2.c:1334: error: implicit declaration of function ‘get_atimespec’
+smbd/trans2.c:1334: error: incompatible types in assignment
+smbd/trans2.c:1335: error: implicit declaration of function ‘get_create_timespec’
+smbd/trans2.c:1335: error: incompatible types in assignment
+smbd/trans2.c:1338: error: implicit declaration of function ‘dos_filetime_timespec’
+smbd/trans2.c:1343: error: implicit declaration of function ‘convert_timespec_to_time_t’
+smbd/trans2.c:1498: error: implicit declaration of function ‘put_long_date_timespec’
+smbd/trans2.c: In function ‘call_trans2findfirst’:
+smbd/trans2.c:1887: warning: assignment makes pointer from integer without a cast
+smbd/trans2.c:1979: error: implicit declaration of function ‘in_list’
+smbd/trans2.c: In function ‘call_trans2findnext’:
+smbd/trans2.c:2259: error: implicit declaration of function ‘string_set’
+smbd/trans2.c: In function ‘call_trans2qfsinfo’:
+smbd/trans2.c:2489: error: implicit declaration of function ‘str_checksum’
+smbd/trans2.c: In function ‘store_file_unix_basic’:
+smbd/trans2.c:3225: error: implicit declaration of function ‘get_ctimespec’
+smbd/trans2.c: In function ‘call_trans2qfilepathinfo’:
+smbd/trans2.c:3672: warning: assignment makes pointer from integer without a cast
+smbd/trans2.c:3766: error: incompatible types in assignment
+smbd/trans2.c:3767: error: incompatible types in assignment
+smbd/trans2.c:3768: error: incompatible types in assignment
+smbd/trans2.c:3773: error: implicit declaration of function ‘null_timespec’
+smbd/trans2.c: In function ‘smb_set_file_time’:
+smbd/trans2.c:4476: error: incompatible types in assignment
+smbd/trans2.c:4481: error: incompatible types in assignment
+smbd/trans2.c:4485: error: implicit declaration of function ‘time_to_asc’
+smbd/trans2.c:4485: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/trans2.c:4486: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/trans2.c:4494: error: invalid initializer
+smbd/trans2.c:4495: error: invalid initializer
+smbd/trans2.c:4496: error: implicit declaration of function ‘timespec_compare’
+smbd/trans2.c:4513: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/trans2.c: In function ‘smb_set_file_unix_link’:
+smbd/trans2.c:4823: warning: assignment makes pointer from integer without a cast
+smbd/trans2.c: In function ‘smb_file_rename_information’:
+smbd/trans2.c:4946: error: implicit declaration of function ‘strchr_m’
+smbd/trans2.c:4955: warning: assignment makes pointer from integer without a cast
+smbd/trans2.c: In function ‘smb_set_info_standard’:
+smbd/trans2.c:5211: error: implicit declaration of function ‘convert_time_t_to_timespec’
+smbd/trans2.c:5211: error: implicit declaration of function ‘srv_make_unix_date2’
+smbd/trans2.c:5211: error: incompatible types in assignment
+smbd/trans2.c:5213: error: incompatible types in assignment
+smbd/trans2.c: In function ‘smb_set_file_basic_info’:
+smbd/trans2.c:5260: error: implicit declaration of function ‘interpret_long_date’
+smbd/trans2.c:5260: error: incompatible types in assignment
+smbd/trans2.c:5262: error: incompatible types in assignment
+smbd/trans2.c:5263: error: incompatible types in assignment
+smbd/trans2.c:5266: error: implicit declaration of function ‘timespec_min’
+smbd/trans2.c:5266: error: incompatible types in assignment
+smbd/trans2.c: In function ‘smb_set_file_allocation_info’:
+smbd/trans2.c:5345: error: implicit declaration of function ‘timespec_current’
+smbd/trans2.c:5345: error: incompatible type for argument 3 of ‘set_filetime’
+smbd/trans2.c:5379: error: incompatible type for argument 2 of ‘fsp_set_pending_modtime’
+smbd/trans2.c: In function ‘smb_unix_mknod’:
+smbd/trans2.c:5494: error: implicit declaration of function ‘parent_dirname’
+smbd/trans2.c:5495: warning: passing argument 2 of ‘inherit_access_acl’ makes pointer from integer without a cast
+smbd/trans2.c: In function ‘smb_set_file_unix_basic’:
+smbd/trans2.c:5545: error: incompatible types in assignment
+smbd/trans2.c:5546: error: incompatible types in assignment
+smbd/trans2.c:5589: error: incompatible types in assignment
+smbd/trans2.c:5590: error: incompatible types in assignment
+smbd/trans2.c: In function ‘call_trans2setfilepathinfo’:
+smbd/trans2.c:6327: error: implicit declaration of function ‘set_mtimespec’
+smbd/trans2.c: In function ‘call_trans2ioctl’:
+smbd/trans2.c:6874: error: implicit declaration of function ‘global_myname’
+smbd/trans2.c:6874: warning: passing argument 6 of ‘srvstr_push_fn’ makes pointer from integer without a cast
+smbd/trans2.c: In function ‘reply_trans2’:
+smbd/trans2.c:7206: error: implicit declaration of function ‘malloc_’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/trans2.c -o smbd/trans2.o
+make: *** [smbd/trans2.o] Error 1
+smbd/uid.c: In function ‘change_to_user’:
+smbd/uid.c:173: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/uid.c:173: error: (Each undeclared identifier is reported only once
+smbd/uid.c:173: error: for each function it appears in.)
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/uid.c -o smbd/uid.o
+make: *** [smbd/uid.o] Error 1
+smbd/dosmode.c: In function ‘dos_mode_msdfs’:
+smbd/dosmode.c:328: error: implicit declaration of function ‘strrchr_m’
+smbd/dosmode.c:328: warning: initialization makes pointer from integer without a cast
+smbd/dosmode.c:344: error: implicit declaration of function ‘is_in_path’
+smbd/dosmode.c: In function ‘dos_mode’:
+smbd/dosmode.c:379: warning: initialization makes pointer from integer without a cast
+smbd/dosmode.c: In function ‘set_filetime’:
+smbd/dosmode.c:595: error: implicit declaration of function ‘null_timespec’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/dosmode.c -o smbd/dosmode.o
+make: *** [smbd/dosmode.o] Error 1
+smbd/filename.c: In function ‘determine_path_error’:
+smbd/filename.c:72: error: implicit declaration of function ‘ms_has_wild’
+smbd/filename.c: In function ‘unix_convert’:
+smbd/filename.c:195: error: implicit declaration of function ‘strrchr_m’
+smbd/filename.c:195: warning: assignment makes pointer from integer without a cast
+smbd/filename.c:220: error: implicit declaration of function ‘strnorm’
+smbd/filename.c: In function ‘check_name’:
+smbd/filename.c:678: error: implicit declaration of function ‘is_in_path’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/filename.c -o smbd/filename.o
+make: *** [smbd/filename.o] Error 1
+smbd/open.c: In function ‘open_file’:
+smbd/open.c:304: error: implicit declaration of function ‘ms_has_wild’
+smbd/open.c:391: error: implicit declaration of function ‘is_in_path’
+smbd/open.c:395: error: implicit declaration of function ‘string_set’
+smbd/open.c: In function ‘is_executable’:
+smbd/open.c:414: error: implicit declaration of function ‘strrchr_m’
+smbd/open.c:414: warning: assignment makes pointer from integer without a cast
+smbd/open.c: In function ‘validate_my_share_entries’:
+smbd/open.c:515: error: implicit declaration of function ‘procid_is_me’
+smbd/open.c: In function ‘delay_for_oplocks’:
+smbd/open.c:749: error: implicit declaration of function ‘procid_str_static’
+smbd/open.c:749: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/open.c: In function ‘open_file_ntcreate’:
+smbd/open.c:1182: error: implicit declaration of function ‘parent_dirname_talloc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/open.c -o smbd/open.o
+make: *** [smbd/open.o] Error 1
+smbd/close.c: In function ‘check_magic’:
+smbd/close.c:45: error: implicit declaration of function ‘strrchr_m’
+smbd/close.c:45: warning: assignment makes pointer from integer without a cast
+smbd/close.c:95: error: implicit declaration of function ‘transfer_file’
+smbd/close.c: In function ‘notify_deferred_opens’:
+smbd/close.c:136: error: implicit declaration of function ‘procid_is_me’
+smbd/close.c: In function ‘close_normal_file’:
+smbd/close.c:403: error: implicit declaration of function ‘null_timespec’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/close.c -o smbd/close.o
+make: *** [smbd/close.o] Error 1
+smbd/blocking.c: In function ‘push_blocking_lock_request’:
+smbd/blocking.c:177: error: implicit declaration of function ‘malloc_’
+smbd/blocking.c:213: error: implicit declaration of function ‘procid_self’
+smbd/blocking.c:219: error: incompatible type for argument 4 of ‘brl_lock’
+smbd/blocking.c:234: warning: passing argument 4 of ‘messaging_register’ from incompatible pointer type
+smbd/blocking.c: In function ‘generic_blocking_lock_error’:
+smbd/blocking.c:303: error: incompatible types in assignment
+smbd/blocking.c: In function ‘cancel_pending_lock_requests_by_fid’:
+smbd/blocking.c:590: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c: In function ‘remove_pending_lock_requests_by_mid’:
+smbd/blocking.c:627: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c: In function ‘process_blocking_lock_queue’:
+smbd/blocking.c:699: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/blocking.c:699: error: (Each undeclared identifier is reported only once
+smbd/blocking.c:699: error: for each function it appears in.)
+smbd/blocking.c:718: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c:744: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c:772: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c:807: error: incompatible type for argument 3 of ‘brl_lock_cancel’
+smbd/blocking.c: In function ‘blocking_lock_cancel’:
+smbd/blocking.c:880: warning: passing argument 4 of ‘messaging_register’ from incompatible pointer type
+smbd/blocking.c:916: error: incompatible type for argument 2 of ‘messaging_send_buf’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/blocking.c -o smbd/blocking.o
+make: *** [smbd/blocking.o] Error 1
+smbd/sec_ctx.c: In function ‘get_current_groups’:
+smbd/sec_ctx.c:153: error: implicit declaration of function ‘malloc_array’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/sec_ctx.c -o smbd/sec_ctx.o
+make: *** [smbd/sec_ctx.o] Error 1
+smbd/srvstr.c: In function ‘message_push_string’:
+smbd/srvstr.c:82: error: implicit declaration of function ‘set_message_bcc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/srvstr.c -o smbd/srvstr.o
+make: *** [smbd/srvstr.o] Error 1
+smbd/vfs.c: In function ‘smb_register_vfs’:
+smbd/vfs.c:79: error: implicit declaration of function ‘smb_xmalloc_array’
+smbd/vfs.c: In function ‘vfs_init_custom’:
+smbd/vfs.c:131: error: implicit declaration of function ‘strchr_m’
+smbd/vfs.c:131: warning: assignment makes pointer from integer without a cast
+smbd/vfs.c:136: error: implicit declaration of function ‘trim_char’
+smbd/vfs.c: In function ‘vfs_fill_sparse’:
+smbd/vfs.c:562: error: implicit declaration of function ‘calloc_array’
+smbd/vfs.c: In function ‘vfs_transfer_file’:
+smbd/vfs.c:615: error: implicit declaration of function ‘transfer_file_internal’
+smbd/vfs.c: In function ‘vfs_ChDir’:
+smbd/vfs.c:662: error: implicit declaration of function ‘strcsequal’
+smbd/vfs.c: In function ‘array_promote’:
+smbd/vfs.c:700: error: implicit declaration of function ‘malloc_’
+smbd/vfs.c: In function ‘vfs_GetWd’:
+smbd/vfs.c:748: error: implicit declaration of function ‘string_set’
+smbd/vfs.c: In function ‘check_reduced_name’:
+smbd/vfs.c:876: error: implicit declaration of function ‘strrchr_m’
+smbd/vfs.c:876: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/vfs.c -o smbd/vfs.o
+make: *** [smbd/vfs.o] Error 1
+smbd/statcache.c: In function ‘stat_cache_lookup’:
+smbd/statcache.c:250: error: implicit declaration of function ‘strrchr_m’
+smbd/statcache.c:250: warning: assignment makes pointer from integer without a cast
+smbd/statcache.c:307: error: implicit declaration of function ‘strnrchr_m’
+smbd/statcache.c:307: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/statcache.c -o smbd/statcache.o
+make: *** [smbd/statcache.o] Error 1
+smbd/posix_acls.c: In function ‘create_pai_buf’:
+smbd/posix_acls.c:171: error: implicit declaration of function ‘malloc_’
+smbd/posix_acls.c: In function ‘print_canon_ace’:
+smbd/posix_acls.c:554: error: implicit declaration of function ‘uidtoname’
+smbd/posix_acls.c:554: warning: initialization makes pointer from integer without a cast
+smbd/posix_acls.c:557: error: implicit declaration of function ‘gidtoname’
+smbd/posix_acls.c:557: warning: initialization makes pointer from integer without a cast
+smbd/posix_acls.c: In function ‘nt4_compatible_acls’:
+smbd/posix_acls.c:815: error: implicit declaration of function ‘get_remote_arch’
+smbd/posix_acls.c: In function ‘uid_entry_in_group’:
+smbd/posix_acls.c:1063: warning: assignment makes pointer from integer without a cast
+smbd/posix_acls.c: In function ‘get_nt_acl’:
+smbd/posix_acls.c:2896: error: implicit declaration of function ‘malloc_array’
+smbd/posix_acls.c: In function ‘append_parent_acl’:
+smbd/posix_acls.c:3187: error: implicit declaration of function ‘parent_dirname_talloc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/posix_acls.c -o smbd/posix_acls.o
+make: *** [smbd/posix_acls.o] Error 1
+lib/sysacls.c: In function ‘sys_acl_to_text’:
+lib/sysacls.c:143: error: implicit declaration of function ‘malloc_’
+lib/sysacls.c:171: error: implicit declaration of function ‘uidtoname’
+lib/sysacls.c:171: warning: assignment makes pointer from integer without a cast
+lib/sysacls.c:214: error: implicit declaration of function ‘Realloc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c lib/sysacls.c -o lib/sysacls.o
+make: *** [lib/sysacls.o] Error 1
+smbd/process.c: In function ‘idle_event_handler’:
+smbd/process.c:260: error: implicit declaration of function ‘talloc_check_name_abort’
+smbd/process.c: In function ‘reply_outbuf’:
+smbd/process.c:935: error: implicit declaration of function ‘set_message’
+smbd/process.c: In function ‘switch_message’:
+smbd/process.c:1018: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/process.c:1018: error: (Each undeclared identifier is reported only once
+smbd/process.c:1018: error: for each function it appears in.)
+smbd/process.c: In function ‘construct_reply’:
+smbd/process.c:1139: error: implicit declaration of function ‘show_msg’
+smbd/process.c: In function ‘chain_reply’:
+smbd/process.c:1343: error: implicit declaration of function ‘smb_setlen’
+smbd/process.c: In function ‘timeout_processing’:
+smbd/process.c:1550: error: ‘SEC_DOMAIN’ undeclared (first use in this function)
+smbd/process.c:1565: error: implicit declaration of function ‘lp_workgroup’
+smbd/process.c:1565: warning: passing argument 1 of ‘secrets_lock_trust_account_password’ makes pointer from integer without a cast
+smbd/process.c:1566: error: implicit declaration of function ‘global_myname’
+smbd/process.c:1566: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/process.c:1566: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+smbd/process.c:1571: warning: passing argument 1 of ‘secrets_fetch_trust_account_password’ makes pointer from integer without a cast
+smbd/process.c:1572: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+smbd/process.c:1572: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+smbd/process.c:1574: warning: passing argument 1 of ‘secrets_lock_trust_account_password’ makes pointer from integer without a cast
+smbd/process.c:1584: warning: passing argument 1 of ‘secrets_lock_trust_account_password’ makes pointer from integer without a cast
+smbd/process.c:1590: warning: passing argument 1 of ‘change_trust_account_password’ makes pointer from integer without a cast
+smbd/process.c:1592: warning: passing argument 1 of ‘secrets_lock_trust_account_password’ makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/process.c -o smbd/process.o
+make: *** [smbd/process.o] Error 1
+smbd/service.c: In function ‘canonicalize_path’:
+smbd/service.c:31: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/service.c:31: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:31: warning: value computed is not used
+smbd/service.c: In function ‘set_conn_connectpath’:
+smbd/service.c:157: error: implicit declaration of function ‘string_set’
+smbd/service.c: In function ‘set_current_service’:
+smbd/service.c:199: error: implicit declaration of function ‘get_remote_arch’
+smbd/service.c: In function ‘find_service’:
+smbd/service.c:412: error: implicit declaration of function ‘strlower_m’
+smbd/service.c:419: error: implicit declaration of function ‘strstr_m’
+smbd/service.c:427: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:427: warning: value computed is not used
+smbd/service.c: In function ‘share_sanity_checks’:
+smbd/service.c:476: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:476: warning: value computed is not used
+smbd/service.c:478: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:478: warning: value computed is not used
+smbd/service.c:480: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:480: warning: value computed is not used
+smbd/service.c:484: error: implicit declaration of function ‘strupper_m’
+smbd/service.c:500: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:500: warning: value computed is not used
+smbd/service.c: In function ‘find_forced_user’:
+smbd/service.c:512: error: implicit declaration of function ‘talloc_string_sub’
+smbd/service.c:513: warning: assignment makes pointer from integer without a cast
+smbd/service.c:524: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:524: warning: value computed is not used
+smbd/service.c: In function ‘find_forced_group’:
+smbd/service.c:573: warning: assignment makes pointer from integer without a cast
+smbd/service.c: In function ‘make_connection_snum’:
+smbd/service.c:647: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:647: warning: value computed is not used
+smbd/service.c:688: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:688: warning: value computed is not used
+smbd/service.c:720: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:720: warning: value computed is not used
+smbd/service.c:722: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/service.c:722: error: (Each undeclared identifier is reported only once
+smbd/service.c:722: error: for each function it appears in.)
+smbd/service.c:747: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:747: warning: value computed is not used
+smbd/service.c:760: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:760: warning: value computed is not used
+smbd/service.c:880: error: implicit declaration of function ‘add_gid_to_array_unique’
+smbd/service.c:892: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:892: warning: value computed is not used
+smbd/service.c:972: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:972: warning: value computed is not used
+smbd/service.c:978: error: implicit declaration of function ‘server_id_self’
+smbd/service.c:981: error: incompatible type for argument 2 of ‘notify_init’
+smbd/service.c:1015: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1015: warning: value computed is not used
+smbd/service.c:1052: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1052: warning: value computed is not used
+smbd/service.c:1078: error: implicit declaration of function ‘set_namearray’
+smbd/service.c: In function ‘make_connection’:
+smbd/service.c:1208: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1208: warning: value computed is not used
+smbd/service.c:1223: error: ‘SEC_SHARE’ undeclared (first use in this function)
+smbd/service.c:1263: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1263: warning: value computed is not used
+smbd/service.c:1288: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1288: warning: value computed is not used
+smbd/service.c: In function ‘close_cnum’:
+smbd/service.c:1356: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1356: warning: value computed is not used
+smbd/service.c:1370: warning: pointer/integer type mismatch in conditional expression
+smbd/service.c:1370: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/service.c -o smbd/service.o
+make: *** [smbd/service.o] Error 1
+smbd/error.c: In function ‘error_packet’:
+smbd/error.c:114: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/error.c -o smbd/error.o
+make: *** [smbd/error.o] Error 1
+printing/printfsp.c: In function ‘print_fsp_open’:
+printing/printfsp.c:44: error: implicit declaration of function ‘safe_strcpy_fn’
+printing/printfsp.c:44: warning: pointer/integer type mismatch in conditional expression
+printing/printfsp.c:44: warning: value computed is not used
+printing/printfsp.c:47: error: implicit declaration of function ‘safe_strcat_fn’
+printing/printfsp.c:47: warning: pointer/integer type mismatch in conditional expression
+printing/printfsp.c:47: warning: value computed is not used
+printing/printfsp.c:51: warning: pointer/integer type mismatch in conditional expression
+printing/printfsp.c:51: warning: value computed is not used
+printing/printfsp.c:84: error: implicit declaration of function ‘string_set’
+printing/printfsp.c: In function ‘print_fsp_end’:
+printing/printfsp.c:114: error: implicit declaration of function ‘string_free’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c printing/printfsp.c -o printing/printfsp.o
+make: *** [printing/printfsp.o] Error 1
+lib/sysquotas.c: In function ‘command_get_quota’:
+lib/sysquotas.c:215: error: implicit declaration of function ‘file_lines_pload’
+lib/sysquotas.c:215: warning: assignment makes pointer from integer without a cast
+lib/sysquotas.c:230: error: implicit declaration of function ‘STR_TO_SMB_BIG_UINT’
+lib/sysquotas.c:295: error: implicit declaration of function ‘file_lines_free’
+lib/sysquotas.c: In function ‘command_set_quota’:
+lib/sysquotas.c:383: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c lib/sysquotas.c -o lib/sysquotas.o
+make: *** [lib/sysquotas.o] Error 1
+smbd/change_trust_pw.c: In function ‘change_trust_account_password’:
+smbd/change_trust_pw.c:53: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/change_trust_pw.c:53: warning: pointer/integer type mismatch in conditional expression
+smbd/change_trust_pw.c:53: warning: value computed is not used
+smbd/change_trust_pw.c:59: error: implicit declaration of function ‘global_myname’
+smbd/change_trust_pw.c:59: warning: passing argument 2 of ‘cli_full_connection’ makes pointer from integer without a cast
+smbd/change_trust_pw.c:92: error: implicit declaration of function ‘current_timestring’
+smbd/change_trust_pw.c:92: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/change_trust_pw.c -o smbd/change_trust_pw.o
+make: *** [smbd/change_trust_pw.o] Error 1
+smbd/fake_file.c: In function ‘open_fake_file’:
+smbd/fake_file.c:134: error: implicit declaration of function ‘string_set’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/fake_file.c -o smbd/fake_file.o
+make: *** [smbd/fake_file.o] Error 1
+smbd/msdfs.c: In function ‘parse_dfs_path’:
+smbd/msdfs.c:100: error: implicit declaration of function ‘trim_char’
+smbd/msdfs.c:107: error: implicit declaration of function ‘strchr_m’
+smbd/msdfs.c:107: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c:154: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c: In function ‘create_conn_struct’:
+smbd/msdfs.c:207: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/msdfs.c:207: warning: pointer/integer type mismatch in conditional expression
+smbd/msdfs.c:207: warning: value computed is not used
+smbd/msdfs.c:208: error: implicit declaration of function ‘pstring_sub’
+smbd/msdfs.c: In function ‘is_msdfs_link_internal’:
+smbd/msdfs.c:404: error: implicit declaration of function ‘strnequal’
+smbd/msdfs.c: In function ‘dfs_path_lookup’:
+smbd/msdfs.c:533: error: implicit declaration of function ‘strrchr_m’
+smbd/msdfs.c:533: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c:535: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c:561: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c:565: warning: assignment makes pointer from integer without a cast
+smbd/msdfs.c: In function ‘get_referred_path’:
+smbd/msdfs.c:762: warning: pointer/integer type mismatch in conditional expression
+smbd/msdfs.c:762: warning: value computed is not used
+smbd/msdfs.c: In function ‘setup_ver2_dfs_referral’:
+smbd/msdfs.c:936: error: implicit declaration of function ‘Realloc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/msdfs.c -o smbd/msdfs.o
+make: *** [smbd/msdfs.o] Error 1
+smbd/mangle.c: In function ‘name_to_8_3’:
+smbd/mangle.c:143: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/mangle.c:143: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle.c:143: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/mangle.c -o smbd/mangle.o
+make: *** [smbd/mangle.o] Error 1
+smbd/mangle_hash.c: In function ‘has_valid_83_chars’:
+smbd/mangle_hash.c:77: error: implicit declaration of function ‘ms_has_wild_w’
+smbd/mangle_hash.c: In function ‘is_mangled’:
+smbd/mangle_hash.c:373: error: implicit declaration of function ‘strchr_m’
+smbd/mangle_hash.c:373: warning: assignment makes pointer from integer without a cast
+smbd/mangle_hash.c:379: warning: assignment makes pointer from integer without a cast
+smbd/mangle_hash.c: In function ‘cache_mangled_name’:
+smbd/mangle_hash.c:423: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/mangle_hash.c:423: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle_hash.c:423: warning: value computed is not used
+smbd/mangle_hash.c:441: error: implicit declaration of function ‘string_term_tdb_data’
+smbd/mangle_hash.c:441: error: incompatible types in assignment
+smbd/mangle_hash.c: In function ‘to_8_3’:
+smbd/mangle_hash.c:548: error: implicit declaration of function ‘strisnormal’
+smbd/mangle_hash.c:552: error: implicit declaration of function ‘str_checksum’
+smbd/mangle_hash.c:559: error: implicit declaration of function ‘strupper_m’
+smbd/mangle_hash.c:563: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle_hash.c:563: warning: value computed is not used
+smbd/mangle_hash.c:595: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle_hash.c:595: warning: value computed is not used
+smbd/mangle_hash.c: In function ‘hash_name_to_8_3’:
+smbd/mangle_hash.c:654: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle_hash.c:654: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/mangle_hash.c -o smbd/mangle_hash.o
+make: *** [smbd/mangle_hash.o] Error 1
+smbd/mangle_hash2.c: In function ‘mangle_hash’:
+smbd/mangle_hash2.c:134: error: implicit declaration of function ‘strupper_m’
+smbd/mangle_hash2.c: In function ‘cache_init’:
+smbd/mangle_hash2.c:159: error: implicit declaration of function ‘calloc_array’
+smbd/mangle_hash2.c: In function ‘cache_insert’:
+smbd/mangle_hash2.c:184: error: implicit declaration of function ‘smb_xstrndup’
+smbd/mangle_hash2.c:184: warning: assignment makes pointer from integer without a cast
+smbd/mangle_hash2.c: In function ‘is_reserved_name’:
+smbd/mangle_hash2.c:446: error: implicit declaration of function ‘strnequal’
+smbd/mangle_hash2.c: In function ‘hash2_name_to_8_3’:
+smbd/mangle_hash2.c:547: error: implicit declaration of function ‘safe_strcpy_fn’
+smbd/mangle_hash2.c:547: warning: pointer/integer type mismatch in conditional expression
+smbd/mangle_hash2.c:547: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c smbd/mangle_hash2.c -o smbd/mangle_hash2.o
+make: *** [smbd/mangle_hash2.o] Error 1
+modules/vfs_default.c: In function ‘vfswrap_mkdir’:
+modules/vfs_default.c:145: error: implicit declaration of function ‘parent_dirname’
+modules/vfs_default.c:145: warning: passing argument 2 of ‘directory_has_default_acl’ makes pointer from integer without a cast
+modules/vfs_default.c: In function ‘copy_reg’:
+modules/vfs_default.c:382: error: implicit declaration of function ‘transfer_file’
+modules/vfs_default.c: In function ‘vfswrap_ntimes’:
+modules/vfs_default.c:638: error: implicit declaration of function ‘convert_timespec_to_timeval’
+modules/vfs_default.c:638: error: incompatible types in assignment
+modules/vfs_default.c:639: error: incompatible types in assignment
+modules/vfs_default.c: In function ‘vfswrap_getlock’:
+modules/vfs_default.c:813: error: implicit declaration of function ‘fcntl_getlock’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c modules/vfs_default.c -o modules/vfs_default.o
+make: *** [modules/vfs_default.o] Error 1
+libsmb/clientgen.c: In function ‘client_receive_smb’:
+libsmb/clientgen.c:66: error: implicit declaration of function ‘show_msg’
+libsmb/clientgen.c: In function ‘cli_setup_bcc’:
+libsmb/clientgen.c:340: error: implicit declaration of function ‘set_message_bcc’
+libsmb/clientgen.c: In function ‘cli_init_creds’:
+libsmb/clientgen.c:349: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clientgen.c:349: warning: pointer/integer type mismatch in conditional expression
+libsmb/clientgen.c:349: warning: value computed is not used
+libsmb/clientgen.c:350: warning: pointer/integer type mismatch in conditional expression
+libsmb/clientgen.c:350: warning: value computed is not used
+libsmb/clientgen.c: In function ‘cli_initialise’:
+libsmb/clientgen.c:394: error: implicit declaration of function ‘malloc_’
+libsmb/clientgen.c: In function ‘cli_echo’:
+libsmb/clientgen.c:626: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clientgen.c -o libsmb/clientgen.o
+make: *** [libsmb/clientgen.o] Error 1
+libsmb/cliconnect.c: In function ‘cli_session_setup_lanman2’:
+libsmb/cliconnect.c:101: error: implicit declaration of function ‘set_message’
+libsmb/cliconnect.c:125: error: implicit declaration of function ‘show_msg’
+libsmb/cliconnect.c:133: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/cliconnect.c:133: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:133: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup_guest’:
+libsmb/cliconnect.c:211: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:211: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup_plaintext’:
+libsmb/cliconnect.c:276: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:276: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup_nt1’:
+libsmb/cliconnect.c:431: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:431: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup_ntlmssp’:
+libsmb/cliconnect.c:749: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:749: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup_spnego’:
+libsmb/cliconnect.c:839: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:839: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_session_setup’:
+libsmb/cliconnect.c:894: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:894: warning: value computed is not used
+libsmb/cliconnect.c:895: error: implicit declaration of function ‘strchr_m’
+libsmb/cliconnect.c:895: warning: assignment makes pointer from integer without a cast
+libsmb/cliconnect.c:895: warning: assignment makes pointer from integer without a cast
+libsmb/cliconnect.c:896: warning: assignment makes pointer from integer without a cast
+libsmb/cliconnect.c: In function ‘cli_send_tconX’:
+libsmb/cliconnect.c:1021: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:1021: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_negprot’:
+libsmb/cliconnect.c:1234: error: implicit declaration of function ‘interpret_long_date’
+libsmb/cliconnect.c:1234: error: incompatible types in assignment
+libsmb/cliconnect.c:1278: error: implicit declaration of function ‘malloc_’
+libsmb/cliconnect.c:1292: error: implicit declaration of function ‘cli_make_unix_date’
+libsmb/cliconnect.c: In function ‘cli_connect’:
+libsmb/cliconnect.c:1416: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:1416: warning: value computed is not used
+libsmb/cliconnect.c: In function ‘cli_start_connection’:
+libsmb/cliconnect.c:1485: error: implicit declaration of function ‘global_myname’
+libsmb/cliconnect.c:1485: warning: assignment makes pointer from integer without a cast
+libsmb/cliconnect.c: In function ‘get_ipc_connect’:
+libsmb/cliconnect.c:1759: error: too many arguments to function ‘get_myname’
+libsmb/cliconnect.c:1762: error: implicit declaration of function ‘lp_workgroup’
+libsmb/cliconnect.c:1763: warning: passing argument 9 of ‘cli_full_connection’ makes pointer from integer without a cast
+libsmb/cliconnect.c: In function ‘get_ipc_connect_master_ip’:
+libsmb/cliconnect.c:1825: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliconnect.c:1825: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/cliconnect.c -o libsmb/cliconnect.o
+make: *** [libsmb/cliconnect.o] Error 1
+libsmb/clifile.c: In function ‘cli_unix_stat’:
+libsmb/clifile.c:268: error: implicit declaration of function ‘set_ctimespec’
+libsmb/clifile.c:268: error: implicit declaration of function ‘interpret_long_date’
+libsmb/clifile.c:269: error: implicit declaration of function ‘set_atimespec’
+libsmb/clifile.c:270: error: implicit declaration of function ‘set_mtimespec’
+libsmb/clifile.c: In function ‘cli_rename’:
+libsmb/clifile.c:392: error: implicit declaration of function ‘set_message’
+libsmb/clifile.c: In function ‘cli_getattrE’:
+libsmb/clifile.c:1225: error: implicit declaration of function ‘cli_make_unix_date2’
+libsmb/clifile.c: In function ‘cli_getatr’:
+libsmb/clifile.c:1277: error: implicit declaration of function ‘cli_make_unix_date3’
+libsmb/clifile.c: In function ‘cli_setattrE’:
+libsmb/clifile.c:1310: error: implicit declaration of function ‘cli_put_dos_date2’
+libsmb/clifile.c: In function ‘cli_setatr’:
+libsmb/clifile.c:1349: error: implicit declaration of function ‘cli_put_dos_date3’
+libsmb/clifile.c: In function ‘cli_chkpath’:
+libsmb/clifile.c:1378: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clifile.c:1378: warning: pointer/integer type mismatch in conditional expression
+libsmb/clifile.c:1378: warning: value computed is not used
+libsmb/clifile.c:1379: error: implicit declaration of function ‘trim_char’
+libsmb/clifile.c: In function ‘cli_set_ea’:
+libsmb/clifile.c:1527: error: implicit declaration of function ‘malloc_’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clifile.c -o libsmb/clifile.o
+make: *** [libsmb/clifile.o] Error 1
+libsmb/clikrb5.c: In function ‘ads_cleanup_expired_creds’:
+libsmb/clikrb5.c:564: warning: passing argument 1 of ‘http_timestring’ makes pointer from integer without a cast
+libsmb/clikrb5.c:564: error: too few arguments to function ‘http_timestring’
+libsmb/clikrb5.c: In function ‘ads_krb5_mk_req’:
+libsmb/clikrb5.c:659: warning: passing argument 1 of ‘http_timestring’ makes pointer from integer without a cast
+libsmb/clikrb5.c:659: error: too few arguments to function ‘http_timestring’
+libsmb/clikrb5.c: In function ‘smb_krb5_gen_netbios_krb5_address’:
+libsmb/clikrb5.c:1294: error: implicit declaration of function ‘malloc_’
+libsmb/clikrb5.c:1299: error: implicit declaration of function ‘global_myname’
+libsmb/clikrb5.c:1299: warning: passing argument 2 of ‘put_name’ makes pointer from integer without a cast
+libsmb/clikrb5.c: In function ‘smb_krb5_open_keytab’:
+libsmb/clikrb5.c:1638: error: implicit declaration of function ‘next_token’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clikrb5.c -o libsmb/clikrb5.o
+make: *** [libsmb/clikrb5.o] Error 1
+libsmb/asn1.c: In function ‘asn1_write’:
+libsmb/asn1.c:41: error: too many arguments to function ‘realloc_array’
+libsmb/asn1.c: In function ‘asn1_push_tag’:
+libsmb/asn1.c:66: error: implicit declaration of function ‘malloc_’
+libsmb/asn1.c: In function ‘asn1_read_OID’:
+libsmb/asn1.c:364: error: implicit declaration of function ‘safe_strcat_fn’
+libsmb/asn1.c:364: warning: pointer/integer type mismatch in conditional expression
+libsmb/asn1.c:364: warning: value computed is not used
+libsmb/asn1.c:366: warning: pointer/integer type mismatch in conditional expression
+libsmb/asn1.c:366: warning: value computed is not used
+libsmb/asn1.c:375: warning: pointer/integer type mismatch in conditional expression
+libsmb/asn1.c:375: warning: value computed is not used
+libsmb/asn1.c: In function ‘asn1_read_GeneralString’:
+libsmb/asn1.c:420: error: implicit declaration of function ‘malloc_array’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/asn1.c -o libsmb/asn1.o
+make: *** [libsmb/asn1.o] Error 1
+libsmb/clirap.c: In function ‘cli_NetWkstaUserLogon’:
+libsmb/clirap.c:87: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clirap.c:87: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:87: warning: value computed is not used
+libsmb/clirap.c:88: error: implicit declaration of function ‘skip_string’
+libsmb/clirap.c:88: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:89: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:89: warning: value computed is not used
+libsmb/clirap.c:90: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:93: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:93: warning: value computed is not used
+libsmb/clirap.c:94: error: implicit declaration of function ‘strupper_m’
+libsmb/clirap.c:99: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:99: warning: value computed is not used
+libsmb/clirap.c: In function ‘cli_RNetShareEnum’:
+libsmb/clirap.c:148: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:148: warning: value computed is not used
+libsmb/clirap.c:149: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:150: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:150: warning: value computed is not used
+libsmb/clirap.c:151: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c: In function ‘cli_NetServerEnum’:
+libsmb/clirap.c:226: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:226: warning: value computed is not used
+libsmb/clirap.c:227: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:229: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:229: warning: value computed is not used
+libsmb/clirap.c:231: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c: In function ‘cli_oem_change_password’:
+libsmb/clirap.c:315: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:315: warning: value computed is not used
+libsmb/clirap.c:316: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:317: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:317: warning: value computed is not used
+libsmb/clirap.c:318: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c:319: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:319: warning: value computed is not used
+libsmb/clirap.c:320: warning: assignment makes pointer from integer without a cast
+libsmb/clirap.c: In function ‘cli_qpathinfo’:
+libsmb/clirap.c:427: error: implicit declaration of function ‘smb_msleep’
+libsmb/clirap.c:436: error: ‘cli_make_unix_date’ undeclared (first use in this function)
+libsmb/clirap.c:436: error: (Each undeclared identifier is reported only once
+libsmb/clirap.c:436: error: for each function it appears in.)
+libsmb/clirap.c:438: error: ‘cli_make_unix_date2’ undeclared (first use in this function)
+libsmb/clirap.c: In function ‘cli_setpathinfo’:
+libsmb/clirap.c:506: error: implicit declaration of function ‘put_long_date’
+libsmb/clirap.c: In function ‘cli_qpathinfo2’:
+libsmb/clirap.c:608: error: implicit declaration of function ‘interpret_long_date’
+libsmb/clirap.c:608: error: incompatible types in assignment
+libsmb/clirap.c:611: error: incompatible types in assignment
+libsmb/clirap.c:614: error: incompatible types in assignment
+libsmb/clirap.c:617: error: incompatible types in assignment
+libsmb/clirap.c: In function ‘cli_qfileinfo’:
+libsmb/clirap.c:726: error: incompatible types in assignment
+libsmb/clirap.c:729: error: incompatible types in assignment
+libsmb/clirap.c:732: error: incompatible types in assignment
+libsmb/clirap.c:735: error: incompatible types in assignment
+libsmb/clirap.c: In function ‘cli_qpathinfo_basic’:
+libsmb/clirap.c:768: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap.c:768: warning: value computed is not used
+libsmb/clirap.c:804: error: implicit declaration of function ‘set_atimespec’
+libsmb/clirap.c:805: error: implicit declaration of function ‘set_mtimespec’
+libsmb/clirap.c:806: error: implicit declaration of function ‘set_ctimespec’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clirap.c -o libsmb/clirap.o
+make: *** [libsmb/clirap.o] Error 1
+libsmb/clierror.c: In function ‘cli_errstr’:
+libsmb/clierror.c:107: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clierror.c:107: warning: pointer/integer type mismatch in conditional expression
+libsmb/clierror.c:107: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clierror.c -o libsmb/clierror.o
+make: *** [libsmb/clierror.o] Error 1
+libsmb/climessage.c: In function ‘cli_message_start_build’:
+libsmb/climessage.c:32: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/climessage.c -o libsmb/climessage.o
+make: *** [libsmb/climessage.o] Error 1
+libsmb/clireadwrite.c: In function ‘cli_issue_read’:
+libsmb/clireadwrite.c:37: error: implicit declaration of function ‘set_message’
+libsmb/clireadwrite.c: In function ‘cli_issue_write’:
+libsmb/clireadwrite.c:295: error: implicit declaration of function ‘Realloc’
+libsmb/clireadwrite.c:352: error: implicit declaration of function ‘show_msg’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clireadwrite.c -o libsmb/clireadwrite.o
+make: *** [libsmb/clireadwrite.o] Error 1
+libsmb/clilist.c: In function ‘interpret_long_filename’:
+libsmb/clilist.c:52: error: implicit declaration of function ‘convert_time_t_to_timespec’
+libsmb/clilist.c:52: error: implicit declaration of function ‘cli_make_unix_date2’
+libsmb/clilist.c:52: error: incompatible types in assignment
+libsmb/clilist.c:53: error: incompatible types in assignment
+libsmb/clilist.c:54: error: incompatible types in assignment
+libsmb/clilist.c:73: error: incompatible types in assignment
+libsmb/clilist.c:74: error: incompatible types in assignment
+libsmb/clilist.c:75: error: incompatible types in assignment
+libsmb/clilist.c:99: error: implicit declaration of function ‘interpret_long_date’
+libsmb/clilist.c:99: error: incompatible types in assignment
+libsmb/clilist.c:101: error: incompatible types in assignment
+libsmb/clilist.c:103: error: incompatible types in assignment
+libsmb/clilist.c: In function ‘cli_list_new’:
+libsmb/clilist.c:188: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clilist.c:188: warning: pointer/integer type mismatch in conditional expression
+libsmb/clilist.c:188: warning: value computed is not used
+libsmb/clilist.c:260: error: implicit declaration of function ‘smb_msleep’
+libsmb/clilist.c:302: error: implicit declaration of function ‘strcsequal’
+libsmb/clilist.c:311: warning: pointer/integer type mismatch in conditional expression
+libsmb/clilist.c:311: warning: value computed is not used
+libsmb/clilist.c:313: warning: pointer/integer type mismatch in conditional expression
+libsmb/clilist.c:313: warning: value computed is not used
+libsmb/clilist.c:318: error: implicit declaration of function ‘Realloc’
+libsmb/clilist.c: In function ‘interpret_short_filename’:
+libsmb/clilist.c:378: error: implicit declaration of function ‘cli_make_unix_date’
+libsmb/clilist.c: In function ‘cli_list_old’:
+libsmb/clilist.c:414: warning: pointer/integer type mismatch in conditional expression
+libsmb/clilist.c:414: warning: value computed is not used
+libsmb/clilist.c:420: error: implicit declaration of function ‘set_message’
+libsmb/clilist.c:487: warning: pointer/integer type mismatch in conditional expression
+libsmb/clilist.c:487: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clilist.c -o libsmb/clilist.o
+make: *** [libsmb/clilist.o] Error 1
+libsmb/cliprint.c: In function ‘cli_print_queue’:
+libsmb/cliprint.c:65: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/cliprint.c:65: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:65: warning: value computed is not used
+libsmb/cliprint.c:66: error: implicit declaration of function ‘skip_string’
+libsmb/cliprint.c:66: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c:67: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:67: warning: value computed is not used
+libsmb/cliprint.c:68: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c:69: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:69: warning: value computed is not used
+libsmb/cliprint.c:70: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c:74: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:74: warning: value computed is not used
+libsmb/cliprint.c:75: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c:96: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:96: warning: value computed is not used
+libsmb/cliprint.c:99: error: implicit declaration of function ‘cli_make_unix_date3’
+libsmb/cliprint.c:101: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:101: warning: value computed is not used
+libsmb/cliprint.c: In function ‘cli_printjob_del’:
+libsmb/cliprint.c:134: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:134: warning: value computed is not used
+libsmb/cliprint.c:135: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c:136: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliprint.c:136: warning: value computed is not used
+libsmb/cliprint.c:137: warning: assignment makes pointer from integer without a cast
+libsmb/cliprint.c: In function ‘cli_spl_open’:
+libsmb/cliprint.c:196: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/cliprint.c -o libsmb/cliprint.o
+make: *** [libsmb/cliprint.o] Error 1
+libsmb/clitrans.c: In function ‘cli_send_trans’:
+libsmb/clitrans.c:46: error: implicit declaration of function ‘set_message’
+libsmb/clitrans.c:91: error: implicit declaration of function ‘show_msg’
+libsmb/clitrans.c: In function ‘cli_receive_trans’:
+libsmb/clitrans.c:220: error: implicit declaration of function ‘Realloc’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clitrans.c -o libsmb/clitrans.o
+make: *** [libsmb/clitrans.o] Error 1
+libsmb/clidgram.c: In function ‘cli_send_mailslot’:
+libsmb/clidgram.c:72: error: implicit declaration of function ‘set_message’
+libsmb/clidgram.c:84: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clidgram.c:84: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidgram.c:84: warning: value computed is not used
+libsmb/clidgram.c:85: error: implicit declaration of function ‘skip_string’
+libsmb/clidgram.c:85: warning: assignment makes pointer from integer without a cast
+libsmb/clidgram.c:104: error: implicit declaration of function ‘pid_to_procid’
+libsmb/clidgram.c:104: error: incompatible type for argument 2 of ‘messaging_send_buf’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clidgram.c -o libsmb/clidgram.o
+make: *** [libsmb/clidgram.o] Error 1
+libsmb/cliquota.c: In function ‘dump_ntquota’:
+libsmb/cliquota.c:611: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/cliquota.c:611: warning: pointer/integer type mismatch in conditional expression
+libsmb/cliquota.c:611: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/cliquota.c -o libsmb/cliquota.o
+make: *** [libsmb/cliquota.o] Error 1
+libsmb/clifsinfo.c: In function ‘cli_get_fs_volume_info’:
+libsmb/clifsinfo.c:285: error: implicit declaration of function ‘interpret_long_date’
+libsmb/clifsinfo.c:285: error: incompatible types in assignment
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clifsinfo.c -o libsmb/clifsinfo.o
+make: *** [libsmb/clifsinfo.o] Error 1
+libsmb/clidfs.c: In function ‘do_connect’:
+libsmb/clidfs.c:74: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clidfs.c:74: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:74: warning: value computed is not used
+libsmb/clidfs.c:78: error: implicit declaration of function ‘strchr_m’
+libsmb/clidfs.c:78: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:88: error: implicit declaration of function ‘global_myname’
+libsmb/clidfs.c:88: warning: passing argument 2 of ‘make_nmb_name’ makes pointer from integer without a cast
+libsmb/clidfs.c:118: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:140: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:140: warning: value computed is not used
+libsmb/clidfs.c:145: error: implicit declaration of function ‘lp_workgroup’
+libsmb/clidfs.c:145: warning: passing argument 7 of ‘cli_session_setup’ makes pointer from integer without a cast
+libsmb/clidfs.c:151: warning: passing argument 7 of ‘cli_session_setup’ makes pointer from integer without a cast
+libsmb/clidfs.c: In function ‘cli_cm_set_mntpoint’:
+libsmb/clidfs.c:211: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:211: warning: value computed is not used
+libsmb/clidfs.c:212: error: implicit declaration of function ‘clean_name’
+libsmb/clidfs.c: In function ‘cli_cm_connect’:
+libsmb/clidfs.c:245: error: implicit declaration of function ‘smb_xmalloc_array’
+libsmb/clidfs.c: In function ‘cli_cm_set_credentials’:
+libsmb/clidfs.c:339: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:339: warning: value computed is not used
+libsmb/clidfs.c:342: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:342: warning: value computed is not used
+libsmb/clidfs.c: In function ‘split_dfs_path’:
+libsmb/clidfs.c:384: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:384: warning: value computed is not used
+libsmb/clidfs.c:390: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:399: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:403: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:403: warning: value computed is not used
+libsmb/clidfs.c:405: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:405: warning: value computed is not used
+libsmb/clidfs.c:408: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:408: warning: value computed is not used
+libsmb/clidfs.c:409: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:409: warning: value computed is not used
+libsmb/clidfs.c: In function ‘clean_path’:
+libsmb/clidfs.c:428: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:428: warning: value computed is not used
+libsmb/clidfs.c:430: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:431: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:444: error: implicit declaration of function ‘strrchr_m’
+libsmb/clidfs.c:444: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:445: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c: In function ‘cli_resolve_path’:
+libsmb/clidfs.c:614: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:614: warning: value computed is not used
+libsmb/clidfs.c:628: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:628: warning: value computed is not used
+libsmb/clidfs.c:636: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:636: warning: value computed is not used
+libsmb/clidfs.c:667: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:667: warning: value computed is not used
+libsmb/clidfs.c:684: error: implicit declaration of function ‘string_append’
+libsmb/clidfs.c:686: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:686: warning: value computed is not used
+libsmb/clidfs.c:702: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:708: warning: assignment makes pointer from integer without a cast
+libsmb/clidfs.c:729: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:729: warning: value computed is not used
+libsmb/clidfs.c:738: warning: pointer/integer type mismatch in conditional expression
+libsmb/clidfs.c:738: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clidfs.c -o libsmb/clidfs.o
+make: *** [libsmb/clidfs.o] Error 1
+libsmb/pwd_cache.c: In function ‘pwd_set_cleartext’:
+libsmb/pwd_cache.c:41: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/pwd_cache.c:41: warning: pointer/integer type mismatch in conditional expression
+libsmb/pwd_cache.c:41: warning: value computed is not used
+libsmb/pwd_cache.c: In function ‘pwd_get_cleartext’:
+libsmb/pwd_cache.c:57: warning: pointer/integer type mismatch in conditional expression
+libsmb/pwd_cache.c:57: warning: value computed is not used
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/pwd_cache.c -o libsmb/pwd_cache.o
+make: *** [libsmb/pwd_cache.o] Error 1
+libsmb/clioplock.c: In function ‘cli_oplock_ack’:
+libsmb/clioplock.c:34: error: implicit declaration of function ‘set_message’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clioplock.c -o libsmb/clioplock.o
+make: *** [libsmb/clioplock.o] Error 1
+libsmb/clirap2.c: In function ‘make_header’:
+libsmb/clirap2.c:132: error: implicit declaration of function ‘push_skip_string’
+libsmb/clirap2.c:132: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:137: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetGroupDelete’:
+libsmb/clirap2.c:163: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetGroupAdd’:
+libsmb/clirap2.c:222: error: implicit declaration of function ‘malloc_array’
+libsmb/clirap2.c: In function ‘cli_NetGroupDelUser’:
+libsmb/clirap2.c:417: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:418: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetGroupAddUser’:
+libsmb/clirap2.c:476: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:477: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetGroupGetUsers’:
+libsmb/clirap2.c:535: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetUserGetGroups’:
+libsmb/clirap2.c:589: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetUserDelete’:
+libsmb/clirap2.c:645: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetFileEnum’:
+libsmb/clirap2.c:1045: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:1046: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetShareDelete’:
+libsmb/clirap2.c:1183: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_get_pdc_name’:
+libsmb/clirap2.c:1254: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:1274: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_ns_check_server_type’:
+libsmb/clirap2.c:1521: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetWkstaUserLogoff’:
+libsmb/clirap2.c:1588: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/clirap2.c:1588: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap2.c:1588: warning: value computed is not used
+libsmb/clirap2.c:1589: error: implicit declaration of function ‘strupper_m’
+libsmb/clirap2.c:1590: warning: the address of ‘upperbuf’ will always evaluate as ‘true’
+libsmb/clirap2.c:1592: warning: pointer/integer type mismatch in conditional expression
+libsmb/clirap2.c:1592: warning: value computed is not used
+libsmb/clirap2.c:1594: warning: the address of ‘upperbuf’ will always evaluate as ‘true’
+libsmb/clirap2.c: In function ‘cli_NetPrintQEnum’:
+libsmb/clirap2.c:1638: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetPrintQGetInfo’:
+libsmb/clirap2.c:1740: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c:1743: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetSessionGetInfo’:
+libsmb/clirap2.c:1983: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetSessionDel’:
+libsmb/clirap2.c:2055: warning: assignment makes pointer from integer without a cast
+libsmb/clirap2.c: In function ‘cli_NetConnectionEnum’:
+libsmb/clirap2.c:2101: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/clirap2.c -o libsmb/clirap2.o
+make: *** [libsmb/clirap2.o] Error 1
+rpc_parse/parse_prs.c: In function ‘prs_debug’:
+rpc_parse/parse_prs.c:83: error: implicit declaration of function ‘tab_depth’
+rpc_parse/parse_prs.c:83: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_init’:
+rpc_parse/parse_prs.c:109: error: implicit declaration of function ‘malloc_’
+rpc_parse/parse_prs.c: In function ‘prs_set_buffer_size’:
+rpc_parse/parse_prs.c:220: error: implicit declaration of function ‘Realloc’
+rpc_parse/parse_prs.c: In function ‘prs_uint8’:
+rpc_parse/parse_prs.c:619: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_uint16’:
+rpc_parse/parse_prs.c:684: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_uint32’:
+rpc_parse/parse_prs.c:713: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_int32’:
+rpc_parse/parse_prs.c:742: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_ntstatus’:
+rpc_parse/parse_prs.c:771: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_dcerpc_status’:
+rpc_parse/parse_prs.c:801: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_werror’:
+rpc_parse/parse_prs.c:832: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_uint8s’:
+rpc_parse/parse_prs.c:860: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c:862: error: implicit declaration of function ‘print_asc’
+rpc_parse/parse_prs.c: In function ‘prs_uint16s’:
+rpc_parse/parse_prs.c:903: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘dbg_rw_punival’:
+rpc_parse/parse_prs.c:945: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_uint32s’:
+rpc_parse/parse_prs.c:1000: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_string2’:
+rpc_parse/parse_prs.c:1101: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c:1114: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘prs_unistr’:
+rpc_parse/parse_prs.c:1250: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c:1307: warning: format ‘%s’ expects type ‘char *’, but argument 2 has type ‘int’
+rpc_parse/parse_prs.c: In function ‘tdb_prs_store’:
+rpc_parse/parse_prs.c:1486: error: implicit declaration of function ‘tdb_trans_store’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c rpc_parse/parse_prs.c -o rpc_parse/parse_prs.o
+make: *** [rpc_parse/parse_prs.o] Error 1
+libsmb/smbencrypt.c: In function ‘NTLMv2_generate_client_data’:
+libsmb/smbencrypt.c:366: error: implicit declaration of function ‘put_long_date’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/smbencrypt.c -o libsmb/smbencrypt.o
+make: *** [libsmb/smbencrypt.o] Error 1
+libsmb/ntlmssp.c: In function ‘ntlmssp_want_feature_list’:
+libsmb/ntlmssp.c:248: error: implicit declaration of function ‘in_list’
+libsmb/ntlmssp.c: In function ‘ntlmssp_server_negotiate’:
+libsmb/ntlmssp.c:568: error: implicit declaration of function ‘get_mydnsdomname’
+libsmb/ntlmssp.c:569: error: implicit declaration of function ‘strlower_m’
+libsmb/ntlmssp.c:572: error: implicit declaration of function ‘get_mydnsfullname’
+libsmb/ntlmssp.c: In function ‘ntlmssp_server_start’:
+libsmb/ntlmssp.c:918: error: ‘global_myname’ undeclared (first use in this function)
+libsmb/ntlmssp.c:918: error: (Each undeclared identifier is reported only once
+libsmb/ntlmssp.c:918: error: for each function it appears in.)
+libsmb/ntlmssp.c:919: error: ‘lp_workgroup’ undeclared (first use in this function)
+libsmb/ntlmssp.c: In function ‘ntlmssp_client_start’:
+libsmb/ntlmssp.c:1219: error: ‘global_myname’ undeclared (first use in this function)
+libsmb/ntlmssp.c:1220: error: ‘lp_workgroup’ undeclared (first use in this function)
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/ntlmssp.c -o libsmb/ntlmssp.o
+make: *** [libsmb/ntlmssp.o] Error 1
+libsmb/ntlmssp_parse.c: In function ‘msrpc_gen’:
+libsmb/ntlmssp_parse.c:59: error: implicit declaration of function ‘str_charnum’
+libsmb/ntlmssp_parse.c:64: error: implicit declaration of function ‘str_ascii_charnum’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/ntlmssp_parse.c -o libsmb/ntlmssp_parse.o
+make: *** [libsmb/ntlmssp_parse.o] Error 1
+libsmb/unexpected.c: In function ‘unexpected_packet’:
+libsmb/unexpected.c:48: error: implicit declaration of function ‘tdb_open_log’
+libsmb/unexpected.c:48: error: implicit declaration of function ‘lock_path’
+libsmb/unexpected.c:50: warning: assignment makes pointer from integer without a cast
+libsmb/unexpected.c: In function ‘receive_unexpected’:
+libsmb/unexpected.c:174: warning: assignment makes pointer from integer without a cast
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/unexpected.c -o libsmb/unexpected.o
+make: *** [libsmb/unexpected.o] Error 1
+libsmb/namecache.c: In function ‘namecache_key’:
+libsmb/namecache.c:98: error: implicit declaration of function ‘strupper_static’
+libsmb/namecache.c:98: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+libsmb/namecache.c: In function ‘namecache_store’:
+libsmb/namecache.c:155: error: implicit declaration of function ‘ipstr_list_make’
+libsmb/namecache.c: In function ‘namecache_fetch’:
+libsmb/namecache.c:219: error: implicit declaration of function ‘ipstr_list_parse’
+libsmb/namecache.c: In function ‘namecache_status_record_key’:
+libsmb/namecache.c:295: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/namecache.c -o libsmb/namecache.o
+make: *** [libsmb/namecache.o] Error 1
+libsmb/nmblib.c: In function ‘put_nmb_name’:
+libsmb/nmblib.c:328: error: implicit declaration of function ‘safe_strcpy_fn’
+libsmb/nmblib.c:328: warning: pointer/integer type mismatch in conditional expression
+libsmb/nmblib.c:328: warning: value computed is not used
+libsmb/nmblib.c:332: error: implicit declaration of function ‘strchr_m’
+libsmb/nmblib.c:332: warning: assignment makes pointer from integer without a cast
+libsmb/nmblib.c: In function ‘parse_alloc_res_rec’:
+libsmb/nmblib.c:375: error: implicit declaration of function ‘malloc_array’
+libsmb/nmblib.c: In function ‘copy_nmb_packet’:
+libsmb/nmblib.c:597: error: implicit declaration of function ‘malloc_’
+libsmb/nmblib.c: In function ‘make_nmb_name’:
+libsmb/nmblib.c:905: warning: pointer/integer type mismatch in conditional expression
+libsmb/nmblib.c:905: warning: value computed is not used
+libsmb/nmblib.c:906: error: implicit declaration of function ‘strupper_m’
+libsmb/nmblib.c:909: error: implicit declaration of function ‘global_scope’
+libsmb/nmblib.c:909: warning: passing argument 2 of ‘push_ascii’ makes pointer from integer without a cast
+libsmb/nmblib.c: In function ‘dns_to_netbios_name’:
+libsmb/nmblib.c:1257: error: implicit declaration of function ‘StrnCpy_fn’
+libsmb/nmblib.c: In function ‘name_mangle’:
+libsmb/nmblib.c:1360: error: invalid type argument of ‘unary *’
+libsmb/nmblib.c:1361: error: subscripted value is neither array nor pointer
+libsmb/nmblib.c:1373: error: subscripted value is neither array nor pointer
+The following command failed:
+gcc -I. -I/data/jelmer/samba.git/source  -O -D_SAMBA_BUILD_=3 -gstabs -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -DDEBUG_PASSWORD -DDEVELOPER -Wdeclaration-after-statement -Werror-implicit-function-declaration  -I/data/jelmer/samba.git/source/iniparser/src -Iinclude -I./include  -I. -I. -I./lib/replace -I./lib/talloc -I./lib/tdb/include -I./libaddns -I./librpc -DHAVE_CONFIG_H  -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DLDAP_DEPRECATED   -I/include -I/data/jelmer/samba.git/source/lib -D_SAMBA_BUILD_=3 -fPIC -c libsmb/nmblib.c -o libsmb/nmblib.o
+make: *** [libsmb/nmblib.o] Error 1
+make: *** [libsmb/namequery.o] Interrupt

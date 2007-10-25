@@ -140,7 +140,8 @@ static NTSTATUS sid_to_name(struct winbindd_domain *domain,
 	    !sid_check_is_in_unix_users(sid) &&
 	    !sid_check_is_unix_users(sid) &&
 	    !sid_check_is_in_unix_groups(sid) &&
-	    !sid_check_is_unix_groups(sid) )
+	    !sid_check_is_unix_groups(sid) &&
+	    !sid_check_is_in_wellknown_domain(sid))
 	{
 		DEBUG(0, ("Possible deadlock: Trying to lookup SID %s with "
 			  "passdb backend\n", sid_string_static(sid)));
@@ -322,7 +323,7 @@ static NTSTATUS lookup_groupmem(struct winbindd_domain *domain,
 /* find the sequence number for a domain */
 static NTSTATUS sequence_number(struct winbindd_domain *domain, uint32 *seq)
 {
-	BOOL result;
+	bool result;
 	time_t seq_num;
 
 	result = pdb_get_seq_num(&seq_num);

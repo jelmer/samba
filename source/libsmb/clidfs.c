@@ -42,15 +42,15 @@ struct client_connection {
 
 static pstring username;
 static pstring password;
-static BOOL use_kerberos;
-static BOOL got_pass;
+static bool use_kerberos;
+static bool got_pass;
 static int signing_state;
 int max_protocol = PROTOCOL_NT1;
 
 static int port;
 static int name_type = 0x20;
-static BOOL have_ip;
-static struct in_addr dest_ip;
+static bool have_ip;
+static struct sockaddr_storage dest_ss;
 
 static struct client_connection *connections;
 
@@ -59,12 +59,12 @@ static struct client_connection *connections;
 ********************************************************************/
 
 static struct cli_state *do_connect( const char *server, const char *share,
-                                     BOOL show_sessetup )
+                                     bool show_sessetup )
 {
 	struct cli_state *c = NULL;
 	struct nmb_name called, calling;
 	const char *server_n;
-	struct in_addr ip;
+	struct sockaddr_storage ss;
 	pstring servicename;
 	char *sharename;
 	fstring newserver, newshare;
@@ -83,22 +83,22 @@ static struct cli_state *do_connect( const char *server, const char *share,
 
 	server_n = server;
 	
-	zero_ip_v4(&ip);
+	zero_addr(&ss, AF_INET);
 
 	make_nmb_name(&calling, global_myname(), 0x0);
 	make_nmb_name(&called , server, name_type);
 
  again:
-	zero_ip_v4(&ip);
-	if (have_ip) 
-		ip = dest_ip;
+	zero_addr(&ss, AF_INET);
+	if (have_ip)
+		ss = dest_ss;
 
 	/* have to open a new connection */
 	if (!(c=cli_initialise()) || (cli_set_port(c, port) != port)) {
 		d_printf("Connection to %s failed\n", server_n);
 		return NULL;
 	}
-	status = cli_connect(c, server_n, &ip);
+	status = cli_connect(c, server_n, &ss);
 	if (!NT_STATUS_IS_OK(status)) {
 		d_printf("Connection to %s failed (Error %s)\n", server_n, nt_errstr(status));
 		return NULL;
@@ -238,7 +238,7 @@ const char *cli_cm_get_mntpoint( struct cli_state *c )
 
 static struct cli_state *cli_cm_connect( const char *server,
 					const char *share,
-					BOOL show_hdr)
+					bool show_hdr)
 {
 	struct client_connection *node;
 	
@@ -282,7 +282,7 @@ static struct cli_state *cli_cm_find( const char *server, const char *share )
 
 struct cli_state *cli_cm_open(const char *server,
 				const char *share,
-				BOOL show_hdr)
+				bool show_hdr)
 {
 	struct cli_state *c;
 	
@@ -366,10 +366,10 @@ void cli_cm_set_dest_name_type( int type )
 /****************************************************************************
 ****************************************************************************/
 
-void cli_cm_set_dest_ip(struct in_addr ip )
+void cli_cm_set_dest_ss(struct sockaddr_storage *pss)
 {
-	dest_ip = ip;
-	have_ip = True;
+	dest_ss = *pss;
+	have_ip = true;
 }
 
 /**********************************************************************
@@ -476,7 +476,7 @@ static void cli_dfs_make_full_path( struct cli_state *cli,
  check for dfs referral
 ********************************************************************/
 
-static BOOL cli_dfs_check_error( struct cli_state *cli, NTSTATUS status )
+static bool cli_dfs_check_error( struct cli_state *cli, NTSTATUS status )
 {
 	uint32 flgs2 = SVAL(cli->inbuf,smb_flg2);
 
@@ -495,7 +495,7 @@ static BOOL cli_dfs_check_error( struct cli_state *cli, NTSTATUS status )
  get the dfs referral link
 ********************************************************************/
 
-BOOL cli_dfs_get_referral( struct cli_state *cli,
+bool cli_dfs_get_referral( struct cli_state *cli,
 			const char *path, 
 			CLIENT_DFS_REFERRAL**refs,
 			size_t *num_refs,
@@ -582,7 +582,7 @@ BOOL cli_dfs_get_referral( struct cli_state *cli,
 /********************************************************************
 ********************************************************************/
 
-BOOL cli_resolve_path( const char *mountpt,
+bool cli_resolve_path( const char *mountpt,
 			struct cli_state *rootcli,
 			const char *path,
 			struct cli_state **targetcli,
@@ -745,14 +745,14 @@ BOOL cli_resolve_path( const char *mountpt,
 /********************************************************************
 ********************************************************************/
 
-BOOL cli_check_msdfs_proxy( struct cli_state *cli, const char *sharename,
+bool cli_check_msdfs_proxy( struct cli_state *cli, const char *sharename,
                             fstring newserver, fstring newshare )
 {
 	CLIENT_DFS_REFERRAL *refs = NULL;
 	size_t num_refs;
 	uint16 consumed;
 	pstring fullpath;
-	BOOL res;
+	bool res;
 	uint16 cnum;
 	pstring newextrapath;
 	

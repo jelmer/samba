@@ -26,22 +26,13 @@ int ClientNMB       = -1;
 int ClientDGRAM     = -1;
 int global_nmb_port = -1;
 
-extern BOOL rescan_listen_set;
-extern BOOL global_in_nmbd;
+extern bool rescan_listen_set;
+extern bool global_in_nmbd;
 
-extern BOOL override_logfile;
-
-/* are we running as a daemon ? */
-static BOOL is_daemon;
-
-/* fork or run in foreground ? */
-static BOOL Fork = True;
-
-/* log to standard output ? */
-static BOOL log_stdout;
+extern bool override_logfile;
 
 /* have we found LanMan clients yet? */
-BOOL found_lm_clients = False;
+bool found_lm_clients = False;
 
 /* what server type are we currently */
 
@@ -174,7 +165,7 @@ static void expire_names_and_servers(time_t t)
  Reload the list of network interfaces.
  ************************************************************************** */
 
-static BOOL reload_interfaces(time_t t)
+static bool reload_interfaces(time_t t)
 {
 	static time_t lastt;
 	int n;
@@ -219,21 +210,22 @@ static BOOL reload_interfaces(time_t t)
 		if (is_loopback_addr(&iface->ip)) {
 			DEBUG(2,("reload_interfaces: Ignoring loopback "
 				"interface %s\n",
-				print_sockaddr(str, sizeof(str),
-					&iface->ip, sizeof(iface->ip)) ));
+				print_sockaddr(str, sizeof(str), &iface->ip) ));
 			continue;
 		}
 
 		for (subrec=subnetlist; subrec; subrec=subrec->next) {
-			if (ip_equal(ip, subrec->myip) &&
-			    ip_equal(nmask, subrec->mask_ip)) break;
+			if (ip_equal_v4(ip, subrec->myip) &&
+			    ip_equal_v4(nmask, subrec->mask_ip)) {
+				break;
+			}
 		}
 
 		if (!subrec) {
 			/* it wasn't found! add it */
-			DEBUG(2,("Found new interface %s\n", 
-				 print_sockaddr(str, sizeof(str),
-					 &iface->ip, sizeof(iface->ip)) ));
+			DEBUG(2,("Found new interface %s\n",
+				 print_sockaddr(str,
+					 sizeof(str), &iface->ip) ));
 			subrec = make_normal_subnet(iface);
 			if (subrec)
 				register_my_workgroup_one_subnet(subrec);
@@ -256,8 +248,10 @@ static BOOL reload_interfaces(time_t t)
 			}
 			ip = ((struct sockaddr_in *)&iface->ip)->sin_addr;
 			nmask = ((struct sockaddr_in *)&iface->netmask)->sin_addr;
-			if (ip_equal(ip, subrec->myip) &&
-			    ip_equal(nmask, subrec->mask_ip)) break;
+			if (ip_equal_v4(ip, subrec->myip) &&
+			    ip_equal_v4(nmask, subrec->mask_ip)) {
+				break;
+			}
 		}
 		if (n == -1) {
 			/* oops, an interface has disapeared. This is
@@ -266,12 +260,12 @@ static BOOL reload_interfaces(time_t t)
 			 instead we just wear the memory leak and
 			 remove it from the list of interfaces without
 			 freeing it */
-			DEBUG(2,("Deleting dead interface %s\n", 
+			DEBUG(2,("Deleting dead interface %s\n",
 				 inet_ntoa(subrec->myip)));
 			close_subnet(subrec);
 		}
 	}
-	
+
 	rescan_listen_set = True;
 
 	/* We need to shutdown if there are no subnets... */
@@ -286,9 +280,9 @@ static BOOL reload_interfaces(time_t t)
  Reload the services file.
  **************************************************************************** */
 
-static BOOL reload_nmbd_services(BOOL test)
+static bool reload_nmbd_services(bool test)
 {
-	BOOL ret;
+	bool ret;
 
 	set_remote_machine_name("nmbd", False);
 
@@ -317,7 +311,7 @@ static BOOL reload_nmbd_services(BOOL test)
 
 /**************************************************************************** **
  * React on 'smbcontrol nmbd reload-config' in the same way as to SIGHUP
- * We use buf here to return BOOL result to process() when reload_interfaces()
+ * We use buf here to return bool result to process() when reload_interfaces()
  * detects that there are no subnets.
  **************************************************************************** */
 
@@ -337,7 +331,7 @@ static void msg_reload_nmbd_services(struct messaging_context *msg,
 		/* If reload_interfaces() returned True */
 		/* we need to shutdown if there are no subnets... */
 		/* pass this info back to process() */
-		*((BOOL*)data->data) = reload_interfaces(0);  
+		*((bool *)data->data) = reload_interfaces(0);  
 	}
 }
 
@@ -385,7 +379,7 @@ static void msg_nmbd_send_packet(struct messaging_context *msg,
 
 	for (subrec = FIRST_SUBNET; subrec != NULL;
 	     subrec = NEXT_SUBNET_EXCLUDING_UNICAST(subrec)) {
-		if (ip_equal(*local_ip, subrec->myip)) {
+		if (ip_equal_v4(*local_ip, subrec->myip)) {
 			p->fd = (p->packet_type == NMB_PACKET) ?
 				subrec->nmb_sock : subrec->dgram_sock;
 			break;
@@ -407,8 +401,8 @@ static void msg_nmbd_send_packet(struct messaging_context *msg,
 
 static void process(void)
 {
-	BOOL run_election;
-	BOOL no_subnets;
+	bool run_election;
+	bool no_subnets;
 
 	while( True ) {
 		time_t t = time(NULL);
@@ -649,8 +643,11 @@ static void process(void)
  Open the socket communication.
  **************************************************************************** */
 
-static BOOL open_sockets(BOOL isdaemon, int port)
+static bool open_sockets(bool isdaemon, int port)
 {
+	struct sockaddr_storage ss;
+	const char *sock_addr = lp_socket_address();
+
 	/*
 	 * The sockets opened here will be used to receive broadcast
 	 * packets *only*. Interface specific sockets are opened in
@@ -659,19 +656,34 @@ static BOOL open_sockets(BOOL isdaemon, int port)
 	 * now deprecated.
 	 */
 
-	if ( isdaemon )
-		ClientNMB = open_socket_in(SOCK_DGRAM, port,
-					   0, interpret_addr(lp_socket_address()),
-					   True);
-	else
-		ClientNMB = 0;
-  
-	ClientDGRAM = open_socket_in(SOCK_DGRAM, DGRAM_PORT,
-					   3, interpret_addr(lp_socket_address()),
-					   True);
+	if (!interpret_string_addr(&ss, sock_addr,
+				AI_NUMERICHOST|AI_PASSIVE)) {
+		DEBUG(0,("open_sockets: unable to get socket address "
+			"from string %s", sock_addr));
+		return false;
+	}
+	if (ss.ss_family != AF_INET) {
+		DEBUG(0,("open_sockets: unable to use IPv6 socket"
+			"%s in nmbd\n",
+			sock_addr));
+		return false;
+	}
 
-	if ( ClientNMB == -1 )
-		return( False );
+	if (isdaemon) {
+		ClientNMB = open_socket_in(SOCK_DGRAM, port,
+					   0, &ss,
+					   true);
+	} else {
+		ClientNMB = 0;
+	}
+
+	ClientDGRAM = open_socket_in(SOCK_DGRAM, DGRAM_PORT,
+					   3, &ss,
+					   true);
+
+	if (ClientNMB == -1) {
+		return false;
+	}
 
 	/* we are never interested in SIGPIPE */
 	BlockSignals(True,SIGPIPE);
@@ -690,21 +702,32 @@ static BOOL open_sockets(BOOL isdaemon, int port)
 /**************************************************************************** **
  main program
  **************************************************************************** */
+
  int main(int argc, const char *argv[])
 {
+	static bool is_daemon;
+	static bool opt_interactive;
+	static bool Fork = true;
+	static bool no_process_group;
+	static bool log_stdout;
 	pstring logfile;
-	static BOOL opt_interactive;
 	poptContext pc;
 	static char *p_lmhosts = dyn_LMHOSTSFILE;
-	static BOOL no_process_group = False;
 	int opt;
+	enum {
+		OPT_DAEMON = 1000,
+		OPT_INTERACTIVE,
+		OPT_FORK,
+		OPT_NO_PROCESS_GROUP,
+		OPT_LOG_STDOUT
+	};
 	struct poptOption long_options[] = {
 	POPT_AUTOHELP
-	{"daemon", 'D', POPT_ARG_VAL, &is_daemon, True, "Become a daemon(default)" },
-	{"interactive", 'i', POPT_ARG_VAL, &opt_interactive, True, "Run interactive (not a daemon)" },
-	{"foreground", 'F', POPT_ARG_VAL, &Fork, False, "Run daemon in foreground (for daemontools & etc)" },
-	{"no-process-group", 0, POPT_ARG_VAL, &no_process_group, True, "Don't create a new process group" },
-	{"log-stdout", 'S', POPT_ARG_VAL, &log_stdout, True, "Log to stdout" },
+	{"daemon", 'D', POPT_ARG_NONE, NULL, OPT_DAEMON, "Become a daemon(default)" },
+	{"interactive", 'i', POPT_ARG_NONE, NULL, OPT_INTERACTIVE, "Run interactive (not a daemon)" },
+	{"foreground", 'F', POPT_ARG_NONE, NULL, OPT_FORK, "Run daemon in foreground (for daemontools & etc)" },
+	{"no-process-group", 0, POPT_ARG_NONE, NULL, OPT_NO_PROCESS_GROUP, "Don't create a new process group" },
+	{"log-stdout", 'S', POPT_ARG_NONE, NULL, OPT_LOG_STDOUT, "Log to stdout" },
 	{"hosts", 'H', POPT_ARG_STRING, &p_lmhosts, 'H', "Load a netbios hosts file"},
 	{"port", 'p', POPT_ARG_INT, &global_nmb_port, NMB_PORT, "Listen on the specified port" },
 	POPT_COMMON_SAMBA
@@ -718,6 +741,21 @@ static BOOL open_sockets(BOOL isdaemon, int port)
 	pc = poptGetContext("nmbd", argc, argv, long_options, 0);
 	while ((opt = poptGetNextOpt(pc)) != -1) {
 		switch (opt) {
+		case OPT_DAEMON:
+			is_daemon = true;
+			break;
+		case OPT_INTERACTIVE:
+			opt_interactive = true;
+			break;
+		case OPT_FORK:
+			Fork = false;
+			break;
+		case OPT_NO_PROCESS_GROUP:
+			no_process_group = true;
+			break;
+		case OPT_LOG_STDOUT:
+			log_stdout = true;
+			break;
 		default:
 			d_fprintf(stderr, "\nInvalid option %s: %s\n\n",
 				  poptBadOption(pc, 0), poptStrerror(opt));
@@ -727,7 +765,7 @@ static BOOL open_sockets(BOOL isdaemon, int port)
 	};
 	poptFreeContext(pc);
 
-	global_in_nmbd = True;
+	global_in_nmbd = true;
 	
 	StartupTime = time(NULL);
 	

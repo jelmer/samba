@@ -27,8 +27,8 @@ static pstring server;
 
 /* numeric is set when the user wants numeric SIDs and ACEs rather
    than going via LSA calls to resolve them */
-static BOOL numeric;
-static BOOL verbose;
+static bool numeric;
+static bool verbose;
 
 enum todo_values {NOOP_QUOTA=0,FS_QUOTA,USER_QUOTA,LIST_QUOTA,SET_QUOTA};
 enum exit_values {EXIT_OK, EXIT_FAILED, EXIT_PARSE_ERROR};
@@ -36,13 +36,13 @@ enum exit_values {EXIT_OK, EXIT_FAILED, EXIT_PARSE_ERROR};
 static struct cli_state *cli_ipc;
 static struct rpc_pipe_client *global_pipe_hnd;
 static POLICY_HND pol;
-static BOOL got_policy_hnd;
+static bool got_policy_hnd;
 
 static struct cli_state *connect_one(const char *share);
 
 /* Open cli connection and policy handle */
 
-static BOOL cli_open_policy_hnd(void)
+static bool cli_open_policy_hnd(void)
 {
 	/* Initialise cli LSA connection */
 
@@ -74,7 +74,7 @@ static BOOL cli_open_policy_hnd(void)
 }
 
 /* convert a SID to a string, either numeric or username/group */
-static void SidToString(fstring str, DOM_SID *sid, BOOL _numeric)
+static void SidToString(fstring str, DOM_SID *sid, bool _numeric)
 {
 	char **domains = NULL;
 	char **names = NULL;
@@ -103,11 +103,11 @@ static void SidToString(fstring str, DOM_SID *sid, BOOL _numeric)
 }
 
 /* convert a string to a SID, either numeric or username/group */
-static BOOL StringToSid(DOM_SID *sid, const char *str)
+static bool StringToSid(DOM_SID *sid, const char *str)
 {
 	enum lsa_SidType *types = NULL;
 	DOM_SID *sids = NULL;
-	BOOL result = True;
+	bool result = True;
 
 	if (strncmp(str, "S-", 2) == 0) {
 		return string_to_sid(sid, str);
@@ -138,9 +138,9 @@ static int parse_quota_set(pstring set_str, pstring username_str, enum SMB_QUOTA
 {
 	char *p = set_str,*p2;
 	int todo;
-	BOOL stop = False;
-	BOOL enable = False;
-	BOOL deny = False;
+	bool stop = False;
+	bool enable = False;
+	bool deny = False;
 	
 	if (strnequal(set_str,"UQLIM:",6)) {
 		p += 6;
@@ -352,16 +352,17 @@ static int do_quota(struct cli_state *cli, enum SMB_QUOTA_TYPE qtype, uint16 cmd
 	return 0;
 }
 
-/***************************************************** 
-return a connection to a server
+/*****************************************************
+ Return a connection to a server.
 *******************************************************/
+
 static struct cli_state *connect_one(const char *share)
 {
 	struct cli_state *c;
-	struct in_addr ip;
+	struct sockaddr_storage ss;
 	NTSTATUS nt_status;
-	zero_ip_v4(&ip);
-	
+	zero_addr(&ss, AF_INET);
+
 	if (!cmdline_auth_info.got_pass) {
 		char *pass = getpass("Password: ");
 		if (pass) {
@@ -371,8 +372,8 @@ static struct cli_state *connect_one(const char *share)
 	}
 
 	if (NT_STATUS_IS_OK(nt_status = cli_full_connection(&c, global_myname(), server, 
-							    &ip, 0,
-							    share, "?????",  
+							    &ss, 0,
+							    share, "?????",
 							    cmdline_auth_info.username, lp_workgroup(),
 							    cmdline_auth_info.password, 0,
 							    cmdline_auth_info.signing_state, NULL))) {
@@ -397,9 +398,9 @@ static struct cli_state *connect_one(const char *share)
 	pstring set_str = {0};
 	enum SMB_QUOTA_TYPE qtype = SMB_INVALID_QUOTA_TYPE;
 	int cmd = 0;
-	static BOOL test_args = False;
+	static bool test_args = False;
 	struct cli_state *cli;
-	BOOL fix_user = False;
+	bool fix_user = False;
 	SMB_NTQUOTA_STRUCT qt;
 	TALLOC_CTX *frame = talloc_stackframe();
 	poptContext pc;
@@ -413,9 +414,9 @@ SETSTRING:\n\
 UQLIM:<username>/<softlimit>/<hardlimit> for user quotas\n\
 FSQLIM:<softlimit>/<hardlimit> for filesystem defaults\n\
 FSQFLAGS:QUOTA_ENABLED/DENY_DISK/LOG_SOFTLIMIT/LOG_HARD_LIMIT", "SETSTRING" },
-		{ "numeric", 'n', POPT_ARG_NONE, &numeric, True, "Don't resolve sids or limits to names" },
-		{ "verbose", 'v', POPT_ARG_NONE, &verbose, True, "be verbose" },
-		{ "test-args", 't', POPT_ARG_NONE, &test_args, True, "Test arguments"},
+		{ "numeric", 'n', POPT_ARG_NONE, NULL, 'n', "Don't resolve sids or limits to names" },
+		{ "verbose", 'v', POPT_ARG_NONE, NULL, 'v', "be verbose" },
+		{ "test-args", 't', POPT_ARG_NONE, NULL, 'r', "Test arguments"},
 		POPT_COMMON_SAMBA
 		POPT_COMMON_CREDENTIALS
 		{ NULL }
@@ -444,6 +445,15 @@ FSQFLAGS:QUOTA_ENABLED/DENY_DISK/LOG_SOFTLIMIT/LOG_HARD_LIMIT", "SETSTRING" },
 
 	while ((opt = poptGetNextOpt(pc)) != -1) {
 		switch (opt) {
+		case 'n':
+			numeric = true;
+			break;
+		case 'v':
+			verbose = true;
+			break;
+		case 't':
+			test_args = true;
+			break;
 		case 'L':
 			if (todo != 0) {
 				d_printf("Please specify only one option of <-L|-F|-S|-u>\n");
